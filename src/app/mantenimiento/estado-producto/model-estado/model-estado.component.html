@@ -1,8 +1,21 @@
 <button nz-button nzType="primary" nzSize="small" (click)="showModal()"><i nz-icon nzTheme="outline" nzType="edit"></i></button>
-<nz-modal [(nzVisible)]="isVisible" nzTitle="The first Modal" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Estado del producto" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
     <ng-container *nzModalContent>
-    <p>Content one</p>
-    <p>Content two</p>
-    <p>Content three</p>
+        <form nz-form [formGroup]="validateForm" nzLayout="horizontal">
+            <div nz-row>
+                <label>Nombre</label>
+                <div nz-col>
+                    <input nz-input type="text" formControlName="nombre" style="width: 470px;">
+                </div>
+              </div>
+              <br>
+              <div nz-row>
+                <label>Observacion</label>
+                <div nz-col>
+                    <input nz-input type="text" formControlName="observacion" style="width: 470px;">
+                </div>
+              </div>
+            </form>    
+
     </ng-container>
 </nz-modal>

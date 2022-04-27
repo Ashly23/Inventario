@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule } from '@angular/core'; 
 import { CommonModule } from '@angular/common';
 
 import { MantenimientoRoutingModule } from './mantenimiento-routing.module';
@@ -23,7 +23,7 @@ import { ModelEstadoComponent } from './estado-producto/model-estado/model-estad
 import { ModalGarantiaComponent } from './garantia/modal-garantia/modal-garantia.component';
 import { ModalPartesComponent } from './partes/modal-partes/modal-partes.component';
 
-
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -52,7 +52,8 @@ import { ModalPartesComponent } from './partes/modal-partes/modal-partes.compone
     NzTableModule,
     NzButtonModule,
     NzIconModule,
-    NzModalModule
+    NzModalModule,
+    ReactiveFormsModule
   ],
   exports: [
     AreaComponent,

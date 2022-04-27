@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 
 interface DataItem {
-  name: string;
-  chinese: number;
-  math: number;
-  english: number;
+  id: number;
+  nombre: string;
+  descripcion: string;
+  estado: boolean;
 }
 
 @Component({
@@ -15,50 +15,32 @@ interface DataItem {
 export class CategoriaComponent {
   listOfColumn = [
     {
-      title: 'Name',
+      title: 'Id',
+      compare: (a: DataItem, b: DataItem) => a.id - b.id,
+      priority: 3
+    },
+    {
+      title: 'Nombre',
       compare: null,
       priority: false
     },
     {
-      title: 'Chinese Score',
-      compare: (a: DataItem, b: DataItem) => a.chinese - b.chinese,
-      priority: 3
+      title: 'Descripcion',
+      compare: null,
+      priority: false
     },
     {
-      title: 'Math Score',
-      compare: (a: DataItem, b: DataItem) => a.math - b.math,
-      priority: 2
+      title: 'Estado',
+      compare: null,
+      priority: false
     },
-    {
-      title: 'English Score',
-      compare: (a: DataItem, b: DataItem) => a.english - b.english,
-      priority: 1
-    }
   ];
   listOfData: DataItem[] = [
     {
-      name: 'John Brown',
-      chinese: 98,
-      math: 60,
-      english: 70
-    },
-    {
-      name: 'Jim Green',
-      chinese: 98,
-      math: 66,
-      english: 89
-    },
-    {
-      name: 'Joe Black',
-      chinese: 98,
-      math: 90,
-      english: 70
-    },
-    {
-      name: 'Jim Red',
-      chinese: 88,
-      math: 99,
-      english: 89
+      id: 1234,
+      nombre: 'It',
+      descripcion: 'fjdfhfjhfdij',
+      estado: true
     }
   ];
 }

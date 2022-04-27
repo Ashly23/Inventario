@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-modal-partes',
@@ -7,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ModalPartesComponent implements OnInit {
   isVisible = false;
+  validateForm !: FormGroup;
   
-  constructor() {}
+  constructor(
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     
@@ -26,6 +30,13 @@ export class ModalPartesComponent implements OnInit {
   handleCancel(): void {
     console.log('Button cancel clicked!');
     this.isVisible = false;
+  }
+
+  CleanForm(){
+    this.validateForm  = this.fb.group({
+      nombre: [null, [Validators.required]],
+      descripcion: [null, [Validators.required]],
+    });
   }
 
 }

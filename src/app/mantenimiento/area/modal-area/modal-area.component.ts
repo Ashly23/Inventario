@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-modal-area',
@@ -7,11 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ModalAreaComponent implements OnInit {
   isVisible = false;
+  validateForm !: FormGroup;
 
-  constructor() {}
+  constructor(
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
-    
+    this.CleanForm();
   }
   
   showModal(): void {
@@ -26,6 +30,17 @@ export class ModalAreaComponent implements OnInit {
   handleCancel(): void {
     console.log('Button cancel clicked!');
     this.isVisible = false;
+  }
+
+  CleanForm(){
+    this.validateForm  = this.fb.group({
+      nombre: [null, [Validators.required]],
+      descripcion: [null, [Validators.required]],
+    });
+  }
+  
+  SaveForm(){
+    
   }
 }
 
