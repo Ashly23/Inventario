@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 interface DataItem {
-  id: number,
   fechaInicial: string,
   fechaFinal: string,
   porcentaje: number,
@@ -17,18 +17,45 @@ interface DataItem {
   styleUrls: ['./garantia.component.css']
 })
 export class GarantiaComponent implements OnInit {
+  isVisible = false;
+  validateForm !: FormGroup;
 
-  constructor() { }
+  constructor(
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
+    this.CleanForm();
+  }
+  
+  showModal(): void {
+    this.isVisible = true;
   }
 
+  handleOk(): void {
+    console.log('Button ok clicked!');
+    this.isVisible = false;
+  }
+
+  handleCancel(): void {
+    console.log('Button cancel clicked!');
+    this.isVisible = false;
+  }
+
+  CleanForm(){
+    this.validateForm  = this.fb.group({
+      fechaInicial: [null, [Validators.required]],
+      fechaFinal: [null, [Validators.required]],
+      porcentaje: [null, [Validators.required]],
+      observacion: [null, [Validators.required]],
+      descripcion: [null, [Validators.required]],
+      cuota: [null, [Validators.required]],
+      estado: [null, [Validators.required]],
+    });
+  } 
+
+  //Tabla
   listOfColumn = [
-    {
-      title: 'Id',
-      compare: (a: DataItem, b: DataItem) => a.id - b.id,
-      priority: 3
-    },
     {
       title: 'Fecha Inicial',
       compare: null,
@@ -62,12 +89,11 @@ export class GarantiaComponent implements OnInit {
     {
       title: 'Estado',
       compare: null,
-      priority: true
+      priority: false
     },
   ];
   listOfData: DataItem[] = [
     {
-      id: 9887,
       fechaInicial: '22 nov',
       fechaFinal: '22 enero',
       porcentaje: 88,

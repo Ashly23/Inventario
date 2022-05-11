@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 interface DataItem {
-  id: number;
   nombre: string;
   correo: string;
   telefono: number;
@@ -15,18 +15,43 @@ interface DataItem {
   styleUrls: ['./fabricante.component.css']
 })
 export class FabricanteComponent implements OnInit {
+  isVisible = false;
+  validateForm !: FormGroup;
 
-  constructor() { }
+  constructor(
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
+    this.CleanForm();
+  }
+  
+  showModal(): void {
+    this.isVisible = true;
   }
 
+  handleOk(): void {
+    console.log('Button ok clicked!');
+    this.isVisible = false;
+  }
+
+  handleCancel(): void {
+    console.log('Button cancel clicked!');
+    this.isVisible = false;
+  }
+
+  CleanForm(){
+    this.validateForm  = this.fb.group({
+      nombre: [null, [Validators.required]],
+      correo: [null, [Validators.required]],
+      telefono: [null, [Validators.required]],
+      sitioWeb: [null, [Validators.required]],
+      estado: [null, [Validators.required]]
+    });
+  } 
+
+  //Tabla
   listOfColumn = [
-    {
-      title: 'Id',
-      compare: (a: DataItem, b: DataItem) => a.id - b.id,
-      priority: 3
-    },
     {
       title: 'Nombre',
       compare: null,
@@ -55,7 +80,6 @@ export class FabricanteComponent implements OnInit {
   ];
   listOfData: DataItem[] = [
     {
-      id: 4566,
       nombre: 'pueba4',
       correo: 'prueba4@gmail.com',
       telefono: 98004433,

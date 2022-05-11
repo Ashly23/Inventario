@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Area } from 'src/app/api/models';
+import { AreaControllerService } from 'src/app/api/services';
 
 interface DataItem {
-  id: number;
   nombre: string;
-  descrip: string;
+  descripcion: string;
   estado: boolean;
 }
 
@@ -12,13 +14,54 @@ interface DataItem {
   templateUrl: './area.component.html',
   styleUrls: ['./area.component.css']
 })
-export class AreaComponent {
+export class AreaComponent implements OnInit {
+  isVisible = false;
+  validateForm !: FormGroup;
+
+  area:Area[]=[];
+
+  constructor(
+    private areaService:AreaControllerService,
+    private fb: FormBuilder
+  ) {}
+
+  ngOnInit(): void  {
+    this.CleanForm();
+    this.areaService.find().subscribe(data=>this.area=data)
+  }
+
+  formProducto: FormGroup = this.fb.group({
+    id: [],
+    nombre: [],
+    descripcion: [],
+    estado: []
+  })
+
+  
+  showModal(): void {
+    this.isVisible = true;
+  }
+
+  handleOk(): void {
+    console.log('Button ok clicked!');
+    this.isVisible = false;
+  }
+
+  handleCancel(): void {
+    console.log('Button cancel clicked!');
+    this.isVisible = false;
+  }
+
+  CleanForm(){
+    this.validateForm  = this.fb.group({
+      nombre: [null, [Validators.required]],
+      descripcion: [null, [Validators.required]],
+      estado: [null, [Validators.required]]
+    });
+  } 
+  
+  //Tabla
   listOfColumn = [
-    {
-      title: 'Id',
-      compare: (a: DataItem, b: DataItem) => a.id - b.id,
-      priority: 1
-    },
     {
       title: 'Nombre',
       compare: null,
@@ -35,12 +78,13 @@ export class AreaComponent {
       priority: false
     },
   ];
+
   listOfData: DataItem[] = [
     {
-      id: 2353,
       nombre: 'prueba2',
-      descrip: 'cjcndjncjndwijhd',
+      descripcion: 'cjcndjncjndwijhd',
       estado: true
     },
   ];
+
 }

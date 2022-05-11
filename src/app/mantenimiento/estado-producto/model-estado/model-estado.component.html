@@ -1,21 +1,32 @@
-<button nz-button nzType="primary" nzSize="small" (click)="showModal()"><i nz-icon nzTheme="outline" nzType="edit"></i></button>
-<nz-modal [(nzVisible)]="isVisible" nzTitle="Estado del producto" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+<button nz-button nzType="primary" nzSize="small"><i nz-icon nzTheme="outline" nzType="edit" (click)="showModal()"></i></button>
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Editar" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
     <ng-container *nzModalContent>
         <form nz-form [formGroup]="validateForm" nzLayout="horizontal">
-            <div nz-row>
-                <label>Nombre</label>
-                <div nz-col>
-                    <input nz-input type="text" formControlName="nombre" style="width: 470px;">
-                </div>
-              </div>
-              <br>
-              <div nz-row>
-                <label>Observacion</label>
-                <div nz-col>
-                    <input nz-input type="text" formControlName="observacion" style="width: 470px;">
-                </div>
-              </div>
-            </form>    
+          <div nz-row [nzGutter]="8">
+            <div nz-col nzSpan="24">
+                <nz-form-item>
+                    <nz-form-label>Nombre</nz-form-label>
+                    <input nz-input formControlName="nombre" style="width: 470px;"/>
+                </nz-form-item>
+            </div>
+        </div>
+        <div nz-row [nzGutter]="8">
+          <div nz-col nzSpan="24">
+              <nz-form-item>
+                  <nz-form-label>Observacion</nz-form-label>
+                  <input nz-input formControlName="observacion" style="width: 470px;"/>
+              </nz-form-item>
+          </div>
+      </div>
+      <div nz-row [nzGutter]="8">
+        <div nz-col nzSpan="24">
+            <nz-form-item>
+                <nz-form-label>Estado</nz-form-label>
+                <input nz-input formControlName="estado" style="width: 470px;"/>
+            </nz-form-item>
+        </div>
+    </div>
+        </form>    
 
     </ng-container>
 </nz-modal>

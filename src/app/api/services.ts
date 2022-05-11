@@ -1,0 +1,9 @@
+export { CategoriasControllerService } from './services/categorias-controller.service';
+export { AreaControllerService } from './services/area-controller.service';
+export { EmpleadoControllerService } from './services/empleado-controller.service';
+export { EstadoProductoControllerService } from './services/estado-producto-controller.service';
+export { FabricanteControllerService } from './services/fabricante-controller.service';
+export { GarantiaControllerService } from './services/garantia-controller.service';
+export { PartesControllerService } from './services/partes-controller.service';
+export { PingControllerService } from './services/ping-controller.service';
+export { ProductoControllerService } from './services/producto-controller.service';

@@ -1,56 +1,72 @@
-<button nz-button nzType="primary" nzSize="small" (click)="showModal()"><i nz-icon nzTheme="outline" nzType="edit"></i></button>
-<nz-modal [(nzVisible)]="isVisible" nzTitle="Producto" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+<button nz-button nzType="primary" nzSize="small"><i nz-icon nzTheme="outline" nzType="edit" (click)="showModal()"></i></button>
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Editar" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
     <ng-container *nzModalContent>
         <form nz-form [formGroup]="validateForm" nzLayout="horizontal">
-            <div nz-row>
-                <label>Nombre</label>
-                <div nz-col>
-                    <input nz-input type="text" formControlName="nombre" style="width: 470px;">
-                </div>
-              </div>
-              <br>
-              <div nz-row>
-                <label>Valor</label>
-                <div nz-col>
-                    <input nz-input type="text" formControlName="Valor" style="width: 470px;">
-                </div>
-              </div>
-              <br>
-              <div nz-row>
-                  <label>Vida UItil</label>
-                  <div nz-col>
-                    <input nz-input type="text" formControlName="vidaUtil" style="width: 470px;">
-                  </div>
-              </div>
-              <br> 
-              <div nz-row>
-                  <label>Año depreciado</label>
-                  <div nz-col>
-                    <input nz-input type="text" formControlName="anioDep" style="width: 470px;">
-                  </div>
-              </div>
-              <br> 
-              <div nz-row>
-                  <label>Marca</label>
-                  <div nz-col>
-                    <input nz-input type="text" formControlName="marca" style="width: 470px;">
-                  </div>
-              </div>
-              <br> 
-              <div nz-row>
-                  <label>Modelo</label>
-                  <div nz-col>
-                    <input nz-input type="text" formControlName="modelo" style="width: 470px;">
-                  </div>
-              </div>
-              <br> 
-              <div nz-row>
-                  <label>Etiqueta de servicio</label>
-                  <div nz-col>
-                    <input nz-input type="text" formControlName="etiquetaServ" style="width: 470px;">
-                  </div>
-              </div>
-            </form>    
+          <div nz-row [nzGutter]="8">
+            <div nz-col nzSpan="24">
+                <nz-form-item>
+                    <nz-form-label>Nombre</nz-form-label>
+                    <input nz-input formControlName="nombre" style="width: 470px;"/>
+                </nz-form-item>
+            </div>
+        </div>
+        <div nz-row [nzGutter]="8">
+          <div nz-col nzSpan="24">
+              <nz-form-item>
+                  <nz-form-label>Valor</nz-form-label>
+                  <input nz-input formControlName="valor" style="width: 470px;"/>
+              </nz-form-item>
+          </div>
+      </div>
+      <div nz-row [nzGutter]="8">
+        <div nz-col nzSpan="24">
+            <nz-form-item>
+                <nz-form-label>Vida Util</nz-form-label>
+                <input nz-input formControlName="vidaUtil" style="width: 470px;"/>
+            </nz-form-item>
+        </div>
+    </div>
+    <div nz-row [nzGutter]="8">
+        <div nz-col nzSpan="24">
+            <nz-form-item>
+                <nz-form-label>Valor Depreciado</nz-form-label>
+                <input nz-input formControlName="valorDepreciado" style="width: 470px;"/>
+            </nz-form-item>
+        </div>
+    </div>
+    <div nz-row [nzGutter]="8">
+      <div nz-col nzSpan="24">
+          <nz-form-item>
+              <nz-form-label>Año Depreciados</nz-form-label>
+              <input nz-input formControlName="anioDepreciados" style="width: 470px;"/>
+          </nz-form-item>
+      </div>
+  </div>
+  <div nz-row [nzGutter]="8">
+    <div nz-col nzSpan="24">
+        <nz-form-item>
+            <nz-form-label>Marca</nz-form-label>
+            <input nz-input formControlName="marca" style="width: 470px;"/>
+        </nz-form-item>
+    </div>
+</div>
+<div nz-row [nzGutter]="8">
+  <div nz-col nzSpan="24">
+      <nz-form-item>
+          <nz-form-label>Modelo</nz-form-label>
+          <input nz-input formControlName="modelo" style="width: 470px;"/>
+      </nz-form-item>
+  </div>
+</div>
+<div nz-row [nzGutter]="8">
+  <div nz-col nzSpan="24">
+      <nz-form-item>
+          <nz-form-label>Etiqueta Servicio</nz-form-label>
+          <input nz-input formControlName="etiquetaServ" style="width: 470px;"/>
+      </nz-form-item>
+  </div>
+</div>
+        </form>    
 
-        </ng-container>
-    </nz-modal>
+    </ng-container>
+</nz-modal>

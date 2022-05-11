@@ -1,16 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 interface DataItem {
-  id: number;
   nombre: string;
   valor: number;
   vidaUtil: number;
-  valorDep: number;
-  anioDep: number;
+  valorDepreciado: number;
+  anioDepreciados: number;
   marca: string;
   modelo: string;
   etiquetaServ: string;
-  caracteristicas: string;
   idCategorias: number;
   idEstado: number;
   idEmpleado: number;
@@ -25,7 +24,57 @@ interface DataItem {
   styleUrls: ['./producto.component.css']
 })
 
-export class ProductoComponent {
+export class ProductoComponent implements OnInit {
+  isVisible = false;
+  validateForm !: FormGroup;
+
+  constructor(
+    private fb: FormBuilder
+  ) {}
+
+  ngOnInit(): void {
+    this.CleanForm();
+  }
+  
+  showModal(): void {
+    this.isVisible = true;
+  }
+
+  handleOk(): void {
+    console.log('Button ok clicked!');
+    this.isVisible = false;
+  }
+
+  handleCancel(): void {
+    console.log('Button cancel clicked!');
+    this.isVisible = false;
+  }
+
+  CleanForm(){
+    this.validateForm  = this.fb.group({
+      nombre: [null, [Validators.required]],
+      valor: [null, [Validators.required]],
+      vidaUtil: [null, [Validators.required]],
+      valorDepreciado: [null, [Validators.required]],
+      anioDepreciados: [null, [Validators.required]],
+      marca: [null, [Validators.required]],
+      modelo: [null, [Validators.required]],
+      etiquetaServ: [null, [Validators.required]],
+    });
+  } 
+
+  formProducto: FormGroup = this.fb.group({
+    nombre: [],
+    valor: [],
+    vidaUtil: [],
+    valorDepreciado: [],
+    anioDepreciados: [],
+    marca: [],
+    modelo: [],
+    etiquetaServ: [],
+  })
+
+
   listOfColumn = [
     {
       title: 'Nombre',
@@ -43,8 +92,13 @@ export class ProductoComponent {
       priority: 3
     },
     {
+      title: 'Valor Depreciado',
+      compare: (a: DataItem, b: DataItem) => a.valorDepreciado - b.valorDepreciado,
+      priority: 2
+    },
+    {
       title: 'Años Depreciado',
-      compare: (a: DataItem, b: DataItem) => a.valorDep - b.valorDep,
+      compare: (a: DataItem, b: DataItem) => a.anioDepreciados - b.anioDepreciados,
       priority: 2
     },
     {
@@ -66,16 +120,15 @@ export class ProductoComponent {
   ];
   listOfData: DataItem[] = [
     {
-    id: 8907,
     nombre: 'Computadora',
     valor: 4000,
     vidaUtil: 5,
-    valorDep: 2.7,
-    anioDep: 2025,
+    valorDepreciado: 2.7,
+    anioDepreciados: 2025,
     marca: 'dell',
     modelo: 'nfdbhhubd',
     etiquetaServ: 'jdihcd',
-    caracteristicas: 'hdsidu',
+
     idCategorias: 1,
     idEstado: 2,
     idEmpleado: 3,

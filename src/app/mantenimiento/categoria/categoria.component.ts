@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 interface DataItem {
-  id: number;
   nombre: string;
   descripcion: string;
   estado: boolean;
@@ -12,13 +12,42 @@ interface DataItem {
   templateUrl: './categoria.component.html',
   styleUrls: ['./categoria.component.css']
 })
-export class CategoriaComponent {
+export class CategoriaComponent implements OnInit {
+  isVisible = false;
+  validateForm !: FormGroup;
+
+  constructor(
+    private fb: FormBuilder
+  ) {}
+
+  ngOnInit(): void {
+    this.CleanForm();
+  }
+  
+  showModal(): void {
+    this.isVisible = true;
+  }
+
+  handleOk(): void {
+    console.log('Button ok clicked!');
+    this.isVisible = false;
+  }
+
+  handleCancel(): void {
+    console.log('Button cancel clicked!');
+    this.isVisible = false;
+  }
+
+  CleanForm(){
+    this.validateForm  = this.fb.group({
+      nombre: [null, [Validators.required]],
+      descripcion: [null, [Validators.required]],
+      estado: [null, [Validators.required]]
+    });
+  } 
+
+  //Tabla
   listOfColumn = [
-    {
-      title: 'Id',
-      compare: (a: DataItem, b: DataItem) => a.id - b.id,
-      priority: 3
-    },
     {
       title: 'Nombre',
       compare: null,
@@ -37,7 +66,6 @@ export class CategoriaComponent {
   ];
   listOfData: DataItem[] = [
     {
-      id: 1234,
       nombre: 'It',
       descripcion: 'fjdfhfjhfdij',
       estado: true

@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/welcome' },
   { path: 'mantenimiento', loadChildren: () => import('./mantenimiento/mantenimiento.module').then(m => m.MantenimientoModule) }
+  
 ];
 
 @NgModule({

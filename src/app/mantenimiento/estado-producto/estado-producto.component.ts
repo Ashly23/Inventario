@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 interface DataItem {
-  id: number;
   nombre: string;
   observacion: string;
   estado: boolean;
@@ -13,21 +13,41 @@ interface DataItem {
   styleUrls: ['./estado-producto.component.css']
 })
 export class EstadoProductoComponent implements OnInit {
-  
-  constructor(){
+  isVisible = false;
+  validateForm !: FormGroup;
 
-  }
+  constructor(
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
-    
+    this.CleanForm();
   }
   
+  showModal(): void {
+    this.isVisible = true;
+  }
+
+  handleOk(): void {
+    console.log('Button ok clicked!');
+    this.isVisible = false;
+  }
+
+  handleCancel(): void {
+    console.log('Button cancel clicked!');
+    this.isVisible = false;
+  }
+
+  CleanForm(){
+    this.validateForm  = this.fb.group({
+      nombre: [null, [Validators.required]],
+      observacion: [null, [Validators.required]],
+      estado: [null, [Validators.required]]
+    });
+  } 
+
+  //Tabla
   listOfColumn = [
-    {
-      title: 'Id',
-      compare: (a: DataItem, b: DataItem) => a.id - b.id,
-      priority: 3
-    },
     {
       title: 'Nombre',
       compare: null,
@@ -46,7 +66,6 @@ export class EstadoProductoComponent implements OnInit {
   ];
   listOfData: DataItem[] = [
     {
-      id: 2654,
       nombre: 'prueba',
       observacion: 'hgytfyrdy',
       estado: true

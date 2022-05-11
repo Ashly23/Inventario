@@ -13,7 +13,9 @@ import { ProductoComponent } from './producto/producto.component';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzFormModule } from 'ng-zorro-antd/form';
 import { ModalProductoComponent } from './producto/modal-producto/modal-producto.component';
 import { ModalAreaComponent } from './area/modal-area/modal-area.component';
 import { ModalCategoriaComponent } from './categoria/modal-categoria/modal-categoria.component';
@@ -22,6 +24,8 @@ import { ModalFabricanteComponent } from './fabricante/modal-fabricante/modal-fa
 import { ModelEstadoComponent } from './estado-producto/model-estado/model-estado.component';
 import { ModalGarantiaComponent } from './garantia/modal-garantia/modal-garantia.component';
 import { ModalPartesComponent } from './partes/modal-partes/modal-partes.component';
+import { AgregarAreaComponent } from './area/agregar-area/agregar-area.component';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -35,6 +39,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     GarantiaComponent,
     PartesComponent,
     ProductoComponent,
+    
     ModalProductoComponent,
     ModalAreaComponent,
     ModalCategoriaComponent,
@@ -42,9 +47,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     ModelEstadoComponent,
     ModalFabricanteComponent,
     ModalGarantiaComponent,
-    ModalPartesComponent
+    ModalPartesComponent,
 
-    
+    AgregarAreaComponent
   ],
   imports: [
     CommonModule,
@@ -53,7 +58,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     NzButtonModule,
     NzIconModule,
     NzModalModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NzFormModule,
+    NzGridModule,
+    NzPopconfirmModule
   ],
   exports: [
     AreaComponent,
