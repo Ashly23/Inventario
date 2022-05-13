@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { EstadoProducto } from 'src/app/api/models';
+import { EstadoProductoControllerService } from 'src/app/api/services';
 
 interface DataItem {
+  id: number,
   nombre: string;
   observacion: string;
   estado: boolean;
@@ -15,13 +19,41 @@ interface DataItem {
 export class EstadoProductoComponent implements OnInit {
   isVisible = false;
   validateForm !: FormGroup;
+  visible: boolean = false;
+  estado:EstadoProducto[]=[];
 
   constructor(
+    private messageService: NzMessageService,
+    private estadoService:EstadoProductoControllerService,
     private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
     this.CleanForm();
+    this.estadoService.find().subscribe(data=>this.estado=data)
+  }
+
+  eliminar(id: number): void {
+    this.estadoService.deleteById({ id }).subscribe(() => {
+      this.estado = this.estado.filter(x => x.id !== id);
+      this.messageService.success('Registro Eliminado')
+    })
+  }
+
+  cancel(): void {
+    this.messageService.info('Su registro sigue activo!')
+  }
+
+  mostrar(data?: EstadoProducto): void {
+    if (data?.id) {
+      this.formEstado.setValue({ ...data, 'estado': String(data.estado) })
+    }
+    this.visible = true
+  }
+
+  ocultar(): void {
+    this.visible = false
+    this.formEstado.reset()
   }
   
   showModal(): void {
@@ -46,8 +78,50 @@ export class EstadoProductoComponent implements OnInit {
     });
   } 
 
+  
+  guardar(): void {
+    this.formEstado.setValue({ ...this.formEstado.value, 'estado': Boolean(this.formEstado.value.estado) })
+    if (this.formEstado.value.id) {
+      this.estadoService.updateById({ 'id': this.formEstado.value.id, 'body': this.formEstado.value }).subscribe(
+        () => {
+          //actualizar
+          this.estado = this.estado.map(obj => {
+            if (obj.id === this.formEstado.value.id){
+              return this.formEstado.value;
+            }
+            return obj;
+          })
+          this.messageService.success('Registro actualizado con exito!')
+          this.formEstado.reset()
+        }
+      )
+
+    } else {
+      //insertar
+      delete this.formEstado.value.id
+      this.estadoService.create({ body: this.formEstado.value }).subscribe((datoAgregado) => {
+        this.estado = [...this.estado, datoAgregado]
+        this.messageService.success('Registro creado con exito!')
+        this.formEstado.reset()
+      })
+    }
+    this.visible = false
+   }
+
+  formEstado: FormGroup = this.fb.group ({
+    id: [],
+    nombre: [],
+    observacion: [],
+    estado: []
+  })
+
   //Tabla
   listOfColumn = [
+    {
+      title: 'Id',
+      compare: (a: DataItem, b: DataItem) => a.id - b.id,
+      priority: 1
+    },
     {
       title: 'Nombre',
       compare: null,
@@ -64,6 +138,8 @@ export class EstadoProductoComponent implements OnInit {
       priority: false
     },
   ];
+
+  /*
   listOfData: DataItem[] = [
     {
       nombre: 'prueba',
@@ -71,5 +147,5 @@ export class EstadoProductoComponent implements OnInit {
       estado: true
     }
   ];
-
+*/
 }

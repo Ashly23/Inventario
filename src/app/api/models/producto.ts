@@ -4,7 +4,7 @@ export interface Producto {
   anioDepreciados: number;
   caracteristicas?: string;
   etiquetaServ?: string;
-  id?: number;
+  id: number;
   idArea: number;
   idCategorias: number;
   idEmpleado: number;

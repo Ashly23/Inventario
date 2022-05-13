@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { Garantia } from 'src/app/api/models';
+import { GarantiaControllerService } from 'src/app/api/services';
 
 interface DataItem {
-  fechaInicial: string,
-  fechaFinal: string,
+  id: number,
+  fecha: string,
   porcentaje: number,
   observacion: string,
   descripcion: string,
@@ -19,13 +22,40 @@ interface DataItem {
 export class GarantiaComponent implements OnInit {
   isVisible = false;
   validateForm !: FormGroup;
+  visible: boolean = false;
+  garantia:Garantia[]=[];
 
   constructor(
+    private messageService: NzMessageService,
+    private garantiaService:GarantiaControllerService,
     private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
     this.CleanForm();
+  }
+
+  eliminar(id: number): void {
+    this.garantiaService.deleteById({ id }).subscribe(() => {
+      this.garantia = this.garantia.filter(x => x.id !== id);
+      this.messageService.success('Registro Eliminado')
+    })
+  }
+
+  cancel(): void {
+    this.messageService.info('Su registro sigue activo!')
+  }
+
+  mostrar(data?: Garantia): void {
+    if (data?.id) {
+      this.formGarantia.setValue({ ...data, 'estado': String(data.estado) })
+    }
+    this.visible = true
+  }
+
+  ocultar(): void {
+    this.visible = false
+    this.formGarantia.reset()
   }
   
   showModal(): void {
@@ -54,15 +84,49 @@ export class GarantiaComponent implements OnInit {
     });
   } 
 
+  guardar(): void {
+    this.formGarantia.setValue({ ...this.formGarantia.value, 'estado': Boolean(this.formGarantia.value.estado) })
+    if (this.formGarantia.value.id) {
+      this.garantiaService.updateById({ 'id': this.formGarantia.value.id, 'body': this.formGarantia.value }).subscribe(
+        () => {
+          //actualizar
+          this.garantia = this.garantia.map(obj => {
+            if (obj.id === this.formGarantia.value.id){
+              return this.formGarantia.value;
+            }
+            return obj;
+          })
+          this.messageService.success('Registro actualizado con exito!')
+          this.formGarantia.reset()
+        }
+      )
+
+    } else {
+      //insertar
+      delete this.formGarantia.value.id
+      this.garantiaService.create({ body: this.formGarantia.value }).subscribe((datoAgregado) => {
+        this.garantia = [...this.garantia, datoAgregado]
+        this.messageService.success('Registro creado con exito!')
+        this.formGarantia.reset()
+      })
+    }
+    this.visible = false
+   }
+
+  formGarantia: FormGroup = this.fb.group({
+    id:[],
+    fecha:[],
+    porcentaje:[],
+    observacion:[],
+    descripcion:[],
+    cuota:[],
+    estado:[]
+  })
+
   //Tabla
   listOfColumn = [
     {
-      title: 'Fecha Inicial',
-      compare: null,
-      priority: false
-    },
-    {
-      title: 'Fecha Final',
+      title: 'Fecha',
       compare: null,
       priority: false
     },
@@ -92,6 +156,9 @@ export class GarantiaComponent implements OnInit {
       priority: false
     },
   ];
+
+
+/*
   listOfData: DataItem[] = [
     {
       fechaInicial: '22 nov',
@@ -103,4 +170,6 @@ export class GarantiaComponent implements OnInit {
       estado: false
     }
   ];
+  */
 }
+

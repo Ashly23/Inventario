@@ -18,6 +18,7 @@ const routes: Routes = [
   { path: 'garantia', component: GarantiaComponent},
   { path: 'partes', component: PartesComponent},
   { path: 'producto', component: ProductoComponent}
+
 ];
 
 @NgModule({

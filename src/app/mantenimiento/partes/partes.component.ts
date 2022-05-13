@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { Partes } from 'src/app/api/models';
+import { PartesControllerService } from 'src/app/api/services';
 
 interface DataItem {
   nombre: string;
@@ -19,13 +22,40 @@ interface DataItem {
 export class PartesComponent implements OnInit{
   isVisible = false;
   validateForm !: FormGroup;
+  visible: boolean = false;
+  partes:Partes[]=[];
 
   constructor(
+    private messageService: NzMessageService,
+    private partesService:PartesControllerService,
     private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
     this.CleanForm();
+  }
+
+  eliminar(id: number): void {
+    this.partesService.deleteById({ id }).subscribe(() => {
+      this.partes = this.partes.filter(x => x.id !== id);
+      this.messageService.success('Registro Eliminado')
+    })
+  }
+
+  cancel(): void {
+    this.messageService.info('Su registro sigue activo!')
+  }
+
+  mostrar(data?: Partes): void {
+    if (data?.id) {
+      this.formPartes.setValue({ ...data, 'estado': String(data.estado) })
+    }
+    this.visible = true
+  }
+
+  ocultar(): void {
+    this.visible = false
+    this.formPartes.reset()
   }
   
   showModal(): void {
@@ -53,7 +83,46 @@ export class PartesComponent implements OnInit{
       estado: [null, [Validators.required]],
     });
   } 
+
+  guardar(): void {
+    this.formPartes.setValue({ ...this.formPartes.value, 'estado': Boolean(this.formPartes.value.estado) })
+    if (this.formPartes.value.id) {
+      this.partesService.updateById({ 'id': this.formPartes.value.id, 'body': this.formPartes.value }).subscribe(
+        () => {
+          //actualizar
+          this.partes = this.partes.map(obj => {
+            if (obj.id === this.formPartes.value.id){
+              return this.formPartes.value;
+            }
+            return obj;
+          })
+          this.messageService.success('Registro actualizado con exito!')
+          this.formPartes.reset()
+        }
+      )
+
+    } else {
+      //insertar
+      delete this.formPartes.value.id
+      this.partesService.create({ body: this.formPartes.value }).subscribe((datoAgregado) => {
+        this.partes = [...this.partes, datoAgregado]
+        this.messageService.success('Registro creado con exito!')
+        this.formPartes.reset()
+      })
+    }
+    this.visible = false
+   }
   
+  formPartes: FormGroup = this.fb.group({
+    nombre: [],
+      tipoParte:[],
+      capacidad:[],
+      valor:[],
+      tecnologia:[],
+      descripcion:[],
+      estado:[]
+  })
+
   //Tabla
   listOfColumn = [
     {
@@ -92,6 +161,8 @@ export class PartesComponent implements OnInit{
       priority: false
     },
   ];
+
+/*
   listOfData: DataItem[] = [
     {
       nombre: 'prueba',
@@ -103,4 +174,5 @@ export class PartesComponent implements OnInit{
       estado: true
     }
   ];
+  */
 }

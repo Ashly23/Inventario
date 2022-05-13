@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Categorias } from 'src/app/api/models';
+import { CategoriasControllerService } from 'src/app/api/services';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 interface DataItem {
+  id: number;
   nombre: string;
   descripcion: string;
   estado: boolean;
@@ -12,18 +16,47 @@ interface DataItem {
   templateUrl: './categoria.component.html',
   styleUrls: ['./categoria.component.css']
 })
+
 export class CategoriaComponent implements OnInit {
   isVisible = false;
   validateForm !: FormGroup;
+  visible: boolean = false;
+  categorias:Categorias[]=[];
 
   constructor(
+    private messageService: NzMessageService,
+    private categoriasService:CategoriasControllerService,
     private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
     this.CleanForm();
+    this.categoriasService.find().subscribe(data=>this.categorias=data)
   }
-  
+
+  eliminar(id: number): void {
+    this.categoriasService.deleteById({ id }).subscribe(() => {
+      this.categorias = this.categorias.filter(x => x.id !== id);
+      this.messageService.success('Registro Eliminado')
+    })
+  }
+
+  cancel(): void {
+    this.messageService.info('Su registro sigue activo!')
+  }
+
+  mostrar(data?: Categorias): void {
+    if (data?.id) {
+      this.formCategorias.setValue({ ...data, 'estado': String(data.estado) })
+    }
+    this.visible = true
+  }
+
+  ocultar(): void {
+    this.visible = false
+    this.formCategorias.reset()
+  }
+
   showModal(): void {
     this.isVisible = true;
   }
@@ -46,8 +79,49 @@ export class CategoriaComponent implements OnInit {
     });
   } 
 
+  guardar(): void {
+    this.formCategorias.setValue({ ...this.formCategorias.value, 'estado': Boolean(this.formCategorias.value.estado) })
+    if (this.formCategorias.value.id) {
+      this.categoriasService.updateById({ 'id': this.formCategorias.value.id, 'body': this.formCategorias.value }).subscribe(
+        () => {
+          //actualizar
+          this.categorias = this.categorias.map(obj => {
+            if (obj.id === this.formCategorias.value.id){
+              return this.formCategorias.value;
+            }
+            return obj;
+          })
+          this.messageService.success('Registro actualizado con exito!')
+          this.formCategorias.reset()
+        }
+      )
+
+    } else {
+      //insertar
+      delete this.formCategorias.value.id
+      this.categoriasService.create({ body: this.formCategorias.value }).subscribe((datoAgregado) => {
+        this.categorias = [...this.categorias, datoAgregado]
+        this.messageService.success('Registro creado con exito!')
+        this.formCategorias.reset()
+      })
+    }
+    this.visible = false
+   }
+
+  formCategorias: FormGroup = this.fb.group({
+    id: [],
+    nombre: [],
+    descripcion: [],
+    estado: []
+  })
+
   //Tabla
   listOfColumn = [
+    {
+      title: 'Id',
+      compare: (a: DataItem, b: DataItem) => a.id - b.id,
+      priority: 0
+    },
     {
       title: 'Nombre',
       compare: null,
@@ -64,6 +138,7 @@ export class CategoriaComponent implements OnInit {
       priority: false
     },
   ];
+/*
   listOfData: DataItem[] = [
     {
       nombre: 'It',
@@ -71,4 +146,5 @@ export class CategoriaComponent implements OnInit {
       estado: true
     }
   ];
+*/
 }

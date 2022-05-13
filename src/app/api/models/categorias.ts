@@ -3,6 +3,6 @@
 export interface Categorias {
   descripcion?: string;
   estado: boolean;
-  id?: number;
+  id: number;
   nombre: string;
 }

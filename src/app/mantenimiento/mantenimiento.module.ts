@@ -16,18 +16,14 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzFormModule } from 'ng-zorro-antd/form';
-import { ModalProductoComponent } from './producto/modal-producto/modal-producto.component';
-import { ModalAreaComponent } from './area/modal-area/modal-area.component';
-import { ModalCategoriaComponent } from './categoria/modal-categoria/modal-categoria.component';
-import { ModalEmpleadoComponent } from './empleado/modal-empleado/modal-empleado.component';
-import { ModalFabricanteComponent } from './fabricante/modal-fabricante/modal-fabricante.component';
-import { ModelEstadoComponent } from './estado-producto/model-estado/model-estado.component';
-import { ModalGarantiaComponent } from './garantia/modal-garantia/modal-garantia.component';
-import { ModalPartesComponent } from './partes/modal-partes/modal-partes.component';
-import { AgregarAreaComponent } from './area/agregar-area/agregar-area.component';
+import { NzRadioModule } from 'ng-zorro-antd/radio';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
-
 import { ReactiveFormsModule } from '@angular/forms';
+import { NzMessageModule } from 'ng-zorro-antd/message';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 
 @NgModule({
   declarations: [
@@ -39,17 +35,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     GarantiaComponent,
     PartesComponent,
     ProductoComponent,
-    
-    ModalProductoComponent,
-    ModalAreaComponent,
-    ModalCategoriaComponent,
-    ModalEmpleadoComponent,
-    ModelEstadoComponent,
-    ModalFabricanteComponent,
-    ModalGarantiaComponent,
-    ModalPartesComponent,
-
-    AgregarAreaComponent
   ],
   imports: [
     CommonModule,
@@ -61,7 +46,13 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     NzFormModule,
     NzGridModule,
-    NzPopconfirmModule
+    NzRadioModule,
+    NzSelectModule,
+    NzInputModule,
+    NzDividerModule,
+    NzPopconfirmModule,
+    NzMessageModule,
+    NzDatePickerModule
   ],
   exports: [
     AreaComponent,
