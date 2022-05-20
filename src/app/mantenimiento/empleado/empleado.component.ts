@@ -8,7 +8,7 @@ interface DataItem {
   id: number;
   nombre: string;
   correo: string;
-  telefono: number;
+  telefono: string;
   estado: boolean;
 }
 
@@ -73,6 +73,7 @@ export class EmpleadoComponent implements OnInit{
 
   CleanForm(){
     this.validateForm  = this.fb.group({
+      id: [null, [Validators.required]],
       nombre: [null, [Validators.required]],
       correo: [null, [Validators.required]],
       telefono: [null, [Validators.required]],
@@ -100,7 +101,8 @@ export class EmpleadoComponent implements OnInit{
     } else {
       //insertar
       delete this.formEmpleado.value.id
-      this.empleadoService.create({ body: this.formEmpleado.value }).subscribe((datoAgregado) => {
+    //  console.log({ body: this.formEmpleado.value })
+        this.empleadoService.create({ body: this.formEmpleado.value }).subscribe((datoAgregado) => {
         this.empleado = [...this.empleado, datoAgregado]
         this.messageService.success('Registro creado con exito!')
         this.formEmpleado.reset()
@@ -122,7 +124,7 @@ export class EmpleadoComponent implements OnInit{
     {
       title: 'Id',
       compare: (a: DataItem, b: DataItem) => a.id - b.id,
-      priority: 1
+      priority: 0
     },
     {
       title: 'Nombre',
@@ -136,8 +138,8 @@ export class EmpleadoComponent implements OnInit{
     },
     {
       title: 'Telefono',
-      compare: (a: DataItem, b: DataItem) => a.telefono - b.telefono,
-      priority: 1
+      compare: null,
+      priority: false
     },
     {
       title: 'Estado',

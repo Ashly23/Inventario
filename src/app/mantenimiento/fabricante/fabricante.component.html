@@ -9,6 +9,7 @@
         <th nzLeft nzWidth="100px">Acciones</th>
         <th *ngFor="let column of listOfColumn" [nzSortFn]="column.compare" [nzSortPriority]="column.priority">
           {{ column.title }}
+        </th>
     </thead>
     <tbody>
       <tr *ngFor="let data of sortTable.data">
@@ -34,7 +35,6 @@
         <td>{{ data.correo }}</td>
         <td>{{ data.telefono }}</td>
         <td>{{ data.sitioWeb }}</td>
-        <td>{{ data.estado }}</td>
         <td>
           <div *ngIf="data.estado"><i nz-icon nzType="check-circle" nzTheme="outline"></i></div>
         </td>
@@ -48,11 +48,19 @@
     <ng-container *nzModalContent>
       <form nz-form nzLayout="vertical" (ngSubmit)="guardar()" [formGroup]="formFabricante">
         <div nz-row [nzGutter]="8">
-          <div nz-col nzSpan="24">
+          <div nz-col nzSpan="12">
             <nz-form-item>
               <nz-form-label>Nombre</nz-form-label>
               <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
-                <input formControlName="nombre" nz-input placeholder="Escribe el nombre del empleado"/>
+                <input formControlName="nombre" nz-input/>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col nzSpan="12">
+            <nz-form-item>
+              <nz-form-label>Telefono</nz-form-label>
+              <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
+                <input formControlName="telefono" nz-input/>
               </nz-form-control>
             </nz-form-item>
           </div>
@@ -62,17 +70,7 @@
             <nz-form-item>
               <nz-form-label>Correo</nz-form-label>
               <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
-                <input formControlName="correo" nz-input placeholder="Escribe el correo del empleado"/>
-              </nz-form-control>
-            </nz-form-item>
-          </div>
-        </div>
-        <div nz-row [nzGutter]="8">
-          <div nz-col nzSpan="24">
-            <nz-form-item>
-              <nz-form-label>Telefono</nz-form-label>
-              <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
-                <input formControlName="telefono" nz-input placeholder="Escribe el telefono del empleado" />
+                <input formControlName="correo" nz-input/>
               </nz-form-control>
             </nz-form-item>
           </div>
@@ -82,7 +80,7 @@
             <nz-form-item>
               <nz-form-label>Sitio web</nz-form-label>
               <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
-                <input formControlName="telefono" nz-input placeholder="Escribe el telefono del empleado" />
+                <input formControlName="sitioWeb" nz-input/>
               </nz-form-control>
             </nz-form-item>
           </div>

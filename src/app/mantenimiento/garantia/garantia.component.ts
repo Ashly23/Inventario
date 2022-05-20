@@ -7,7 +7,7 @@ import { GarantiaControllerService } from 'src/app/api/services';
 interface DataItem {
   id: number,
   fecha: string,
-  porcentaje: number,
+  porcentaje: string,
   observacion: string,
   descripcion: string,
   cuota: number,
@@ -33,6 +33,7 @@ export class GarantiaComponent implements OnInit {
 
   ngOnInit(): void {
     this.CleanForm();
+    this.garantiaService.find().subscribe(data=>this.garantia=data)
   }
 
   eliminar(id: number): void {
@@ -74,8 +75,7 @@ export class GarantiaComponent implements OnInit {
 
   CleanForm(){
     this.validateForm  = this.fb.group({
-      fechaInicial: [null, [Validators.required]],
-      fechaFinal: [null, [Validators.required]],
+      fecha: [null, [Validators.required]],
       porcentaje: [null, [Validators.required]],
       observacion: [null, [Validators.required]],
       descripcion: [null, [Validators.required]],
@@ -126,14 +126,19 @@ export class GarantiaComponent implements OnInit {
   //Tabla
   listOfColumn = [
     {
+      title: 'Id',
+      compare: (a: DataItem, b: DataItem) => a.id - b.id,
+      priority: 0
+    },
+    {
       title: 'Fecha',
       compare: null,
       priority: false
     },
     {
       title: 'Porcentaje',
-      compare: (a: DataItem, b: DataItem) => a.porcentaje - b.porcentaje,
-      priority: 2
+      compare: null,
+      priority: false
     },
     {
       title: 'Observacion',

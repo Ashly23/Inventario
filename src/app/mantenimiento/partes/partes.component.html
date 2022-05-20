@@ -36,7 +36,6 @@
         <td>{{ data.valor }}</td>
         <td>{{ data.tecnologia }}</td>
         <td>{{ data.descripcion }}</td>
-        <td>{{ data.estado }}</td>
         <td>
           <div *ngIf="data.estado"><i nz-icon nzType="check-circle" nzTheme="outline"></i></div>
         </td>
@@ -46,45 +45,41 @@
 
 
   <!--  Nueva Parte -->
-  <nz-modal [(nzVisible)]="visible" nzTitle="Nuevo Fabricante">
+  <nz-modal [(nzVisible)]="visible" nzTitle="Nueva parte del producto">
     <ng-container *nzModalContent>
       <form nz-form nzLayout="vertical" (ngSubmit)="guardar()" [formGroup]="formPartes">
         <div nz-row [nzGutter]="8">
-          <div nz-col nzSpan="24">
+          <div nz-col nzSpan="12">
             <nz-form-item>
               <nz-form-label>Nombre</nz-form-label>
               <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
-                <input formControlName="nombre" nz-input placeholder="Escribe el nombre de la parte del producto" />
+                <input formControlName="nombre" nz-input/>
               </nz-form-control>
             </nz-form-item>
           </div>
-        </div>
-        <div nz-row [nzGutter]="8">
-          <div nz-col nzSpan="24">
+          <div nz-col nzSpan="12">
             <nz-form-item>
               <nz-form-label>Tipo</nz-form-label>
               <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
-                <input formControlName="tipoParte" nz-input placeholder="Escribe el correo del empleado"/>
+                <input formControlName="tipoParte" nz-input/>
               </nz-form-control>
             </nz-form-item>
           </div>
         </div>
         <div nz-row [nzGutter]="8">
-          <div nz-col nzSpan="24">
+          <div nz-col nzSpan="12">
             <nz-form-item>
               <nz-form-label>Capacidad</nz-form-label>
               <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
-                <input formControlName="capacidad" nz-input placeholder="Escribe el telefono del empleado" />
+                <input formControlName="capacidad" nz-input/>
               </nz-form-control>
             </nz-form-item>
           </div>
-        </div>
-        <div nz-row [nzGutter]="8">
-          <div nz-col nzSpan="24">
+          <div nz-col nzSpan="12">
             <nz-form-item>
               <nz-form-label>Valor</nz-form-label>
               <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
-                <input formControlName="valor" nz-input placeholder="Escribe el telefono del empleado" />
+                <input formControlName="valor" nz-input/>
               </nz-form-control>
             </nz-form-item>
           </div>
@@ -94,7 +89,7 @@
             <nz-form-item>
               <nz-form-label>Tecnologia</nz-form-label>
               <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
-                <input formControlName="tecnologia" nz-input placeholder="Escribe el telefono del empleado" />
+                <input formControlName="tecnologia" nz-input/>
               </nz-form-control>
             </nz-form-item>
           </div>
@@ -104,7 +99,7 @@
             <nz-form-item>
               <nz-form-label>Descripcion</nz-form-label>
               <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
-                <input formControlName="descripcion" nz-input placeholder="Escribe el telefono del empleado" />
+                <input formControlName="descripcion" nz-input/>
               </nz-form-control>
             </nz-form-item>
           </div>

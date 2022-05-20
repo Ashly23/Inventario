@@ -1,0 +1,95 @@
+<div nz-row>
+    <div nz-col nzSpan="24"><button (click)="mostrar()" nz-button nzType="primary">Agregar</button></div>
+  </div>
+  <hr>
+  
+  <nz-table #sortTable [nzData]="empleadoProducto" nzTableLayout="fixed" [nzScroll]="{ x: '100%', y: '240px' }">
+    <thead>
+      <tr>
+        <th nzLeft nzWidth="100px">Acciones</th>
+        <th *ngFor="let column of listOfColumn" [nzSortFn]="column.compare" [nzSortPriority]="column.priority">
+          {{ column.title }}
+        </th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of sortTable.data">
+        <td nzLeft nzAlign="center">
+          <div nz-row>
+            <div nz-col nzSpan="10">
+              <td>
+                <a (click)="mostrar(data)">
+                <button nz-button nzType="primary" nzSize="small">
+                <i nz-icon nzType="edit" nzTheme="outline"></i></button></a>
+              </td>
+            </div>
+            <div nz-col nzSpan="10" nzOffset="1">
+                  <a nz-popconfirm nzPopconfirmTitle="¿Está seguro de borrar el registro?" nzPopconfirmPlacement="bottom"
+                  (nzOnConfirm)="eliminar(data.id)" (nzOnCancel)="cancel()" nzShape="circle" nzCancelText="No" nzOkText="Si">
+                  <button nz-button nzType="primary" nzSize="small" nzDanger>
+                  <i nz-icon nzType="close" nzTheme="outline"></i></button></a>
+            </div>
+          </div>
+        </td>
+        <td>{{ data.id }}</td>
+        <td>{{ data.fechaInicial | date }}</td>
+        <td>{{ data.fechaFinal | date }}</td>
+        <td>{{ data.idEmpleado }}</td>
+        <td>{{ data.idProducto }}</td>
+      </tr>
+    </tbody>
+  </nz-table>
+
+
+   
+<nz-modal [(nzVisible)]="visible" nzTitle="Nuevo">
+    <ng-container *nzModalContent>
+      <form nz-form nzLayout="vertical" (ngSubmit)="guardar()" [formGroup]="formEmpleadoProducto">
+        <div nz-row [nzGutter]="8">
+            <div nz-col nzSpan="12">
+                <nz-form-item>
+                    <nz-form-label>Fecha Inicial</nz-form-label>
+                    <nz-form-control  nzErrorTip="Por favor escriba el dato correcto!">
+                        <nz-date-picker formControlName="fechaInicial" nzPlaceHolder="Seleccione Fecha"></nz-date-picker>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div nz-col nzSpan="12">
+                <nz-form-item>
+                    <nz-form-label>Fecha Final</nz-form-label>
+                    <nz-form-control  nzErrorTip="Por favor escriba el dato correcto!">
+                        <nz-date-picker formControlName="fechaFinal" PlaceHolder="Seleccione Fecha"></nz-date-picker>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
+        <div nz-row [nzGutter]="8">
+          <div nz-col nzSpan="12">
+            <nz-form-item>
+                <nz-form-label>Empleado</nz-form-label>
+                <nz-form-control  nzErrorTip="Por favor escriba el dato correcto!">
+                    <nz-select formControlName="idEmpleado">
+                        <nz-option *ngFor="let item of empleado" [nzValue]="item.id" [nzLabel]="item.nombre">
+                        </nz-option>
+                    </nz-select>
+                </nz-form-control>
+               </nz-form-item>
+            </div>
+              <div nz-col nzSpan="12">
+                <nz-form-item>
+                    <nz-form-label>Producto</nz-form-label>
+                    <nz-form-control  nzErrorTip="Por favor escriba el dato correcto!">
+                        <nz-select formControlName="idProducto">
+                            <nz-option *ngFor="let item of producto" [nzValue]="item.id" [nzLabel]="item.nombre">
+                            </nz-option>
+                        </nz-select>
+                    </nz-form-control>
+                   </nz-form-item>
+                  </div>
+        </div>
+      </form>
+    </ng-container>
+    <div *nzModalFooter>
+      <button nz-button nzType="default" (click)="ocultar()">Cancelar</button>
+      <button nz-button nzType="primary" (click)="guardar()">Guardar</button>
+    </div>
+  </nz-modal>

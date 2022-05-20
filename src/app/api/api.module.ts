@@ -6,6 +6,7 @@ import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
 import { CategoriasControllerService } from './services/categorias-controller.service';
 import { AreaControllerService } from './services/area-controller.service';
+import { EmpleadoProductoControllerService } from './services/empleado-producto-controller.service';
 import { EmpleadoControllerService } from './services/empleado-controller.service';
 import { EstadoProductoControllerService } from './services/estado-producto-controller.service';
 import { FabricanteControllerService } from './services/fabricante-controller.service';
@@ -24,6 +25,7 @@ import { ProductoControllerService } from './services/producto-controller.servic
   providers: [
     CategoriasControllerService,
     AreaControllerService,
+    EmpleadoProductoControllerService,
     EmpleadoControllerService,
     EstadoProductoControllerService,
     FabricanteControllerService,

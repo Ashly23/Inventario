@@ -6,13 +6,14 @@
  */
 export interface NewProducto {
   anioDepreciados: number;
-  caracteristicas?: string;
   etiquetaServ?: string;
   idArea: number;
   idCategorias: number;
-  idEmpleado: number;
+  idEmpleadoProducto: number;
   idEstadoProducto: number;
-  marca?: string;
+  idFabricante: number;
+  idGarantia: number;
+  idPartes: number;
   modelo?: string;
   nombre: string;
   valor: number;

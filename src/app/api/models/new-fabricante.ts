@@ -7,7 +7,7 @@
 export interface NewFabricante {
   correo: string;
   estado?: boolean;
-  nombre?: string;
-  sitioWeb: string;
-  telefono?: number;
+  nombre: string;
+  sitioWeb?: string;
+  telefono: string;
 }

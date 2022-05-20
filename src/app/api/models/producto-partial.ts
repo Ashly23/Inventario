@@ -5,18 +5,19 @@
  * (tsType: Partial<Producto>, schemaOptions: { partial: true })
  */
 export interface ProductoPartial {
-  anioDepreciados?: number;
-  caracteristicas?: string;
+  anioDepreciados: number;
   etiquetaServ?: string;
-  id?: number;
-  idArea?: number;
-  idCategorias?: number;
-  idEmpleado?: number;
-  idEstadoProducto?: number;
-  marca?: string;
+  id: number;
+  idArea: number;
+  idCategorias: number;
+  idEstadoProducto: number;
+  idFabricante: number;
+  idGarantia: number;
+  idEmpleado: number;
+  idPartes: number;
   modelo?: string;
-  nombre?: string;
-  valor?: number;
-  valorDepreciado?: number;
-  vidaUtil?: number;
+  nombre: string;
+  valor: number;
+  valorDepreciado: number;
+  vidaUtil: number;
 }

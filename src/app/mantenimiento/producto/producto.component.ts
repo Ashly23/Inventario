@@ -1,24 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { Producto } from 'src/app/api/models';
-import { ProductoControllerService } from 'src/app/api/services';
+import { Area, Categorias, Empleado, EstadoProducto, Fabricante, Garantia, Partes, Producto } from 'src/app/api/models';
+import { AreaControllerService, CategoriasControllerService, EmpleadoControllerService, 
+      EstadoProductoControllerService, 
+      FabricanteControllerService, GarantiaControllerService, PartesControllerService, ProductoControllerService } from 'src/app/api/services';
 
 interface DataItem {
+  id: number;
   nombre: string;
   valor: number;
   vidaUtil: number;
   valorDepreciado: number;
   anioDepreciados: number;
-  marca: string;
   modelo: string;
   etiquetaServ: string;
   idCategorias: number;
   idEstado: number;
-  idEmpleado: number;
   idArea: number;
   idGarantia: number;
   idFabricante: number;
+  idPartes: number;
 }
 
 @Component({
@@ -32,15 +34,37 @@ export class ProductoComponent implements OnInit {
   validateForm !: FormGroup;
   visible: boolean = false;
   producto:Producto[]=[];
+  area:Area[]=[];
+  categorias:Categorias[]=[];
+  empleado:Empleado[]=[];
+  fabricante:Fabricante[]=[];
+  estado:EstadoProducto[]=[];
+  garantia:Garantia[]=[];
+  partes:Partes[]=[];
 
   constructor(
     private messageService: NzMessageService,
     private productoService:ProductoControllerService,
+    private areaService:AreaControllerService,
+    private categoriasService:CategoriasControllerService,
+    private empleadoService:EmpleadoControllerService,
+    private fabricanteService:FabricanteControllerService,
+    private estadoService:EstadoProductoControllerService,
+    private garantiaService:GarantiaControllerService,
+    private partesService:PartesControllerService,
     private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
     this.CleanForm();
+    this.productoService.find().subscribe(data=>this.producto=data)
+    this.areaService.find().subscribe(data=>this.area=data)
+    this.categoriasService.find().subscribe(data=>this.categorias=data)
+    this.empleadoService.find().subscribe(data=>this.empleado=data)
+    this.fabricanteService.find().subscribe(data=>this.fabricante=data)
+    this.estadoService.find().subscribe(data=>this.estado=data)
+    this.garantiaService.find().subscribe(data=>this.garantia=data)
+    this.partesService.find().subscribe(data=>this.partes=data)
   }
 
   eliminar(id: number): void {
@@ -54,7 +78,10 @@ export class ProductoComponent implements OnInit {
     this.messageService.info('Su registro sigue activo!')
   }
 
-  mostrar(data?: Producto): void {
+  mostrar(data?:Producto): void {
+    if (data?.id) {
+      this.formProducto.setValue({ ... data})
+    }
     this.visible = true
   }
 
@@ -84,14 +111,20 @@ export class ProductoComponent implements OnInit {
       vidaUtil: [null, [Validators.required]],
       valorDepreciado: [null, [Validators.required]],
       anioDepreciados: [null, [Validators.required]],
-      marca: [null, [Validators.required]],
       modelo: [null, [Validators.required]],
       etiquetaServ: [null, [Validators.required]],
+      idArea: [null, [Validators.required]],
+      idCategoria: [null, [Validators.required]],
+      idEmpleado: [null, [Validators.required]],
+      idFabricante: [null, [Validators.required]],
+      idEstadoProducto: [null, [Validators.required]],
+      idGarantia: [null, [Validators.required]],
+      idPartes: [null, [Validators.required]],
     });
   } 
 
   guardar(): void {
-    this.formProducto.setValue({ ...this.formProducto.value, 'estado': Boolean(this.formProducto.value.estado) })
+    this.formProducto.setValue({ ...this.formProducto.value })
     if (this.formProducto.value.id) {
       this.productoService.updateById({ 'id': this.formProducto.value.id, 'body': this.formProducto.value }).subscribe(
         () => {
@@ -110,6 +143,7 @@ export class ProductoComponent implements OnInit {
     } else {
       //insertar
       delete this.formProducto.value.id
+      console.log({ body: this.formProducto.value })
       this.productoService.create({ body: this.formProducto.value }).subscribe((datoAgregado) => {
         this.producto = [...this.producto, datoAgregado]
         this.messageService.success('Registro creado con exito!')
@@ -120,17 +154,29 @@ export class ProductoComponent implements OnInit {
    }
 
   formProducto: FormGroup = this.fb.group({
+    id: [],
+    idArea: [],
+    idCategorias: [],
+    idEmpleado:[],
+    idFabricante:[],
+    idEstadoProducto:[],
+    idGarantia:[],
+    idPartes:[],
     nombre: [],
     valor: [],
     vidaUtil: [],
     valorDepreciado: [],
     anioDepreciados: [],
-    marca: [],
     modelo: [],
     etiquetaServ: [],
   })
 
   listOfColumn = [
+    {
+      title: 'Id',
+      compare: (a: DataItem, b: DataItem) => a.id - b.id,
+      priority: 0
+    },
     {
       title: 'Nombre',
       compare: null,
@@ -157,11 +203,6 @@ export class ProductoComponent implements OnInit {
       priority: 2
     },
     {
-      title: 'Marca',
-      compare: null,
-      priority: false
-    },
-    {
       title: 'Modelo',
       compare: null,
       priority: false
@@ -180,7 +221,6 @@ export class ProductoComponent implements OnInit {
     vidaUtil: 5,
     valorDepreciado: 2.7,
     anioDepreciados: 2025,
-    marca: 'dell',
     modelo: 'nfdbhhubd',
     etiquetaServ: 'jdihcd',
 

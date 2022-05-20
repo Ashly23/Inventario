@@ -8,7 +8,7 @@ interface DataItem {
   id: number;
   nombre: string;
   correo: string;
-  telefono: number;
+  telefono: string;
   sitioWeb: string;
   estado: boolean;
 }
@@ -32,6 +32,7 @@ export class FabricanteComponent implements OnInit {
 
   ngOnInit(): void {
     this.CleanForm();
+    this.fabricanteService.find().subscribe(data=>this.fabricante=data)
   }
 
   eliminar(id: number): void {
@@ -124,7 +125,7 @@ export class FabricanteComponent implements OnInit {
     {
       title: 'Id',
       compare: (a: DataItem, b: DataItem) => a.id - b.id,
-      priority: 1
+      priority: 0
     },
     {
       title: 'Nombre',
@@ -138,8 +139,8 @@ export class FabricanteComponent implements OnInit {
     },
     {
       title: 'Telefono',
-      compare: (a: DataItem, b: DataItem) => a.telefono - b.telefono,
-      priority: 1
+      compare: null,
+      priority: false
     },
     {
       title: 'sitioWeb',

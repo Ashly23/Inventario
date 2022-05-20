@@ -9,5 +9,5 @@ export interface EmpleadoWithRelations {
   estado: boolean;
   id: number;
   nombre: string;
-  telefono: number;
+  telefono: string;
 }

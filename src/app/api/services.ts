@@ -1,5 +1,6 @@
 export { CategoriasControllerService } from './services/categorias-controller.service';
 export { AreaControllerService } from './services/area-controller.service';
+export { EmpleadoProductoControllerService } from './services/empleado-producto-controller.service';
 export { EmpleadoControllerService } from './services/empleado-controller.service';
 export { EstadoProductoControllerService } from './services/estado-producto-controller.service';
 export { FabricanteControllerService } from './services/fabricante-controller.service';

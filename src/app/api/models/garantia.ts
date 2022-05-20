@@ -7,5 +7,5 @@ export interface Garantia {
   fecha: string;
   id: number;
   observacion?: string;
-  porcentaje?: number;
+  porcentaje?: string;
 }

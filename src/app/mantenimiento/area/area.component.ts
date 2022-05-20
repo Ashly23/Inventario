@@ -139,7 +139,7 @@ export class AreaComponent implements OnInit {
     },
   ];
   
-
+/*
   listOfData: DataItem[] = [
     {
       id: 1234,
@@ -148,5 +148,6 @@ export class AreaComponent implements OnInit {
       estado: true
     },
   ];
+  */
 
 }

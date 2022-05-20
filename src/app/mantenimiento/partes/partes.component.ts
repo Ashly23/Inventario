@@ -5,10 +5,11 @@ import { Partes } from 'src/app/api/models';
 import { PartesControllerService } from 'src/app/api/services';
 
 interface DataItem {
+  id: number;
   nombre: string;
   tipoParte: string;
   capacidad: string;
-  valor: number;
+  valor: string;
   tecnologia: string;
   descripcion: string;
   estado: boolean;
@@ -33,6 +34,7 @@ export class PartesComponent implements OnInit{
 
   ngOnInit(): void {
     this.CleanForm();
+    this.partesService.find().subscribe(data=>this.partes=data)
   }
 
   eliminar(id: number): void {
@@ -114,7 +116,8 @@ export class PartesComponent implements OnInit{
    }
   
   formPartes: FormGroup = this.fb.group({
-    nombre: [],
+      id: [],
+      nombre: [],
       tipoParte:[],
       capacidad:[],
       valor:[],
@@ -125,6 +128,11 @@ export class PartesComponent implements OnInit{
 
   //Tabla
   listOfColumn = [
+    {
+      title: 'Id',
+      compare: (a: DataItem, b: DataItem) => a.id - b.id,
+      priority: 0
+    },
     {
       title: 'Nombre',
       compare: null,

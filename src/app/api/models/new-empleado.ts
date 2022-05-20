@@ -8,5 +8,5 @@ export interface NewEmpleado {
   correo: string;
   estado: boolean;
   nombre: string;
-  telefono: number;
+  telefono: string;
 }

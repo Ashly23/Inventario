@@ -42,7 +42,7 @@
 
 
   <!--       Agregar Nuevo Empleado       -->
-<nz-modal [(nzVisible)]="visible" nzTitle="Nueva Area">
+<nz-modal [(nzVisible)]="visible" nzTitle="Nueva Empleado">
   <ng-container *nzModalContent>
     <form nz-form nzLayout="vertical" (ngSubmit)="guardar()" [formGroup]="formEmpleado">
       <div nz-row [nzGutter]="8">
@@ -50,7 +50,7 @@
           <nz-form-item>
             <nz-form-label>Nombre</nz-form-label>
             <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
-              <input formControlName="nombre" nz-input placeholder="Escribe el nombre del empleado"/>
+              <input formControlName="nombre" nz-input/>
             </nz-form-control>
           </nz-form-item>
         </div>
@@ -60,7 +60,7 @@
           <nz-form-item>
             <nz-form-label>Correo</nz-form-label>
             <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
-              <input formControlName="correo" nz-input placeholder="Escribe el correo del empleado"/>
+              <input formControlName="correo" nz-input/>
             </nz-form-control>
           </nz-form-item>
         </div>
@@ -70,7 +70,7 @@
           <nz-form-item>
             <nz-form-label>Telefono</nz-form-label>
             <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
-              <input formControlName="telefono" nz-input placeholder="Escribe el telefono del empleado" />
+              <input formControlName="telefono" nz-input/>
             </nz-form-control>
           </nz-form-item>
         </div>

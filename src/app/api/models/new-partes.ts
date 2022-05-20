@@ -11,5 +11,5 @@ export interface NewPartes {
   nombre: string;
   tecnologia?: string;
   tipoParte?: string;
-  valor: number;
+  valor: string;
 }

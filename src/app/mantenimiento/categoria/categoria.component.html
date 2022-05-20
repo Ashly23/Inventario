@@ -42,7 +42,7 @@
 
 
 <!--       Agregar Nueva Categoria      -->
-  <nz-modal [(nzVisible)]="visible" nzTitle="Agregar categoria">
+  <nz-modal [(nzVisible)]="visible" nzTitle="Nueva Categoria">
     <ng-container *nzModalContent>
       <form nz-form nzLayout="vertical" (ngSubmit)="guardar()" [formGroup]="formCategorias">
         <div nz-row [nzGutter]="8">
@@ -50,7 +50,7 @@
             <nz-form-item>
               <nz-form-label>Nombre</nz-form-label>
               <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
-                <input formControlName="nombre" nz-input placeholder="Escribe el nombre del area" />
+                <input formControlName="nombre" nz-input/>
               </nz-form-control>
             </nz-form-item>
           </div>
@@ -60,7 +60,7 @@
             <nz-form-item>
               <nz-form-label>Descripcion</nz-form-label>
               <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
-                <input formControlName="descripcion" nz-input placeholder="Escribe la descripcion de la area" />
+                <input formControlName="descripcion" nz-input/>
               </nz-form-control>
             </nz-form-item>
           </div>

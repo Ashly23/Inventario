@@ -5,5 +5,5 @@ export interface Empleado {
   estado: boolean;
   id: number;
   nombre: string;
-  telefono: number;
+  telefono: string;
 }

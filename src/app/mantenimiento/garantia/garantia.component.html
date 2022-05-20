@@ -30,12 +30,11 @@
           </div>
         </td>
         <td>{{ data.id }}</td>
-        <td>{{ data.fecha }}</td>
+        <td>{{ data.fecha | date }}</td>
         <td>{{ data.porcentaje }}</td>
         <td>{{ data.observacion }}</td>
         <td>{{ data.descripcion }}</td>
         <td>{{ data.cuota }}</td>
-        <td>{{ data.estado }}</td>
         <td>
           <div *ngIf="data.estado"><i nz-icon nzType="check-circle" nzTheme="outline"></i></div>
         </td>
@@ -45,25 +44,32 @@
 
 
 <!--   Agregar Nueva Garantia   -->
-  <nz-modal [(nzVisible)]="visible" nzTitle="Nuevo Fabricante">
+  <nz-modal [(nzVisible)]="visible" nzTitle="Nueva Garantia">
     <ng-container *nzModalContent>
       <form nz-form nzLayout="vertical" (ngSubmit)="guardar()" [formGroup]="formGarantia">
-       <div nz-row [nzGutter]="8">
-        <div nz-col nzSpan="24">
-            <nz-form-item>
-                <nz-form-label>Fecha</nz-form-label>
-                <nz-form-control  nzErrorTip="Por favor escriba el dato correcto!">
-                    <nz-range-picker formControlName="fecha" nz-input nzBorderless="Seleccione Fecha"></nz-range-picker>
-                </nz-form-control>
-            </nz-form-item>
-        </div>
-     </div>
         <div nz-row [nzGutter]="8">
-          <div nz-col nzSpan="24">
+          <div nz-col nzSpan="8">
+              <nz-form-item>
+                  <nz-form-label>Fecha</nz-form-label>
+                  <nz-form-control  nzErrorTip="Por favor escriba el dato correcto!">
+                      <nz-date-picker formControlName="fecha" nzPlaceHolder="Seleccione Fecha"></nz-date-picker>
+                  </nz-form-control>
+              </nz-form-item>
+          </div>
+          <div nz-col nzSpan="8">
             <nz-form-item>
               <nz-form-label>Porcentaje</nz-form-label>
               <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
-                <input formControlName="porcentaje" nz-input placeholder="Escribe el correo del empleado"/>
+                <input formControlName="porcentaje" nz-input/>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          
+          <div nz-col nzSpan="8">
+            <nz-form-item>
+              <nz-form-label>Cuota</nz-form-label>
+              <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
+                <input formControlName="cuota" nz-input/>
               </nz-form-control>
             </nz-form-item>
           </div>
@@ -73,7 +79,7 @@
             <nz-form-item>
               <nz-form-label>Observacion</nz-form-label>
               <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
-                <input formControlName="observacion" nz-input placeholder="Escribe el telefono del empleado" />
+                <input formControlName="observacion" nz-input/>
               </nz-form-control>
             </nz-form-item>
           </div>
@@ -83,22 +89,12 @@
             <nz-form-item>
               <nz-form-label>Descripcion</nz-form-label>
               <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
-                <input formControlName="descripcion" nz-input placeholder="Escribe el telefono del empleado" />
+                <input formControlName="descripcion" nz-input/>
               </nz-form-control>
             </nz-form-item>
           </div>
         </div>
-        <div nz-row [nzGutter]="8">
-          <div nz-col nzSpan="24">
-            <nz-form-item>
-              <nz-form-label>Cuota</nz-form-label>
-              <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
-                <input formControlName="cuota" nz-input placeholder="Escribe el telefono del empleado" />
-              </nz-form-control>
-            </nz-form-item>
-          </div>
-        </div>
-        <div nz-row [nzGutter]="8">
+          <div nz-row [nzGutter]="8">
           <div nz-col nzSpan="24">
             <nz-form-item>
               <nz-form-label>Estado</nz-form-label>
@@ -111,8 +107,10 @@
             </nz-form-item>
           </div>
         </div>
+
       </form>
     </ng-container>
+
     <div *nzModalFooter>
       <button nz-button nzType="default" (click)="ocultar()">Cancelar</button>
       <button nz-button nzType="primary" (click)="guardar()">Guardar</button>

@@ -9,5 +9,5 @@ export interface EmpleadoPartial {
   estado?: boolean;
   id?: number;
   nombre?: string;
-  telefono?: number;
+  telefono?: string;
 }

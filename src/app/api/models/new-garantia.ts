@@ -8,8 +8,7 @@ export interface NewGarantia {
   cuota?: string;
   descripcion?: string;
   estado: boolean;
-  fechaFinal: string;
-  fechaInicial: string;
+  fecha: string;
   observacion?: string;
-  porcentaje?: number;
+  porcentaje?: string;
 }

@@ -8,9 +8,8 @@ export interface GarantiaWithRelations {
   cuota?: string;
   descripcion?: string;
   estado: boolean;
-  fechaFinal: string;
-  fechaInicial: string;
+  fecha: string;
   id: number;
   observacion?: string;
-  porcentaje?: number;
+  porcentaje?: string;
 }

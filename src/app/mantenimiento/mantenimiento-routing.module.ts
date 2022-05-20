@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AreaComponent } from './area/area.component';
 import { CategoriaComponent } from './categoria/categoria.component';
+import { EmpleadoProductoComponent } from './empleado-producto/empleado-producto.component';
 import { EmpleadoComponent } from './empleado/empleado.component';
 import { EstadoProductoComponent } from './estado-producto/estado-producto.component';
 import { FabricanteComponent } from './fabricante/fabricante.component';
@@ -17,8 +18,8 @@ const routes: Routes = [
   { path: 'fabricante', component: FabricanteComponent},
   { path: 'garantia', component: GarantiaComponent},
   { path: 'partes', component: PartesComponent},
-  { path: 'producto', component: ProductoComponent}
-
+  { path: 'producto', component: ProductoComponent},
+  { path: 'empleado-producto', component: EmpleadoProductoComponent}
 ];
 
 @NgModule({
