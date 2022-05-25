@@ -7,9 +7,9 @@
 export interface GarantiaPartial {
   cuota?: string;
   descripcion?: string;
-  estado: boolean;
-  fecha: string;
-  id: number;
+  estado?: boolean;
+  fecha?: string;
+  id?: number;
   observacion?: string;
   porcentaje?: string;
 }

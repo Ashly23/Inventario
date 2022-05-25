@@ -3,7 +3,7 @@
 export interface Partes {
   capacidad?: string;
   descripcion?: string;
-  estado: boolean;
+  estado?: boolean;
   id: number;
   nombre: string;
   tecnologia?: string;

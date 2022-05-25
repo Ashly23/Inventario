@@ -71,20 +71,9 @@
                </nz-form-item>
               </div>
             <div nz-col nzSpan="6">
-          <nz-form-item>
-            <nz-form-label>Empleado</nz-form-label>
-              <nz-form-control  nzErrorTip="Por favor escriba el dato correcto!">
-                  <nz-select formControlName="idEmpleado">
-                      <nz-option *ngFor="let item of empleado" [nzValue]="item.id" [nzLabel]="item.nombre">
-                      </nz-option>
-                  </nz-select>
-              </nz-form-control>
-           </nz-form-item>
-         </div>
-        <div nz-col nzSpan="6">
-          <nz-form-item>
-              <nz-form-label>Fabricante</nz-form-label>
-              <nz-form-control  nzErrorTip="Por favor escriba el dato correcto!">
+              <nz-form-item>
+               <nz-form-label>Fabricante</nz-form-label>
+                 <nz-form-control  nzErrorTip="Por favor escriba el dato correcto!">
                   <nz-select formControlName="idFabricante">
                       <nz-option *ngFor="let item of fabricante" [nzValue]="item.id" [nzLabel]="item.nombre">
                       </nz-option>
@@ -106,17 +95,19 @@
               </nz-form-control>
            </nz-form-item>
          </div>
+         
          <div nz-col nzSpan="6">
           <nz-form-item>
               <nz-form-label>Garantia</nz-form-label>
               <nz-form-control  nzErrorTip="Por favor escriba el dato correcto!">
                   <nz-select formControlName="idGarantia">
-                      <nz-option *ngFor="let item of garantia" [nzValue]="item.id" [nzLabel]="item.id">
+                      <nz-option *ngFor="let item of garantia" [nzValue]="item.id" [nzLabel]="item.fecha">
                       </nz-option>
                   </nz-select>
               </nz-form-control>
            </nz-form-item>
          </div>
+         
          <div nz-col nzSpan="6">
           <nz-form-item>
               <nz-form-label>Partes</nz-form-label>

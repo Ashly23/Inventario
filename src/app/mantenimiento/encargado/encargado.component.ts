@@ -1,34 +1,33 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { Empleado, EmpleadoProducto, Producto } from 'src/app/api/models';
-import { EmpleadoControllerService, EmpleadoProductoControllerService, ProductoControllerService } from 'src/app/api/services';
+import { Empleado, Encargado, Producto } from 'src/app/api/models';
+import { EncargadoControllerService, EmpleadoControllerService, ProductoControllerService } from 'src/app/api/services';
 
 interface DataItem {
   id: number,
   fechaInicial: string,
   fechaFinal: string,
-  idEmpleado: string,
+  idEmpleado: number,
   idProducto: number
 }
 
 @Component({
-  selector: 'app-empleado-producto',
-  templateUrl: './empleado-producto.component.html',
-  styleUrls: ['./empleado-producto.component.css']
+  selector: 'app-encargado',
+  templateUrl: './encargado.component.html',
+  styleUrls: ['./encargado.component.css']
 })
-
-export class EmpleadoProductoComponent implements OnInit {
+export class EncargadoComponent implements OnInit {
   isVisible = false;
   validateForm !: FormGroup;
   visible: boolean = false;
-  empleadoProducto:EmpleadoProducto[]=[];
+  encargado:Encargado[]=[];
   empleado:Empleado[]=[];
   producto:Producto[]=[];
 
   constructor(
     private messageService: NzMessageService,
-    private empleadoProductoService:EmpleadoProductoControllerService,
+    private encargadoService:EncargadoControllerService,
     private empleadoService:EmpleadoControllerService,
     private productoService:ProductoControllerService,
     private fb: FormBuilder
@@ -36,14 +35,14 @@ export class EmpleadoProductoComponent implements OnInit {
 
   ngOnInit(): void {
     this.CleanForm();
-    this.empleadoProductoService.find().subscribe(data=>this.empleadoProducto=data),
+    this.encargadoService.find().subscribe(data=>this.encargado=data)
     this.empleadoService.find().subscribe(data=>this.empleado=data)
     this.productoService.find().subscribe(data=>this.producto=data)
   }
 
   eliminar(id: number): void {
-    this.empleadoProductoService.deleteById({ id }).subscribe(() => {
-      this.empleadoProducto= this.empleadoProducto.filter(x => x.id !== id);
+    this.encargadoService.deleteById({ id }).subscribe(() => {
+      this.encargado = this.encargado.filter(x => x.id !== id);
       this.messageService.success('Registro Eliminado')
     })
   }
@@ -52,16 +51,16 @@ export class EmpleadoProductoComponent implements OnInit {
     this.messageService.info('Su registro sigue activo!')
   }
 
-  mostrar(data?: EmpleadoProducto): void {
+  mostrar(data?: Encargado): void {
     if (data?.id) {
-      this.formEmpleadoProducto.setValue({ ...data })
+      this.formEncargado.setValue({ ...data })
     }
     this.visible = true
   }
 
   ocultar(): void {
     this.visible = false
-    this.formEmpleadoProducto.reset()
+    this.formEncargado.reset()
   }
 
   showModal(): void {
@@ -91,35 +90,35 @@ export class EmpleadoProductoComponent implements OnInit {
   guardar(): void {
    // console.log(this.formEmpleadoProducto.value);
     
-    this.formEmpleadoProducto.setValue({ ...this.formEmpleadoProducto.value })
-    if (this.formEmpleadoProducto.value.id) {
-      this.empleadoProductoService.updateById({ 'id': this.formEmpleadoProducto.value.id, 'body': this.formEmpleadoProducto.value }).subscribe(
+    this.formEncargado.setValue({ ...this.formEncargado.value })
+    if (this.formEncargado.value.id) {
+      this.encargadoService.updateById({ 'id': this.formEncargado.value.id, 'body': this.formEncargado.value }).subscribe(
         () => {
           //actualizar
-          this.empleadoProducto = this.empleadoProducto.map(obj => {
-            if (obj.id === this.formEmpleadoProducto.value.id){
-              return this.formEmpleadoProducto.value;
+          this.encargado = this.encargado.map(obj => {
+            if (obj.id === this.formEncargado.value.id){
+              return this.formEncargado.value;
             }
             return obj;
           })
           this.messageService.success('Registro actualizado con exito!')
-          this.formEmpleadoProducto.reset()
+          this.formEncargado.reset()
         }
       )
 
     } else {
       //insertar
-      delete this.formEmpleadoProducto.value.id
-      this.empleadoProductoService.create({ body: this.formEmpleadoProducto.value }).subscribe((datoAgregado) => {
-        this.empleadoProducto = [...this.empleadoProducto, datoAgregado]
+      delete this.formEncargado.value.id
+      this.encargadoService.create({ body: this.formEncargado.value }).subscribe((datoAgregado) => {
+        this.encargado = [...this.encargado, datoAgregado]
         this.messageService.success('Registro creado con exito!')
-        this.formEmpleadoProducto.reset()
+        this.formEncargado.reset()
       })
     }
     this.visible = false
    }
 
-  formEmpleadoProducto: FormGroup = this.fb.group({
+  formEncargado: FormGroup = this.fb.group({
     id: [],
     fechaInicial: [],
     fechaFinal: [],
@@ -129,11 +128,11 @@ export class EmpleadoProductoComponent implements OnInit {
 
 //Tabla
 listOfColumn = [
-    {
-      title: 'Id',
-      compare: (a: DataItem, b: DataItem) => a.id - b.id,
-      priority: 0
-    },
+  {
+    title: 'Id',
+    compare: (a: DataItem, b: DataItem) => a.id- b.id,
+    priority: 2
+  },
     {
       title: 'Fecha Inicial',
       compare: null,
@@ -145,14 +144,14 @@ listOfColumn = [
       priority: false
     },
     {
-      title: 'Nombre',
-      compare: null,
-      priority: false
+      title: 'Id Empleado',
+      compare: (a: DataItem, b: DataItem) => a.idEmpleado - b.idEmpleado,
+      priority: 2
     },
     {
       title: 'Id Producto',
       compare: (a: DataItem, b: DataItem) => a.idProducto - b.idProducto,
-      priority: 2
+      priority: 3
     },
   ];
 }

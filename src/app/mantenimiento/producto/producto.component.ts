@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { Area, Categorias, Empleado, EstadoProducto, Fabricante, Garantia, Partes, Producto } from 'src/app/api/models';
-import { AreaControllerService, CategoriasControllerService, EmpleadoControllerService, 
-      EstadoProductoControllerService, 
+import { Area, Categorias, EstadoProducto, Fabricante, Garantia, Partes, Producto } from 'src/app/api/models';
+import { AreaControllerService, CategoriasControllerService, EstadoProductoControllerService, 
       FabricanteControllerService, GarantiaControllerService, PartesControllerService, ProductoControllerService } from 'src/app/api/services';
 
 interface DataItem {
@@ -21,6 +20,7 @@ interface DataItem {
   idGarantia: number;
   idFabricante: number;
   idPartes: number;
+  
 }
 
 @Component({
@@ -36,7 +36,6 @@ export class ProductoComponent implements OnInit {
   producto:Producto[]=[];
   area:Area[]=[];
   categorias:Categorias[]=[];
-  empleado:Empleado[]=[];
   fabricante:Fabricante[]=[];
   estado:EstadoProducto[]=[];
   garantia:Garantia[]=[];
@@ -47,7 +46,6 @@ export class ProductoComponent implements OnInit {
     private productoService:ProductoControllerService,
     private areaService:AreaControllerService,
     private categoriasService:CategoriasControllerService,
-    private empleadoService:EmpleadoControllerService,
     private fabricanteService:FabricanteControllerService,
     private estadoService:EstadoProductoControllerService,
     private garantiaService:GarantiaControllerService,
@@ -60,7 +58,6 @@ export class ProductoComponent implements OnInit {
     this.productoService.find().subscribe(data=>this.producto=data)
     this.areaService.find().subscribe(data=>this.area=data)
     this.categoriasService.find().subscribe(data=>this.categorias=data)
-    this.empleadoService.find().subscribe(data=>this.empleado=data)
     this.fabricanteService.find().subscribe(data=>this.fabricante=data)
     this.estadoService.find().subscribe(data=>this.estado=data)
     this.garantiaService.find().subscribe(data=>this.garantia=data)
@@ -108,14 +105,13 @@ export class ProductoComponent implements OnInit {
     this.validateForm  = this.fb.group({
       nombre: [null, [Validators.required]],
       valor: [null, [Validators.required]],
-      vidaUtil: [null, [Validators.required]],
+      vidaUtil: [0, [Validators.required]],
       valorDepreciado: [null, [Validators.required]],
       anioDepreciados: [null, [Validators.required]],
       modelo: [null, [Validators.required]],
       etiquetaServ: [null, [Validators.required]],
       idArea: [null, [Validators.required]],
       idCategoria: [null, [Validators.required]],
-      idEmpleado: [null, [Validators.required]],
       idFabricante: [null, [Validators.required]],
       idEstadoProducto: [null, [Validators.required]],
       idGarantia: [null, [Validators.required]],
@@ -157,7 +153,6 @@ export class ProductoComponent implements OnInit {
     id: [],
     idArea: [],
     idCategorias: [],
-    idEmpleado:[],
     idFabricante:[],
     idEstadoProducto:[],
     idGarantia:[],

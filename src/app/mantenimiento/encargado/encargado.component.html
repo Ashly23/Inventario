@@ -3,7 +3,7 @@
   </div>
   <hr>
   
-  <nz-table #sortTable [nzData]="empleadoProducto" nzTableLayout="fixed" [nzScroll]="{ x: '100%', y: '240px' }">
+  <nz-table #sortTable [nzData]="encargado" nzTableLayout="fixed" [nzScroll]="{ x: '100%', y: '240px' }">
     <thead>
       <tr>
         <th nzLeft nzWidth="100px">Acciones</th>
@@ -43,7 +43,7 @@
    
 <nz-modal [(nzVisible)]="visible" nzTitle="Nuevo">
     <ng-container *nzModalContent>
-      <form nz-form nzLayout="vertical" (ngSubmit)="guardar()" [formGroup]="formEmpleadoProducto">
+      <form nz-form nzLayout="vertical" (ngSubmit)="guardar()" [formGroup]="formEncargado">
         <div nz-row [nzGutter]="8">
             <div nz-col nzSpan="12">
                 <nz-form-item>
@@ -93,3 +93,4 @@
       <button nz-button nzType="primary" (click)="guardar()">Guardar</button>
     </div>
   </nz-modal>
+

@@ -5,7 +5,7 @@
  * (tsType: Omit<Fabricante, 'id'>, schemaOptions: { title: 'NewFabricante', exclude: [ 'id' ] })
  */
 export interface NewFabricante {
-  correo: string;
+  correo?: string;
   estado?: boolean;
   nombre: string;
   sitioWeb?: string;

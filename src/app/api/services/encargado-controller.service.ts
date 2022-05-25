@@ -9,16 +9,16 @@ import { RequestBuilder } from '../request-builder';
 import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
-import { EmpleadoProducto } from '../models/empleado-producto';
-import { EmpleadoProductoPartial } from '../models/empleado-producto-partial';
-import { EmpleadoProductoWithRelations } from '../models/empleado-producto-with-relations';
-import { NewEmpleadoProducto } from '../models/new-empleado-producto';
+import { Encargado } from '../models/encargado';
+import { EncargadoPartial } from '../models/encargado-partial';
+import { EncargadoWithRelations } from '../models/encargado-with-relations';
+import { NewEncargado } from '../models/new-encargado';
 import { Count as LoopbackCount } from '../models/loopback/count';
 
 @Injectable({
   providedIn: 'root',
 })
-export class EmpleadoProductoControllerService extends BaseService {
+export class EncargadoControllerService extends BaseService {
   constructor(
     config: ApiConfiguration,
     http: HttpClient
@@ -27,9 +27,9 @@ export class EmpleadoProductoControllerService extends BaseService {
   }
 
   /**
-   * Path part for operation empleadoProductoControllerCount
+   * Path part for operation encargadoControllerCount
    */
-  static readonly EmpleadoProductoControllerCountPath = '/empleado-productos/count';
+  static readonly EncargadoControllerCountPath = '/encargados/count';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -41,7 +41,7 @@ export class EmpleadoProductoControllerService extends BaseService {
     where?: any;
   }): Observable<StrictHttpResponse<LoopbackCount>> {
 
-    const rb = new RequestBuilder(this.rootUrl, EmpleadoProductoControllerService.EmpleadoProductoControllerCountPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, EncargadoControllerService.EncargadoControllerCountPath, 'get');
     if (params) {
       rb.query('where', params.where, {});
     }
@@ -73,9 +73,9 @@ export class EmpleadoProductoControllerService extends BaseService {
   }
 
   /**
-   * Path part for operation empleadoProductoControllerFindById
+   * Path part for operation encargadoControllerFindById
    */
-  static readonly EmpleadoProductoControllerFindByIdPath = '/empleado-productos/{id}';
+  static readonly EncargadoControllerFindByIdPath = '/encargados/{id}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -86,9 +86,9 @@ export class EmpleadoProductoControllerService extends BaseService {
   findById$Response(params: {
     id: number;
     filter?: any;
-  }): Observable<StrictHttpResponse<EmpleadoProductoWithRelations>> {
+  }): Observable<StrictHttpResponse<EncargadoWithRelations>> {
 
-    const rb = new RequestBuilder(this.rootUrl, EmpleadoProductoControllerService.EmpleadoProductoControllerFindByIdPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, EncargadoControllerService.EncargadoControllerFindByIdPath, 'get');
     if (params) {
       rb.path('id', params.id, {});
       rb.query('filter', params.filter, {});
@@ -100,7 +100,7 @@ export class EmpleadoProductoControllerService extends BaseService {
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<EmpleadoProductoWithRelations>;
+        return r as StrictHttpResponse<EncargadoWithRelations>;
       })
     );
   }
@@ -114,17 +114,17 @@ export class EmpleadoProductoControllerService extends BaseService {
   findById(params: {
     id: number;
     filter?: any;
-  }): Observable<EmpleadoProductoWithRelations> {
+  }): Observable<EncargadoWithRelations> {
 
     return this.findById$Response(params).pipe(
-      map((r: StrictHttpResponse<EmpleadoProductoWithRelations>) => r.body as EmpleadoProductoWithRelations)
+      map((r: StrictHttpResponse<EncargadoWithRelations>) => r.body as EncargadoWithRelations)
     );
   }
 
   /**
-   * Path part for operation empleadoProductoControllerReplaceById
+   * Path part for operation encargadoControllerReplaceById
    */
-  static readonly EmpleadoProductoControllerReplaceByIdPath = '/empleado-productos/{id}';
+  static readonly EncargadoControllerReplaceByIdPath = '/encargados/{id}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -134,10 +134,10 @@ export class EmpleadoProductoControllerService extends BaseService {
    */
   replaceById$Response(params: {
     id: number;
-    body?: EmpleadoProducto
+    body?: Encargado
   }): Observable<StrictHttpResponse<any>> {
 
-    const rb = new RequestBuilder(this.rootUrl, EmpleadoProductoControllerService.EmpleadoProductoControllerReplaceByIdPath, 'put');
+    const rb = new RequestBuilder(this.rootUrl, EncargadoControllerService.EncargadoControllerReplaceByIdPath, 'put');
     if (params) {
       rb.path('id', params.id, {});
       rb.body(params.body, 'application/json');
@@ -162,7 +162,7 @@ export class EmpleadoProductoControllerService extends BaseService {
    */
   replaceById(params: {
     id: number;
-    body?: EmpleadoProducto
+    body?: Encargado
   }): Observable<any> {
 
     return this.replaceById$Response(params).pipe(
@@ -171,9 +171,9 @@ export class EmpleadoProductoControllerService extends BaseService {
   }
 
   /**
-   * Path part for operation empleadoProductoControllerDeleteById
+   * Path part for operation encargadoControllerDeleteById
    */
-  static readonly EmpleadoProductoControllerDeleteByIdPath = '/empleado-productos/{id}';
+  static readonly EncargadoControllerDeleteByIdPath = '/encargados/{id}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -185,7 +185,7 @@ export class EmpleadoProductoControllerService extends BaseService {
     id: number;
   }): Observable<StrictHttpResponse<any>> {
 
-    const rb = new RequestBuilder(this.rootUrl, EmpleadoProductoControllerService.EmpleadoProductoControllerDeleteByIdPath, 'delete');
+    const rb = new RequestBuilder(this.rootUrl, EncargadoControllerService.EncargadoControllerDeleteByIdPath, 'delete');
     if (params) {
       rb.path('id', params.id, {});
     }
@@ -217,9 +217,9 @@ export class EmpleadoProductoControllerService extends BaseService {
   }
 
   /**
-   * Path part for operation empleadoProductoControllerUpdateById
+   * Path part for operation encargadoControllerUpdateById
    */
-  static readonly EmpleadoProductoControllerUpdateByIdPath = '/empleado-productos/{id}';
+  static readonly EncargadoControllerUpdateByIdPath = '/encargados/{id}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -229,10 +229,10 @@ export class EmpleadoProductoControllerService extends BaseService {
    */
   updateById$Response(params: {
     id: number;
-    body?: EmpleadoProductoPartial
+    body?: EncargadoPartial
   }): Observable<StrictHttpResponse<any>> {
 
-    const rb = new RequestBuilder(this.rootUrl, EmpleadoProductoControllerService.EmpleadoProductoControllerUpdateByIdPath, 'patch');
+    const rb = new RequestBuilder(this.rootUrl, EncargadoControllerService.EncargadoControllerUpdateByIdPath, 'patch');
     if (params) {
       rb.path('id', params.id, {});
       rb.body(params.body, 'application/json');
@@ -257,7 +257,7 @@ export class EmpleadoProductoControllerService extends BaseService {
    */
   updateById(params: {
     id: number;
-    body?: EmpleadoProductoPartial
+    body?: EncargadoPartial
   }): Observable<any> {
 
     return this.updateById$Response(params).pipe(
@@ -266,9 +266,9 @@ export class EmpleadoProductoControllerService extends BaseService {
   }
 
   /**
-   * Path part for operation empleadoProductoControllerFind
+   * Path part for operation encargadoControllerFind
    */
-  static readonly EmpleadoProductoControllerFindPath = '/empleado-productos';
+  static readonly EncargadoControllerFindPath = '/encargados';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -278,9 +278,9 @@ export class EmpleadoProductoControllerService extends BaseService {
    */
   find$Response(params?: {
     filter?: any;
-  }): Observable<StrictHttpResponse<Array<EmpleadoProductoWithRelations>>> {
+  }): Observable<StrictHttpResponse<Array<EncargadoWithRelations>>> {
 
-    const rb = new RequestBuilder(this.rootUrl, EmpleadoProductoControllerService.EmpleadoProductoControllerFindPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, EncargadoControllerService.EncargadoControllerFindPath, 'get');
     if (params) {
       rb.query('filter', params.filter, {});
     }
@@ -291,7 +291,7 @@ export class EmpleadoProductoControllerService extends BaseService {
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<EmpleadoProductoWithRelations>>;
+        return r as StrictHttpResponse<Array<EncargadoWithRelations>>;
       })
     );
   }
@@ -304,17 +304,17 @@ export class EmpleadoProductoControllerService extends BaseService {
    */
   find(params?: {
     filter?: any;
-  }): Observable<Array<EmpleadoProductoWithRelations>> {
+  }): Observable<Array<EncargadoWithRelations>> {
 
     return this.find$Response(params).pipe(
-      map((r: StrictHttpResponse<Array<EmpleadoProductoWithRelations>>) => r.body as Array<EmpleadoProductoWithRelations>)
+      map((r: StrictHttpResponse<Array<EncargadoWithRelations>>) => r.body as Array<EncargadoWithRelations>)
     );
   }
 
   /**
-   * Path part for operation empleadoProductoControllerCreate
+   * Path part for operation encargadoControllerCreate
    */
-  static readonly EmpleadoProductoControllerCreatePath = '/empleado-productos';
+  static readonly EncargadoControllerCreatePath = '/encargados';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -323,10 +323,10 @@ export class EmpleadoProductoControllerService extends BaseService {
    * This method sends `application/json` and handles request body of type `application/json`.
    */
   create$Response(params?: {
-    body?: NewEmpleadoProducto
-  }): Observable<StrictHttpResponse<EmpleadoProducto>> {
+    body?: NewEncargado
+  }): Observable<StrictHttpResponse<Encargado>> {
 
-    const rb = new RequestBuilder(this.rootUrl, EmpleadoProductoControllerService.EmpleadoProductoControllerCreatePath, 'post');
+    const rb = new RequestBuilder(this.rootUrl, EncargadoControllerService.EncargadoControllerCreatePath, 'post');
     if (params) {
       rb.body(params.body, 'application/json');
     }
@@ -337,7 +337,7 @@ export class EmpleadoProductoControllerService extends BaseService {
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<EmpleadoProducto>;
+        return r as StrictHttpResponse<Encargado>;
       })
     );
   }
@@ -349,18 +349,18 @@ export class EmpleadoProductoControllerService extends BaseService {
    * This method sends `application/json` and handles request body of type `application/json`.
    */
   create(params?: {
-    body?: NewEmpleadoProducto
-  }): Observable<EmpleadoProducto> {
+    body?: NewEncargado
+  }): Observable<Encargado> {
 
     return this.create$Response(params).pipe(
-      map((r: StrictHttpResponse<EmpleadoProducto>) => r.body as EmpleadoProducto)
+      map((r: StrictHttpResponse<Encargado>) => r.body as Encargado)
     );
   }
 
   /**
-   * Path part for operation empleadoProductoControllerUpdateAll
+   * Path part for operation encargadoControllerUpdateAll
    */
-  static readonly EmpleadoProductoControllerUpdateAllPath = '/empleado-productos';
+  static readonly EncargadoControllerUpdateAllPath = '/encargados';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -370,10 +370,10 @@ export class EmpleadoProductoControllerService extends BaseService {
    */
   updateAll$Response(params?: {
     where?: any;
-    body?: EmpleadoProductoPartial
+    body?: EncargadoPartial
   }): Observable<StrictHttpResponse<LoopbackCount>> {
 
-    const rb = new RequestBuilder(this.rootUrl, EmpleadoProductoControllerService.EmpleadoProductoControllerUpdateAllPath, 'patch');
+    const rb = new RequestBuilder(this.rootUrl, EncargadoControllerService.EncargadoControllerUpdateAllPath, 'patch');
     if (params) {
       rb.query('where', params.where, {});
       rb.body(params.body, 'application/json');
@@ -398,7 +398,7 @@ export class EmpleadoProductoControllerService extends BaseService {
    */
   updateAll(params?: {
     where?: any;
-    body?: EmpleadoProductoPartial
+    body?: EncargadoPartial
   }): Observable<LoopbackCount> {
 
     return this.updateAll$Response(params).pipe(

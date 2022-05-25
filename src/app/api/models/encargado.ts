@@ -1,9 +1,9 @@
 /* tslint:disable */
 /* eslint-disable */
-export interface EmpleadoProducto {
+export interface Encargado {
   fechaFinal: string;
   fechaInicial: string;
   id: number;
-  idEmpleado: string;
-  idProducto: number;
+  idEmpleado?: number;
+  idProducto?: number;
 }

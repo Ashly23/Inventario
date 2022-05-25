@@ -1,5 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
+import { ProductoWithRelations } from './producto-with-relations';
 
 /**
  * (tsType: AreaWithRelations, schemaOptions: { includeRelations: true })
@@ -9,4 +10,5 @@ export interface AreaWithRelations {
   estado: boolean;
   id: number;
   nombre: string;
+  productos?: Array<ProductoWithRelations>;
 }

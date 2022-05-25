@@ -2,7 +2,7 @@
 /* eslint-disable */
 export interface Fabricante {
   correo?: string;
-  estado: boolean;
+  estado?: boolean;
   id: number;
   nombre: string;
   sitioWeb?: string;

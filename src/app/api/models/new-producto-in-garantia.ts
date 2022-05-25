@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * (tsType: Omit<Producto, 'id'>, schemaOptions: { title: 'NewProducto', exclude: [ 'id' ] })
+ * (tsType: @loopback/repository-json-schema#Optional<Omit<Producto, 'id'>, 'idGarantia'>, schemaOptions: { title: 'NewProductoInGarantia', exclude: [ 'id' ], optional: [ 'idGarantia' ] })
  */
-export interface NewProducto {
+export interface NewProductoInGarantia {
   anioDepreciados: number;
   etiquetaServ?: string;
   idArea?: number;

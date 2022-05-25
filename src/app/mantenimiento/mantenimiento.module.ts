@@ -24,7 +24,7 @@ import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
-import { EmpleadoProductoComponent } from './empleado-producto/empleado-producto.component';
+import { EncargadoComponent } from './encargado/encargado.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +36,7 @@ import { EmpleadoProductoComponent } from './empleado-producto/empleado-producto
     GarantiaComponent,
     PartesComponent,
     ProductoComponent,
-    EmpleadoProductoComponent,
+    EncargadoComponent,
   ],
   imports: [
     CommonModule,
@@ -64,6 +64,7 @@ import { EmpleadoProductoComponent } from './empleado-producto/empleado-producto
     FabricanteComponent,
     GarantiaComponent,
     PartesComponent,
+    EncargadoComponent,
     ProductoComponent
   ]
 })
