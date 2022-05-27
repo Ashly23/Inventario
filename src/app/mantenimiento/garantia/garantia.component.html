@@ -48,7 +48,18 @@
     <ng-container *nzModalContent>
       <form nz-form nzLayout="vertical" (ngSubmit)="guardar()" [formGroup]="formGarantia">
         <div nz-row [nzGutter]="8">
-          <div nz-col nzSpan="8">
+          <div nz-col nzSpan="12">
+            <nz-form-item>
+                <nz-form-label>Area</nz-form-label>
+                <nz-form-control  nzErrorTip="Por favor escriba el dato correcto!">
+                    <nz-select formControlName="nombre">
+                        <nz-option *ngFor="let item of producto" [nzValue]="item.id" [nzLabel]="item.nombre">
+                        </nz-option>
+                    </nz-select>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+          <div nz-col nzSpan="12">
               <nz-form-item>
                   <nz-form-label>Fecha</nz-form-label>
                   <nz-form-control  nzErrorTip="Por favor escriba el dato correcto!">
@@ -56,7 +67,9 @@
                   </nz-form-control>
               </nz-form-item>
           </div>
-          <div nz-col nzSpan="8">
+          </div>
+        <div nz-row [nzGutter]="8">
+           <div nz-col nzSpan="12">
             <nz-form-item>
               <nz-form-label>Porcentaje</nz-form-label>
               <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
@@ -64,8 +77,7 @@
               </nz-form-control>
             </nz-form-item>
           </div>
-          
-          <div nz-col nzSpan="8">
+          <div nz-col nzSpan="12">
             <nz-form-item>
               <nz-form-label>Cuota</nz-form-label>
               <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">

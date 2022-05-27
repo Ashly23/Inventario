@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { Empleado, Encargado, Producto } from 'src/app/api/models';
+import { Empleado, Encargado, EncargadoWithRelations, Producto } from 'src/app/api/models';
 import { EncargadoControllerService, EmpleadoControllerService, ProductoControllerService } from 'src/app/api/services';
 
 interface DataItem {
@@ -19,9 +19,11 @@ interface DataItem {
 })
 export class EncargadoComponent implements OnInit {
   isVisible = false;
+  size: 'large' | 'default' = 'default';
   validateForm !: FormGroup;
-  visible: boolean = false;
-  encargado:Encargado[]=[];
+  visible = false;
+  visibleDrawer = false;
+  encargado:EncargadoWithRelations[]=[];
   empleado:Empleado[]=[];
   producto:Producto[]=[];
 
@@ -35,17 +37,45 @@ export class EncargadoComponent implements OnInit {
 
   ngOnInit(): void {
     this.CleanForm();
-    this.encargadoService.find().subscribe(data=>this.encargado=data)
+    this.encargadoService.find(
+      {"filter":{"include": [{"relation": "Productos"},{"relation": "Empleados"}]}}
+    ).subscribe(data=>{this.encargado=data
+    console.log(data)
+    })
     this.empleadoService.find().subscribe(data=>this.empleado=data)
     this.productoService.find().subscribe(data=>this.producto=data)
   }
 
-  eliminar(id: number): void {
+  eliminar(id: number ): void {
     this.encargadoService.deleteById({ id }).subscribe(() => {
       this.encargado = this.encargado.filter(x => x.id !== id);
       this.messageService.success('Registro Eliminado')
     })
   }
+
+  //Drawer
+  get title(): string {
+    return `${this.size} Drawer`;
+  }
+
+  showDefault(): void {
+    this.size = 'default';
+    this.open();
+  }
+
+  showLarge(): void {
+    this.size = 'large';
+    this.open();
+  }
+
+  open(): void {
+    this.visibleDrawer = true;
+  }
+
+  close(): void {
+    this.visibleDrawer = false;
+  }
+  //FD
 
   cancel(): void {
     this.messageService.info('Su registro sigue activo!')
@@ -115,7 +145,7 @@ export class EncargadoComponent implements OnInit {
         this.formEncargado.reset()
       })
     }
-    this.visible = false
+    this.visible= false
    }
 
   formEncargado: FormGroup = this.fb.group({
@@ -144,14 +174,14 @@ listOfColumn = [
       priority: false
     },
     {
-      title: 'Id Empleado',
-      compare: (a: DataItem, b: DataItem) => a.idEmpleado - b.idEmpleado,
-      priority: 2
+      title: 'Empleado',
+      compare: null,
+      priority: false
     },
     {
-      title: 'Id Producto',
-      compare: (a: DataItem, b: DataItem) => a.idProducto - b.idProducto,
-      priority: 3
+      title: 'Producto',
+      compare: null,
+      priority: false
     },
   ];
 }

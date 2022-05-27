@@ -6,7 +6,7 @@
  */
 export interface EstadoProductoPartial {
   estado?: boolean;
-  id?: number;
+  id: number;
   nombre?: string;
   observacion?: string;
 }

@@ -19,7 +19,7 @@ export interface ProductoWithRelations {
   Garantias?: GarantiaWithRelations;
   Parte?: PartesWithRelations;
   anioDepreciados: number;
-  encargados?: EncargadoWithRelations;
+  encargados?: Array<EncargadoWithRelations>;
   etiquetaServ?: string;
   id: number;
   idArea?: number;

@@ -7,6 +7,6 @@
 export interface CategoriasPartial {
   descripcion?: string;
   estado?: boolean;
-  id?: number;
+  id: number;
   nombre?: string;
 }

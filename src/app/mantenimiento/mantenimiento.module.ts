@@ -8,8 +8,9 @@ import { EmpleadoComponent } from './empleado/empleado.component';
 import { EstadoProductoComponent } from './estado-producto/estado-producto.component';
 import { FabricanteComponent } from './fabricante/fabricante.component';
 import { GarantiaComponent } from './garantia/garantia.component';
-import { PartesComponent } from './partes/partes.component';
+import { PartesComponent } from './producto/partes/partes.component';
 import { ProductoComponent } from './producto/producto.component';
+import { EncargadoComponent } from './producto/encargado/encargado.component';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -24,7 +25,7 @@ import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
-import { EncargadoComponent } from './encargado/encargado.component';
+import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,7 @@ import { EncargadoComponent } from './encargado/encargado.component';
     GarantiaComponent,
     PartesComponent,
     ProductoComponent,
-    EncargadoComponent,
+    EncargadoComponent
   ],
   imports: [
     CommonModule,
@@ -54,7 +55,8 @@ import { EncargadoComponent } from './encargado/encargado.component';
     NzDividerModule,
     NzPopconfirmModule,
     NzMessageModule,
-    NzDatePickerModule
+    NzDatePickerModule,
+    NzDrawerModule
   ],
   exports: [
     AreaComponent,

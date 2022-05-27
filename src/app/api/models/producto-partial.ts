@@ -7,7 +7,7 @@
 export interface ProductoPartial {
   anioDepreciados?: number;
   etiquetaServ?: string;
-  id?: number;
+  id: number;
   idArea?: number;
   idCategorias?: number;
   idEstadoProducto?: number;

@@ -7,6 +7,6 @@
 export interface AreaPartial {
   descripcion?: string;
   estado?: boolean;
-  id?: number;
+  id: number;
   nombre?: string;
 }

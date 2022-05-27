@@ -19,8 +19,7 @@ interface DataItem {
   idArea: number;
   idGarantia: number;
   idFabricante: number;
-  idPartes: number;
-  
+  idPartes: number; 
 }
 
 @Component({
@@ -206,7 +205,7 @@ export class ProductoComponent implements OnInit {
       title: 'Etiqueta de Servicio',
       compare: null,
       priority: false
-    },
+    }
   ];
 /*
   listOfData: DataItem[] = [
@@ -229,3 +228,5 @@ export class ProductoComponent implements OnInit {
  ]; 
  */
 }
+
+//EMPLEADO ENCARGADO DEL PRODCUCTO

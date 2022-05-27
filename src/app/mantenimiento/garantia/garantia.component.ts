@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { Garantia } from 'src/app/api/models';
+import { Garantia, Producto } from 'src/app/api/models';
 import { GarantiaControllerService } from 'src/app/api/services';
 
 interface DataItem {
@@ -24,6 +24,7 @@ export class GarantiaComponent implements OnInit {
   validateForm !: FormGroup;
   visible: boolean = false;
   garantia:Garantia[]=[];
+  producto:Producto[]=[];
 
   constructor(
     private messageService: NzMessageService,
@@ -34,6 +35,7 @@ export class GarantiaComponent implements OnInit {
   ngOnInit(): void {
     this.CleanForm();
     this.garantiaService.find().subscribe(data=>this.garantia=data)
+    
   }
 
   eliminar(id: number): void {

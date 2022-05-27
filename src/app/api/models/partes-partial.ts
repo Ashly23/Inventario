@@ -8,7 +8,7 @@ export interface PartesPartial {
   capacidad?: string;
   descripcion?: string;
   estado?: boolean;
-  id?: number;
+  id: number;
   nombre?: string;
   tecnologia?: string;
   tipoParte?: string;

@@ -7,7 +7,7 @@
 export interface EmpleadoPartial {
   correo?: string;
   estado?: boolean;
-  id?: number;
+  id: number;
   nombre?: string;
   telefono?: string;
 }

@@ -7,7 +7,7 @@
 export interface FabricantePartial {
   correo?: string;
   estado?: boolean;
-  id?: number;
+  id: number;
   nombre?: string;
   sitioWeb?: string;
   telefono?: string;

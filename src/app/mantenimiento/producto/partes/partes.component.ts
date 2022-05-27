@@ -22,8 +22,10 @@ interface DataItem {
 })
 export class PartesComponent implements OnInit{
   isVisible = false;
+  size: 'large' | 'default' = 'default';
   validateForm !: FormGroup;
   visible: boolean = false;
+  visibleDrawer = false;
   partes:Partes[]=[];
 
   constructor(
@@ -43,6 +45,30 @@ export class PartesComponent implements OnInit{
       this.messageService.success('Registro Eliminado')
     })
   }
+
+    //Drawer
+    get title(): string {
+      return `${this.size} Drawer`;
+    }
+  
+    showDefault(): void {
+      this.size = 'default';
+      this.open();
+    }
+  
+    showLarge(): void {
+      this.size = 'large';
+      this.open();
+    }
+  
+    open(): void {
+      this.visibleDrawer = true;
+    }
+  
+    close(): void {
+      this.visibleDrawer = false;
+    }
+    //FD
 
   cancel(): void {
     this.messageService.info('Su registro sigue activo!')
@@ -76,6 +102,7 @@ export class PartesComponent implements OnInit{
 
   CleanForm(){
     this.validateForm  = this.fb.group({
+      id: [null, [Validators.required]],
       nombre: [null, [Validators.required]],
       tipoParte: [null, [Validators.required]],
       capacidad: [null, [Validators.required]],

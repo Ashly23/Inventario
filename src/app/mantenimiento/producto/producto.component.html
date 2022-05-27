@@ -38,6 +38,13 @@
         <td>{{ data.anioDepreciados }}</td>
         <td>{{ data.modelo }}</td>
         <td>{{ data.etiquetaServ }}</td>
+
+        <td nzRight nzAlign="center">
+          <app-encargado></app-encargado>
+        </td>
+        <td nzRight nzAlign="center">
+          <app-partes></app-partes>
+        </td>
       </tr>
     </tbody>
   </nz-table>
@@ -79,10 +86,9 @@
                       </nz-option>
                   </nz-select>
               </nz-form-control>
-           </nz-form-item>
+            </nz-form-item>
+          </div>
          </div>
-        </div>
-
         <div nz-row [nzGutter]="8">
         <div nz-col nzSpan="6">
           <nz-form-item>
@@ -95,7 +101,6 @@
               </nz-form-control>
            </nz-form-item>
          </div>
-         
          <div nz-col nzSpan="6">
           <nz-form-item>
               <nz-form-label>Garantia</nz-form-label>
@@ -107,7 +112,6 @@
               </nz-form-control>
            </nz-form-item>
          </div>
-         
          <div nz-col nzSpan="6">
           <nz-form-item>
               <nz-form-label>Partes</nz-form-label>
@@ -120,7 +124,6 @@
            </nz-form-item>
          </div>
          </div>
-
         <div nz-row [nzGutter]="8">
           <div nz-col nzSpan="15">
             <nz-form-item>
@@ -166,7 +169,6 @@
             </nz-form-item>
           </div>
         </div>
-
         <div nz-row [nzGutter]="8">
           <div nz-col nzSpan="12">
             <nz-form-item>

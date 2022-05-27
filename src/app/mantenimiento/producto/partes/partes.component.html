@@ -1,3 +1,15 @@
+<button nz-button nzType="primary" (click)="showLarge()">Partes</button>
+
+<nz-drawer
+      [nzSize]="size"
+      [nzVisible]="visibleDrawer"
+      nzPlacement="right"
+      [nzTitle]="title"
+      [nzExtra]="extra"
+      (nzOnClose)="close()"
+    >
+<ng-container *nzDrawerContent>
+
 <div nz-row>
   <div nz-col nzSpan="24"><button (click)="mostrar()" nz-button nzType="primary">Agregar</button></div>
 </div>
@@ -42,6 +54,14 @@
       </tr>
     </tbody>
   </nz-table>
+</ng-container>
+</nz-drawer>
+<ng-template #extra>
+  <button nz-button nzType="default" (click)="close()">Cancel</button>
+  &nbsp;
+  <button nz-button nzType="primary" (click)="close()">OK</button>
+</ng-template>
+
 
 
   <!--  Nueva Parte -->

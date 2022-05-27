@@ -16,6 +16,7 @@ interface DataItem {
   templateUrl: './estado-producto.component.html',
   styleUrls: ['./estado-producto.component.css']
 })
+
 export class EstadoProductoComponent implements OnInit {
   isVisible = false;
   validateForm !: FormGroup;
@@ -95,7 +96,6 @@ export class EstadoProductoComponent implements OnInit {
           this.formEstado.reset()
         }
       )
-
     } else {
       //insertar
       delete this.formEstado.value.id
