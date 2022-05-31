@@ -8,8 +8,7 @@ interface DataItem {
   id: number,
   fechaInicial: string,
   fechaFinal: string,
-  idEmpleado: number,
-  idProducto: number
+  idEmpleado: number
 }
 
 @Component({
@@ -23,30 +22,33 @@ export class EncargadoComponent implements OnInit {
   validateForm !: FormGroup;
   visible = false;
   visibleDrawer = false;
-  encargado:EncargadoWithRelations[]=[];
-  empleado:Empleado[]=[];
-  producto:Producto[]=[];
+  encargado: EncargadoWithRelations[] = [];
+  empleado: Empleado[] = [];
+  producto: Producto[] = [];
 
   constructor(
     private messageService: NzMessageService,
-    private encargadoService:EncargadoControllerService,
-    private empleadoService:EmpleadoControllerService,
-    private productoService:ProductoControllerService,
+    private encargadoService: EncargadoControllerService,
+    private empleadoService: EmpleadoControllerService,
+    private productoService: ProductoControllerService,
     private fb: FormBuilder
   ) { }
 
   ngOnInit(): void {
     this.CleanForm();
     this.encargadoService.find(
-      {"filter":{"include": [{"relation": "Productos"},{"relation": "Empleados"}]}}
-    ).subscribe(data=>{this.encargado=data
-    console.log(data)
+      {
+        "filter": `{"include": [{"relation": "Productos"},{"relation": "Empleados"}]}`
+      }
+    ).subscribe(data => {
+      this.encargado = data
+      console.log(data)
     })
-    this.empleadoService.find().subscribe(data=>this.empleado=data)
-    this.productoService.find().subscribe(data=>this.producto=data)
+    this.empleadoService.find().subscribe(data => this.empleado = data)
+    this.productoService.find().subscribe(data => this.producto = data)
   }
 
-  eliminar(id: number ): void {
+  eliminar(id: number): void {
     this.encargadoService.deleteById({ id }).subscribe(() => {
       this.encargado = this.encargado.filter(x => x.id !== id);
       this.messageService.success('Registro Eliminado')
@@ -107,26 +109,26 @@ export class EncargadoComponent implements OnInit {
     this.isVisible = false;
   }
 
-  CleanForm(){
-    this.validateForm  = this.fb.group({
+  CleanForm() {
+    this.validateForm = this.fb.group({
       id: [null, [Validators.required]],
       fechaInicial: [null, [Validators.required]],
       fechaFinal: [null, [Validators.required]],
       idEmpleado: [null, [Validators.required]],
       idProducto: [null, [Validators.required]]
     });
-  } 
+  }
 
   guardar(): void {
-   // console.log(this.formEmpleadoProducto.value);
-    
+    // console.log(this.formEmpleadoProducto.value);
+
     this.formEncargado.setValue({ ...this.formEncargado.value })
     if (this.formEncargado.value.id) {
       this.encargadoService.updateById({ 'id': this.formEncargado.value.id, 'body': this.formEncargado.value }).subscribe(
         () => {
           //actualizar
           this.encargado = this.encargado.map(obj => {
-            if (obj.id === this.formEncargado.value.id){
+            if (obj.id === this.formEncargado.value.id) {
               return this.formEncargado.value;
             }
             return obj;
@@ -135,7 +137,6 @@ export class EncargadoComponent implements OnInit {
           this.formEncargado.reset()
         }
       )
-
     } else {
       //insertar
       delete this.formEncargado.value.id
@@ -145,8 +146,8 @@ export class EncargadoComponent implements OnInit {
         this.formEncargado.reset()
       })
     }
-    this.visible= false
-   }
+    this.visible = false
+  }
 
   formEncargado: FormGroup = this.fb.group({
     id: [],
@@ -156,13 +157,13 @@ export class EncargadoComponent implements OnInit {
     idProducto: []
   })
 
-//Tabla
-listOfColumn = [
-  {
-    title: 'Id',
-    compare: (a: DataItem, b: DataItem) => a.id- b.id,
-    priority: 2
-  },
+  //Tabla
+  listOfColumn = [
+    {
+      title: 'Id',
+      compare: (a: DataItem, b: DataItem) => a.id - b.id,
+      priority: 2
+    },
     {
       title: 'Fecha Inicial',
       compare: null,

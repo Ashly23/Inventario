@@ -10,7 +10,7 @@ export interface FabricanteWithRelations {
   estado?: boolean;
   id: number;
   nombre: string;
-  productos?: Array<ProductoWithRelations>;
+  Productos?: ProductoWithRelations;
   sitioWeb?: string;
   telefono: string;
 }

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { Partes } from 'src/app/api/models';
-import { PartesControllerService } from 'src/app/api/services';
+import { Partes, Producto } from 'src/app/api/models';
+import { PartesControllerService, ProductoControllerService } from 'src/app/api/services';
 
 interface DataItem {
   id: number;
@@ -27,16 +27,19 @@ export class PartesComponent implements OnInit{
   visible: boolean = false;
   visibleDrawer = false;
   partes:Partes[]=[];
+  producto:Producto[]=[];
 
   constructor(
     private messageService: NzMessageService,
     private partesService:PartesControllerService,
+    private productoService:ProductoControllerService,
     private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
     this.CleanForm();
     this.partesService.find().subscribe(data=>this.partes=data)
+    this.productoService.find().subscribe(data=>this.producto=data)
   }
 
   eliminar(id: number): void {
@@ -48,7 +51,7 @@ export class PartesComponent implements OnInit{
 
     //Drawer
     get title(): string {
-      return `${this.size} Drawer`;
+      return `Partes`;
     }
   
     showDefault(): void {
@@ -106,9 +109,7 @@ export class PartesComponent implements OnInit{
       nombre: [null, [Validators.required]],
       tipoParte: [null, [Validators.required]],
       capacidad: [null, [Validators.required]],
-      valor: [null, [Validators.required]],
       tecnologia: [null, [Validators.required]],
-      descripcion: [null, [Validators.required]],
       estado: [null, [Validators.required]],
     });
   } 
@@ -133,6 +134,7 @@ export class PartesComponent implements OnInit{
     } else {
       //insertar
       delete this.formPartes.value.id
+      console.log({ body: this.formPartes.value })
       this.partesService.create({ body: this.formPartes.value }).subscribe((datoAgregado) => {
         this.partes = [...this.partes, datoAgregado]
         this.messageService.success('Registro creado con exito!')
@@ -141,25 +143,18 @@ export class PartesComponent implements OnInit{
     }
     this.visible = false
    }
-  
+
   formPartes: FormGroup = this.fb.group({
-      id: [],
+      id:[],
       nombre: [],
       tipoParte:[],
       capacidad:[],
-      valor:[],
       tecnologia:[],
-      descripcion:[],
       estado:[]
   })
 
   //Tabla
   listOfColumn = [
-    {
-      title: 'Id',
-      compare: (a: DataItem, b: DataItem) => a.id - b.id,
-      priority: 0
-    },
     {
       title: 'Nombre',
       compare: null,
@@ -176,17 +171,7 @@ export class PartesComponent implements OnInit{
       priority: false
     },
     {
-      title: 'Valor',
-      compare: null,
-      priority: false
-    },
-    {
       title: 'Tecnologia',
-      compare: null,
-      priority: false
-    },
-    {
-      title: 'Descripcion',
       compare: null,
       priority: false
     },

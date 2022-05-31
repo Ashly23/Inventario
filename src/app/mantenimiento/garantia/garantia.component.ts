@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { Garantia, Producto } from 'src/app/api/models';
-import { GarantiaControllerService } from 'src/app/api/services';
+import { Garantia, GarantiaWithRelations, Producto } from 'src/app/api/models';
+import { GarantiaControllerService, ProductoControllerService } from 'src/app/api/services';
 
 interface DataItem {
   id: number,
   fecha: string,
   porcentaje: string,
   observacion: string,
-  descripcion: string,
   cuota: number,
   estado: boolean
 }
@@ -23,19 +22,27 @@ export class GarantiaComponent implements OnInit {
   isVisible = false;
   validateForm !: FormGroup;
   visible: boolean = false;
-  garantia:Garantia[]=[];
+  garantia:GarantiaWithRelations[]=[];
   producto:Producto[]=[];
 
   constructor(
     private messageService: NzMessageService,
     private garantiaService:GarantiaControllerService,
+    private productoService: ProductoControllerService,
     private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
     this.CleanForm();
-    this.garantiaService.find().subscribe(data=>this.garantia=data)
-    
+    this.garantiaService.find(
+      {
+        "filter": `{"include": [{"relation": "Productos"}]}`
+      }
+    ).subscribe(data=> {
+      this.garantia = data 
+    console.log(data)  
+  })
+    this.productoService.find().subscribe(data => this.producto = data)
   }
 
   eliminar(id: number): void {
@@ -77,10 +84,10 @@ export class GarantiaComponent implements OnInit {
 
   CleanForm(){
     this.validateForm  = this.fb.group({
+      idProducto: [null, [Validators.required]],
       fecha: [null, [Validators.required]],
       porcentaje: [null, [Validators.required]],
       observacion: [null, [Validators.required]],
-      descripcion: [null, [Validators.required]],
       cuota: [null, [Validators.required]],
       estado: [null, [Validators.required]],
     });
@@ -117,10 +124,10 @@ export class GarantiaComponent implements OnInit {
 
   formGarantia: FormGroup = this.fb.group({
     id:[],
+    idProducto:[],
     fecha:[],
     porcentaje:[],
     observacion:[],
-    descripcion:[],
     cuota:[],
     estado:[]
   })
@@ -131,6 +138,11 @@ export class GarantiaComponent implements OnInit {
       title: 'Id',
       compare: (a: DataItem, b: DataItem) => a.id - b.id,
       priority: 0
+    },
+    {
+      title: 'Producto',
+      compare: null,
+      priority: false
     },
     {
       title: 'Fecha',
@@ -144,11 +156,6 @@ export class GarantiaComponent implements OnInit {
     },
     {
       title: 'Observacion',
-      compare: null,
-      priority: false
-    },
-    {
-      title: 'Descripcion',
       compare: null,
       priority: false
     },

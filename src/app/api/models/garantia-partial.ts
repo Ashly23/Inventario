@@ -12,4 +12,5 @@ export interface GarantiaPartial {
   id: number;
   observacion?: string;
   porcentaje?: string;
+  idProducto?: number;
 }

@@ -13,5 +13,5 @@ export interface GarantiaWithRelations {
   id: number;
   observacion?: string;
   porcentaje?: string;
-  productos?: Array<ProductoWithRelations>;
+  Productos?: ProductoWithRelations;
 }

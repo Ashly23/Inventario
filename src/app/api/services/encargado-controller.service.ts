@@ -84,7 +84,7 @@ export class EncargadoControllerService extends BaseService {
    * This method doesn't expect any request body.
    */
   findById$Response(params: {
-    id: string;
+    id: number;
     filter?: any;
   }): Observable<StrictHttpResponse<EncargadoWithRelations>> {
 
@@ -112,7 +112,7 @@ export class EncargadoControllerService extends BaseService {
    * This method doesn't expect any request body.
    */
   findById(params: {
-    id: string;
+    id: number;
     filter?: any;
   }): Observable<EncargadoWithRelations> {
 

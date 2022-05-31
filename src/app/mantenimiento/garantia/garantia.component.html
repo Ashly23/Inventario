@@ -30,10 +30,10 @@
           </div>
         </td>
         <td>{{ data.id }}</td>
+        <td>{{ data.Productos?.nombre }}</td>
         <td>{{ data.fecha | date }}</td>
         <td>{{ data.porcentaje }}</td>
         <td>{{ data.observacion }}</td>
-        <td>{{ data.descripcion }}</td>
         <td>{{ data.cuota }}</td>
         <td>
           <div *ngIf="data.estado"><i nz-icon nzType="check-circle" nzTheme="outline"></i></div>
@@ -50,15 +50,15 @@
         <div nz-row [nzGutter]="8">
           <div nz-col nzSpan="12">
             <nz-form-item>
-                <nz-form-label>Area</nz-form-label>
+                <nz-form-label>Producto</nz-form-label>
                 <nz-form-control  nzErrorTip="Por favor escriba el dato correcto!">
-                    <nz-select formControlName="nombre">
-                        <nz-option *ngFor="let item of producto" [nzValue]="item.id" [nzLabel]="item.nombre">
+                    <nz-select formControlName="idProducto">
+                        <nz-option *ngFor="let item of producto"  [nzValue]="item.id" [nzLabel]="item.nombre">
                         </nz-option>
                     </nz-select>
                 </nz-form-control>
-            </nz-form-item>
-        </div>
+               </nz-form-item>
+              </div>
           <div nz-col nzSpan="12">
               <nz-form-item>
                   <nz-form-label>Fecha</nz-form-label>
@@ -92,16 +92,6 @@
               <nz-form-label>Observacion</nz-form-label>
               <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
                 <input formControlName="observacion" nz-input/>
-              </nz-form-control>
-            </nz-form-item>
-          </div>
-        </div>
-        <div nz-row [nzGutter]="8">
-          <div nz-col nzSpan="24">
-            <nz-form-item>
-              <nz-form-label>Descripcion</nz-form-label>
-              <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
-                <input formControlName="descripcion" nz-input/>
               </nz-form-control>
             </nz-form-item>
           </div>

@@ -8,4 +8,5 @@ export interface Garantia {
   id: number;
   observacion?: string;
   porcentaje?: string;
+  idProducto?: number;
 }

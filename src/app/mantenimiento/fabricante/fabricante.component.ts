@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { Fabricante } from 'src/app/api/models';
-import { FabricanteControllerService } from 'src/app/api/services';
+import { Fabricante, Producto } from 'src/app/api/models';
+import { FabricanteControllerService, ProductoControllerService } from 'src/app/api/services';
 
 interface DataItem {
   id: number;
   nombre: string;
+  idProducto: number;
   correo: string;
   telefono: string;
   sitioWeb: string;
@@ -23,16 +24,26 @@ export class FabricanteComponent implements OnInit {
   validateForm !: FormGroup;
   visible: boolean = false;
   fabricante:Fabricante[]=[];
+  producto: Producto[] = [];
 
   constructor(
     private messageService: NzMessageService,
     private fabricanteService:FabricanteControllerService,
+    private productoService: ProductoControllerService,
     private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
     this.CleanForm();
-    this.fabricanteService.find().subscribe(data=>this.fabricante=data)
+    this.fabricanteService.find(
+      {
+        "filter": `{"include": [{"relation": "Productos"}]}`
+      }
+    ).subscribe(data=> {
+      this.fabricante=data 
+      console.log(data)
+    })
+    this.productoService.find().subscribe(data => this.producto = data)
   }
 
   eliminar(id: number): void {
@@ -74,7 +85,9 @@ export class FabricanteComponent implements OnInit {
 
   CleanForm(){
     this.validateForm  = this.fb.group({
+      id: [null, [Validators.required]],
       nombre: [null, [Validators.required]],
+      idProducto: [null, [Validators.required]],
       correo: [null, [Validators.required]],
       telefono: [null, [Validators.required]],
       sitioWeb: [null, [Validators.required]],
@@ -114,6 +127,7 @@ export class FabricanteComponent implements OnInit {
   formFabricante: FormGroup = this.fb.group({
     id:[],
     nombre:[],
+    idProducto:[],
     correo:[],
     telefono:[],
     sitioWeb:[],
@@ -129,6 +143,11 @@ export class FabricanteComponent implements OnInit {
     },
     {
       title: 'Nombre',
+      compare: null,
+      priority: false
+    },
+    {
+      title: 'Producto',
       compare: null,
       priority: false
     },

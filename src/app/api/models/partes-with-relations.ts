@@ -7,12 +7,10 @@ import { ProductoWithRelations } from './producto-with-relations';
  */
 export interface PartesWithRelations {
   capacidad?: string;
-  descripcion?: string;
   estado?: boolean;
   id: number;
   nombre: string;
   productos?: Array<ProductoWithRelations>;
   tecnologia?: string;
   tipoParte?: string;
-  valor: string;
 }

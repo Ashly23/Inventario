@@ -15,8 +15,8 @@ export interface ProductoWithRelations {
   Areas?: AreaWithRelations;
   Categorias?: CategoriasWithRelations;
   EstadoProductos?: EstadoProductoWithRelations;
-  Fabricantes?: FabricanteWithRelations;
-  Garantias?: GarantiaWithRelations;
+ // Fabricantes?: FabricanteWithRelations;
+ // Garantias?: GarantiaWithRelations;
   Parte?: PartesWithRelations;
   anioDepreciados: number;
   encargados?: Array<EncargadoWithRelations>;
@@ -25,8 +25,6 @@ export interface ProductoWithRelations {
   idArea?: number;
   idCategorias?: number;
   idEstadoProducto?: number;
-  idFabricante?: number;
-  idGarantia?: number;
   idPartes?: number;
   modelo?: string;
   nombre: string;

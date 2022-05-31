@@ -17,9 +17,7 @@ interface DataItem {
   idCategorias: number;
   idEstado: number;
   idArea: number;
-  idGarantia: number;
-  idFabricante: number;
-  idPartes: number; 
+  idPartes: number;
 }
 
 @Component({
@@ -35,9 +33,7 @@ export class ProductoComponent implements OnInit {
   producto:Producto[]=[];
   area:Area[]=[];
   categorias:Categorias[]=[];
-  fabricante:Fabricante[]=[];
   estado:EstadoProducto[]=[];
-  garantia:Garantia[]=[];
   partes:Partes[]=[];
 
   constructor(
@@ -45,9 +41,7 @@ export class ProductoComponent implements OnInit {
     private productoService:ProductoControllerService,
     private areaService:AreaControllerService,
     private categoriasService:CategoriasControllerService,
-    private fabricanteService:FabricanteControllerService,
     private estadoService:EstadoProductoControllerService,
-    private garantiaService:GarantiaControllerService,
     private partesService:PartesControllerService,
     private fb: FormBuilder
   ) {}
@@ -57,9 +51,7 @@ export class ProductoComponent implements OnInit {
     this.productoService.find().subscribe(data=>this.producto=data)
     this.areaService.find().subscribe(data=>this.area=data)
     this.categoriasService.find().subscribe(data=>this.categorias=data)
-    this.fabricanteService.find().subscribe(data=>this.fabricante=data)
     this.estadoService.find().subscribe(data=>this.estado=data)
-    this.garantiaService.find().subscribe(data=>this.garantia=data)
     this.partesService.find().subscribe(data=>this.partes=data)
   }
 
@@ -111,10 +103,8 @@ export class ProductoComponent implements OnInit {
       etiquetaServ: [null, [Validators.required]],
       idArea: [null, [Validators.required]],
       idCategoria: [null, [Validators.required]],
-      idFabricante: [null, [Validators.required]],
       idEstadoProducto: [null, [Validators.required]],
-      idGarantia: [null, [Validators.required]],
-      idPartes: [null, [Validators.required]],
+      idPartes: [null, [Validators.required]]
     });
   } 
 
@@ -150,11 +140,9 @@ export class ProductoComponent implements OnInit {
 
   formProducto: FormGroup = this.fb.group({
     id: [],
-    idArea: [],
-    idCategorias: [],
-    idFabricante:[],
+    idArea:[],
+    idCategorias:[],
     idEstadoProducto:[],
-    idGarantia:[],
     idPartes:[],
     nombre: [],
     valor: [],
@@ -205,7 +193,14 @@ export class ProductoComponent implements OnInit {
       title: 'Etiqueta de Servicio',
       compare: null,
       priority: false
+    },
+    {
+      title: 'Acciones',
+      compare: null,
+      priority: false
     }
+    
+
   ];
 /*
   listOfData: DataItem[] = [
@@ -228,5 +223,3 @@ export class ProductoComponent implements OnInit {
  ]; 
  */
 }
-
-//EMPLEADO ENCARGADO DEL PRODCUCTO

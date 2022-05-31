@@ -7,8 +7,6 @@ export interface Producto {
   idArea?: number;
   idCategorias?: number;
   idEstadoProducto?: number;
-  idFabricante?: number;
-  idGarantia?: number;
   idPartes?: number;
   modelo?: string;
   nombre: string;

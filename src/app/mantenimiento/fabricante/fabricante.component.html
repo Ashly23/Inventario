@@ -32,6 +32,7 @@
         </td>
         <td>{{ data.id }}</td>
         <td>{{ data.nombre }}</td>
+       <!-- <td>{{ data.Productos?.nombre }}</td> -->
         <td>{{ data.correo }}</td>
         <td>{{ data.telefono }}</td>
         <td>{{ data.sitioWeb }}</td>
@@ -56,6 +57,17 @@
               </nz-form-control>
             </nz-form-item>
           </div>
+          <div nz-col nzSpan="12">
+            <nz-form-item>
+                <nz-form-label>Producto</nz-form-label>
+                <nz-form-control  nzErrorTip="Por favor escriba el dato correcto!">
+                    <nz-select formControlName="idProducto">
+                        <nz-option *ngFor="let item of producto"  [nzValue]="item.id" [nzLabel]="item.nombre">
+                        </nz-option>
+                    </nz-select>
+                </nz-form-control>
+               </nz-form-item>
+              </div>
           <div nz-col nzSpan="12">
             <nz-form-item>
               <nz-form-label>Telefono</nz-form-label>

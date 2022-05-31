@@ -38,12 +38,14 @@
         <td>{{ data.anioDepreciados }}</td>
         <td>{{ data.modelo }}</td>
         <td>{{ data.etiquetaServ }}</td>
-
         <td nzRight nzAlign="center">
+          <div nz-col nzSpan="10">
           <app-encargado></app-encargado>
-        </td>
-        <td nzRight nzAlign="center">
+        </div>
+        &nbsp;
+        <div nz-col nzSpan="10" nzOffset="1">
           <app-partes></app-partes>
+        </div>
         </td>
       </tr>
     </tbody>
@@ -55,7 +57,7 @@
     <ng-container *nzModalContent>
       <form nz-form nzLayout="vertical" (ngSubmit)="guardar()" [formGroup]="formProducto">
       <div nz-row [nzGutter]="8">
-          <div nz-col nzSpan="6">
+          <div nz-col nzSpan="12">
               <nz-form-item>
                   <nz-form-label>Area</nz-form-label>
                   <nz-form-control  nzErrorTip="Por favor escriba el dato correcto!">
@@ -66,7 +68,7 @@
                   </nz-form-control>
               </nz-form-item>
           </div>
-          <div nz-col nzSpan="6">
+          <div nz-col nzSpan="12">
             <nz-form-item>
                 <nz-form-label>Categorias</nz-form-label>
                 <nz-form-control  nzErrorTip="Por favor escriba el dato correcto!">
@@ -77,20 +79,9 @@
                 </nz-form-control>
                </nz-form-item>
               </div>
-            <div nz-col nzSpan="6">
-              <nz-form-item>
-               <nz-form-label>Fabricante</nz-form-label>
-                 <nz-form-control  nzErrorTip="Por favor escriba el dato correcto!">
-                  <nz-select formControlName="idFabricante">
-                      <nz-option *ngFor="let item of fabricante" [nzValue]="item.id" [nzLabel]="item.nombre">
-                      </nz-option>
-                  </nz-select>
-              </nz-form-control>
-            </nz-form-item>
-          </div>
-         </div>
-        <div nz-row [nzGutter]="8">
-        <div nz-col nzSpan="6">
+                 </div>
+          <div nz-row [nzGutter]="8">
+           <div nz-col nzSpan="12">
           <nz-form-item>
               <nz-form-label>Estado Producto</nz-form-label>
               <nz-form-control  nzErrorTip="Por favor escriba el dato correcto!">
@@ -101,28 +92,17 @@
               </nz-form-control>
            </nz-form-item>
          </div>
-         <div nz-col nzSpan="6">
-          <nz-form-item>
-              <nz-form-label>Garantia</nz-form-label>
-              <nz-form-control  nzErrorTip="Por favor escriba el dato correcto!">
-                  <nz-select formControlName="idGarantia">
-                      <nz-option *ngFor="let item of garantia" [nzValue]="item.id" [nzLabel]="item.fecha">
-                      </nz-option>
-                  </nz-select>
-              </nz-form-control>
-           </nz-form-item>
-         </div>
-         <div nz-col nzSpan="6">
-          <nz-form-item>
-              <nz-form-label>Partes</nz-form-label>
-              <nz-form-control  nzErrorTip="Por favor escriba el dato correcto!">
-                  <nz-select formControlName="idPartes">
-                      <nz-option *ngFor="let item of partes" [nzValue]="item.id" [nzLabel]="item.nombre">
-                      </nz-option>
-                  </nz-select>
-              </nz-form-control>
-           </nz-form-item>
-         </div>
+          <div nz-col nzSpan="12">
+            <nz-form-item>
+                <nz-form-label>Partes</nz-form-label>
+                <nz-form-control  nzErrorTip="Por favor escriba el dato correcto!">
+                    <nz-select formControlName="idPartes">
+                        <nz-option *ngFor="let item of partes" [nzValue]="item.id" [nzLabel]="item.nombre">
+                        </nz-option>
+                    </nz-select>
+                </nz-form-control>
+             </nz-form-item>
+           </div>
          </div>
         <div nz-row [nzGutter]="8">
           <div nz-col nzSpan="15">

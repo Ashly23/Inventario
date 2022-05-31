@@ -41,13 +41,10 @@
             </div>
           </div>
         </td>
-        <td>{{ data.id }}</td>
         <td>{{ data.nombre }}</td>
         <td>{{ data.tipoParte }}</td>
         <td>{{ data.capacidad }}</td>
-        <td>{{ data.valor }}</td>
         <td>{{ data.tecnologia }}</td>
-        <td>{{ data.descripcion }}</td>
         <td>
           <div *ngIf="data.estado"><i nz-icon nzType="check-circle" nzTheme="outline"></i></div>
         </td>
@@ -77,6 +74,8 @@
               </nz-form-control>
             </nz-form-item>
           </div>
+            </div>
+            <div nz-row [nzGutter]="8">
           <div nz-col nzSpan="12">
             <nz-form-item>
               <nz-form-label>Tipo</nz-form-label>
@@ -85,21 +84,11 @@
               </nz-form-control>
             </nz-form-item>
           </div>
-        </div>
-        <div nz-row [nzGutter]="8">
           <div nz-col nzSpan="12">
             <nz-form-item>
               <nz-form-label>Capacidad</nz-form-label>
               <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
                 <input formControlName="capacidad" nz-input/>
-              </nz-form-control>
-            </nz-form-item>
-          </div>
-          <div nz-col nzSpan="12">
-            <nz-form-item>
-              <nz-form-label>Valor</nz-form-label>
-              <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
-                <input formControlName="valor" nz-input/>
               </nz-form-control>
             </nz-form-item>
           </div>
@@ -110,16 +99,6 @@
               <nz-form-label>Tecnologia</nz-form-label>
               <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
                 <input formControlName="tecnologia" nz-input/>
-              </nz-form-control>
-            </nz-form-item>
-          </div>
-        </div>
-        <div nz-row [nzGutter]="8">
-          <div nz-col nzSpan="24">
-            <nz-form-item>
-              <nz-form-label>Descripcion</nz-form-label>
-              <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
-                <input formControlName="descripcion" nz-input/>
               </nz-form-control>
             </nz-form-item>
           </div>
