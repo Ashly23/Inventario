@@ -1,5 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
+import { PartesWithRelations } from './partes-with-relations';
 import { ProductoWithRelations } from './producto-with-relations';
 
 /**
@@ -10,7 +11,8 @@ export interface FabricanteWithRelations {
   estado?: boolean;
   id: number;
   nombre: string;
-  Productos?: ProductoWithRelations;
+  partes?: Array<PartesWithRelations>;
+  productos?: Array<ProductoWithRelations>;
   sitioWeb?: string;
   telefono: string;
 }

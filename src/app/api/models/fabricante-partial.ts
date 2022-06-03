@@ -11,5 +11,4 @@ export interface FabricantePartial {
   nombre?: string;
   sitioWeb?: string;
   telefono?: string;
-  idProducto?: number;
 }

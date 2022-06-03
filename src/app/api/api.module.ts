@@ -15,19 +15,18 @@ import { EncargadoProductoControllerService } from './services/encargado-product
 import { EstadoProductoControllerService } from './services/estado-producto-controller.service';
 import { EstadoProductoProductoControllerService } from './services/estado-producto-producto-controller.service';
 import { FabricanteControllerService } from './services/fabricante-controller.service';
+import { FabricantePartesControllerService } from './services/fabricante-partes-controller.service';
 import { FabricanteProductoControllerService } from './services/fabricante-producto-controller.service';
 import { GarantiaControllerService } from './services/garantia-controller.service';
 import { GarantiaProductoControllerService } from './services/garantia-producto-controller.service';
 import { PartesControllerService } from './services/partes-controller.service';
-import { PartesProductoControllerService } from './services/partes-producto-controller.service';
+import { PartesFabricanteControllerService } from './services/partes-fabricante-controller.service';
 import { PingControllerService } from './services/ping-controller.service';
 import { ProductoControllerService } from './services/producto-controller.service';
 import { ProductoAreaControllerService } from './services/producto-area-controller.service';
 import { ProductoCategoriasControllerService } from './services/producto-categorias-controller.service';
 import { ProductoEstadoProductoControllerService } from './services/producto-estado-producto-controller.service';
 import { ProductoFabricanteControllerService } from './services/producto-fabricante-controller.service';
-import { ProductoGarantiaControllerService } from './services/producto-garantia-controller.service';
-import { ProductoPartesControllerService } from './services/producto-partes-controller.service';
 
 /**
  * Module that provides all services and configuration.
@@ -48,19 +47,18 @@ import { ProductoPartesControllerService } from './services/producto-partes-cont
     EstadoProductoControllerService,
     EstadoProductoProductoControllerService,
     FabricanteControllerService,
+    FabricantePartesControllerService,
     FabricanteProductoControllerService,
     GarantiaControllerService,
     GarantiaProductoControllerService,
     PartesControllerService,
-    PartesProductoControllerService,
+    PartesFabricanteControllerService,
     PingControllerService,
     ProductoControllerService,
     ProductoAreaControllerService,
     ProductoCategoriasControllerService,
     ProductoEstadoProductoControllerService,
     ProductoFabricanteControllerService,
-    ProductoGarantiaControllerService,
-    ProductoPartesControllerService,
     ApiConfiguration
   ],
 })

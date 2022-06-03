@@ -11,7 +11,7 @@ export interface ProductoPartial {
   idArea?: number;
   idCategorias?: number;
   idEstadoProducto?: number;
-  idPartes?: number;
+  idFabricante?: number;
   modelo?: string;
   nombre?: string;
   valor?: number;

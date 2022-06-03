@@ -1,17 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { Partes, Producto } from 'src/app/api/models';
-import { PartesControllerService, ProductoControllerService } from 'src/app/api/services';
+import { Fabricante, Partes, PartesWithRelations } from 'src/app/api/models';
+import { FabricanteControllerService, PartesControllerService } from 'src/app/api/services';
 
 interface DataItem {
   id: number;
   nombre: string;
+  idFabricante:number;
   tipoParte: string;
   capacidad: string;
-  valor: string;
   tecnologia: string;
-  descripcion: string;
   estado: boolean;
 }
 
@@ -26,20 +25,28 @@ export class PartesComponent implements OnInit{
   validateForm !: FormGroup;
   visible: boolean = false;
   visibleDrawer = false;
-  partes:Partes[]=[];
-  producto:Producto[]=[];
+  partes:PartesWithRelations[]=[];
+  fabricante:Fabricante[]=[];
+  //producto:Producto[]=[];
 
   constructor(
     private messageService: NzMessageService,
     private partesService:PartesControllerService,
-    private productoService:ProductoControllerService,
+    private fabricanteService:FabricanteControllerService,
     private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
     this.CleanForm();
-    this.partesService.find().subscribe(data=>this.partes=data)
-    this.productoService.find().subscribe(data=>this.producto=data)
+    this.partesService.find(
+      {
+        "filter": `{"include": [{"relation": "Fabricantes"}]}`
+      }
+    ).subscribe(data => {
+      this.partes = data
+    })
+    this.fabricanteService.find().subscribe(data=>this.fabricante=data)
+    //this.productoService.find().subscribe(data=>this.producto=data)
   }
 
   eliminar(id: number): void {
@@ -51,7 +58,7 @@ export class PartesComponent implements OnInit{
 
     //Drawer
     get title(): string {
-      return `Partes`;
+      return `Partes del Producto`;
     }
   
     showDefault(): void {
@@ -79,7 +86,15 @@ export class PartesComponent implements OnInit{
 
   mostrar(data?: Partes): void {
     if (data?.id) {
-      this.formPartes.setValue({ ...data, 'estado': String(data.estado) })
+      this.formPartes.setValue({ 
+        id: data.id,
+        nombre: data.nombre,
+        idFabricante: data.idFabricante,
+        tipoParte: data.tipoParte,
+        capacidad: data.capacidad,
+        tecnologia: data.tecnologia,
+        estado: data.estado
+      })
     }
     this.visible = true
   }
@@ -107,6 +122,7 @@ export class PartesComponent implements OnInit{
     this.validateForm  = this.fb.group({
       id: [null, [Validators.required]],
       nombre: [null, [Validators.required]],
+      idFabricante: [null, [Validators.required]],
       tipoParte: [null, [Validators.required]],
       capacidad: [null, [Validators.required]],
       tecnologia: [null, [Validators.required]],
@@ -118,11 +134,11 @@ export class PartesComponent implements OnInit{
     this.formPartes.setValue({ ...this.formPartes.value, 'estado': Boolean(this.formPartes.value.estado) })
     if (this.formPartes.value.id) {
       this.partesService.updateById({ 'id': this.formPartes.value.id, 'body': this.formPartes.value }).subscribe(
-        () => {
+        (data) => {
           //actualizar
           this.partes = this.partes.map(obj => {
             if (obj.id === this.formPartes.value.id){
-              return this.formPartes.value;
+              return data;
             }
             return obj;
           })
@@ -134,7 +150,6 @@ export class PartesComponent implements OnInit{
     } else {
       //insertar
       delete this.formPartes.value.id
-      console.log({ body: this.formPartes.value })
       this.partesService.create({ body: this.formPartes.value }).subscribe((datoAgregado) => {
         this.partes = [...this.partes, datoAgregado]
         this.messageService.success('Registro creado con exito!')
@@ -146,7 +161,8 @@ export class PartesComponent implements OnInit{
 
   formPartes: FormGroup = this.fb.group({
       id:[],
-      nombre: [],
+      nombre:[],
+      idFabricante:[],
       tipoParte:[],
       capacidad:[],
       tecnologia:[],
@@ -157,6 +173,11 @@ export class PartesComponent implements OnInit{
   listOfColumn = [
     {
       title: 'Nombre',
+      compare: null,
+      priority: false
+    },
+    {
+      title: 'Fabricante',
       compare: null,
       priority: false
     },

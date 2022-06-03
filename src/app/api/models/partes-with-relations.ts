@@ -1,16 +1,17 @@
 /* tslint:disable */
 /* eslint-disable */
-import { ProductoWithRelations } from './producto-with-relations';
+import { FabricanteWithRelations } from './fabricante-with-relations';
 
 /**
  * (tsType: PartesWithRelations, schemaOptions: { includeRelations: true })
  */
 export interface PartesWithRelations {
+  Fabricantes?: FabricanteWithRelations;
   capacidad?: string;
   estado?: boolean;
   id: number;
+  idFabricante?: number;
   nombre: string;
-  productos?: Array<ProductoWithRelations>;
   tecnologia?: string;
   tipoParte?: string;
 }

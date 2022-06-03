@@ -9,15 +9,15 @@ import { RequestBuilder } from '../request-builder';
 import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
-import { NewProductoInPartes } from '../models/new-producto-in-partes';
-import { Producto } from '../models/producto';
-import { ProductoPartial } from '../models/producto-partial';
+import { NewPartesInFabricante } from '../models/new-partes-in-fabricante';
+import { Partes } from '../models/partes';
+import { PartesPartial } from '../models/partes-partial';
 import { Count as LoopbackCount } from '../models/loopback/count';
 
 @Injectable({
   providedIn: 'root',
 })
-export class PartesProductoControllerService extends BaseService {
+export class FabricantePartesControllerService extends BaseService {
   constructor(
     config: ApiConfiguration,
     http: HttpClient
@@ -26,9 +26,9 @@ export class PartesProductoControllerService extends BaseService {
   }
 
   /**
-   * Path part for operation partesProductoControllerFind
+   * Path part for operation fabricantePartesControllerFind
    */
-  static readonly PartesProductoControllerFindPath = '/partes/{id}/productos';
+  static readonly FabricantePartesControllerFindPath = '/fabricantes/{id}/partes';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -39,9 +39,9 @@ export class PartesProductoControllerService extends BaseService {
   find$Response(params: {
     id: number;
     filter?: any;
-  }): Observable<StrictHttpResponse<Array<Producto>>> {
+  }): Observable<StrictHttpResponse<Array<Partes>>> {
 
-    const rb = new RequestBuilder(this.rootUrl, PartesProductoControllerService.PartesProductoControllerFindPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, FabricantePartesControllerService.FabricantePartesControllerFindPath, 'get');
     if (params) {
       rb.path('id', params.id, {});
       rb.query('filter', params.filter, {});
@@ -53,7 +53,7 @@ export class PartesProductoControllerService extends BaseService {
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<Producto>>;
+        return r as StrictHttpResponse<Array<Partes>>;
       })
     );
   }
@@ -67,17 +67,17 @@ export class PartesProductoControllerService extends BaseService {
   find(params: {
     id: number;
     filter?: any;
-  }): Observable<Array<Producto>> {
+  }): Observable<Array<Partes>> {
 
     return this.find$Response(params).pipe(
-      map((r: StrictHttpResponse<Array<Producto>>) => r.body as Array<Producto>)
+      map((r: StrictHttpResponse<Array<Partes>>) => r.body as Array<Partes>)
     );
   }
 
   /**
-   * Path part for operation partesProductoControllerCreate
+   * Path part for operation fabricantePartesControllerCreate
    */
-  static readonly PartesProductoControllerCreatePath = '/partes/{id}/productos';
+  static readonly FabricantePartesControllerCreatePath = '/fabricantes/{id}/partes';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -87,10 +87,10 @@ export class PartesProductoControllerService extends BaseService {
    */
   create$Response(params: {
     id: number;
-    body?: NewProductoInPartes
-  }): Observable<StrictHttpResponse<Producto>> {
+    body?: NewPartesInFabricante
+  }): Observable<StrictHttpResponse<Partes>> {
 
-    const rb = new RequestBuilder(this.rootUrl, PartesProductoControllerService.PartesProductoControllerCreatePath, 'post');
+    const rb = new RequestBuilder(this.rootUrl, FabricantePartesControllerService.FabricantePartesControllerCreatePath, 'post');
     if (params) {
       rb.path('id', params.id, {});
       rb.body(params.body, 'application/json');
@@ -102,7 +102,7 @@ export class PartesProductoControllerService extends BaseService {
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Producto>;
+        return r as StrictHttpResponse<Partes>;
       })
     );
   }
@@ -115,18 +115,18 @@ export class PartesProductoControllerService extends BaseService {
    */
   create(params: {
     id: number;
-    body?: NewProductoInPartes
-  }): Observable<Producto> {
+    body?: NewPartesInFabricante
+  }): Observable<Partes> {
 
     return this.create$Response(params).pipe(
-      map((r: StrictHttpResponse<Producto>) => r.body as Producto)
+      map((r: StrictHttpResponse<Partes>) => r.body as Partes)
     );
   }
 
   /**
-   * Path part for operation partesProductoControllerDelete
+   * Path part for operation fabricantePartesControllerDelete
    */
-  static readonly PartesProductoControllerDeletePath = '/partes/{id}/productos';
+  static readonly FabricantePartesControllerDeletePath = '/fabricantes/{id}/partes';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -139,7 +139,7 @@ export class PartesProductoControllerService extends BaseService {
     where?: any;
   }): Observable<StrictHttpResponse<LoopbackCount>> {
 
-    const rb = new RequestBuilder(this.rootUrl, PartesProductoControllerService.PartesProductoControllerDeletePath, 'delete');
+    const rb = new RequestBuilder(this.rootUrl, FabricantePartesControllerService.FabricantePartesControllerDeletePath, 'delete');
     if (params) {
       rb.path('id', params.id, {});
       rb.query('where', params.where, {});
@@ -173,9 +173,9 @@ export class PartesProductoControllerService extends BaseService {
   }
 
   /**
-   * Path part for operation partesProductoControllerPatch
+   * Path part for operation fabricantePartesControllerPatch
    */
-  static readonly PartesProductoControllerPatchPath = '/partes/{id}/productos';
+  static readonly FabricantePartesControllerPatchPath = '/fabricantes/{id}/partes';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -186,10 +186,10 @@ export class PartesProductoControllerService extends BaseService {
   patch$Response(params: {
     id: number;
     where?: any;
-    body?: ProductoPartial
+    body?: PartesPartial
   }): Observable<StrictHttpResponse<LoopbackCount>> {
 
-    const rb = new RequestBuilder(this.rootUrl, PartesProductoControllerService.PartesProductoControllerPatchPath, 'patch');
+    const rb = new RequestBuilder(this.rootUrl, FabricantePartesControllerService.FabricantePartesControllerPatchPath, 'patch');
     if (params) {
       rb.path('id', params.id, {});
       rb.query('where', params.where, {});
@@ -216,7 +216,7 @@ export class PartesProductoControllerService extends BaseService {
   patch(params: {
     id: number;
     where?: any;
-    body?: ProductoPartial
+    body?: PartesPartial
   }): Observable<LoopbackCount> {
 
     return this.patch$Response(params).pipe(

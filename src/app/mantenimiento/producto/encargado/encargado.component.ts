@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -6,9 +7,10 @@ import { EncargadoControllerService, EmpleadoControllerService, ProductoControll
 
 interface DataItem {
   id: number,
-  fechaInicial: string,
+  fechaInicial: Date,
   fechaFinal: string,
-  idEmpleado: number
+  idEmpleado: number,
+  idProducto: number
 }
 
 @Component({
@@ -25,6 +27,7 @@ export class EncargadoComponent implements OnInit {
   encargado: EncargadoWithRelations[] = [];
   empleado: Empleado[] = [];
   producto: Producto[] = [];
+  pipe = new DatePipe('en-US');
 
   constructor(
     private messageService: NzMessageService,
@@ -42,7 +45,7 @@ export class EncargadoComponent implements OnInit {
       }
     ).subscribe(data => {
       this.encargado = data
-      console.log(data)
+      //console.log("DATOS",data)
     })
     this.empleadoService.find().subscribe(data => this.empleado = data)
     this.productoService.find().subscribe(data => this.producto = data)
@@ -57,7 +60,7 @@ export class EncargadoComponent implements OnInit {
 
   //Drawer
   get title(): string {
-    return `${this.size} Drawer`;
+    return `Encargado del Producto`;
   }
 
   showDefault(): void {
@@ -85,7 +88,13 @@ export class EncargadoComponent implements OnInit {
 
   mostrar(data?: Encargado): void {
     if (data?.id) {
-      this.formEncargado.setValue({ ...data })
+      this.formEncargado.setValue({ 
+        id: data.id,
+        fechaInicial:(new Date(data.fechaInicial)).toISOString(),
+        fechaFinal: (new Date(data.fechaFinal)).toISOString(),
+        idEmpleado: data.idEmpleado,
+        idProducto: data.idProducto
+      })
     }
     this.visible = true
   }
@@ -119,17 +128,17 @@ export class EncargadoComponent implements OnInit {
     });
   }
 
-  guardar(): void {
-    // console.log(this.formEmpleadoProducto.value);
+  //console.log(this.formEncargado.value);
 
-    this.formEncargado.setValue({ ...this.formEncargado.value })
+  guardar(): void {
+   this.formEncargado.setValue({ ...this.formEncargado.value })
     if (this.formEncargado.value.id) {
       this.encargadoService.updateById({ 'id': this.formEncargado.value.id, 'body': this.formEncargado.value }).subscribe(
-        () => {
+        (data) => {
           //actualizar
           this.encargado = this.encargado.map(obj => {
             if (obj.id === this.formEncargado.value.id) {
-              return this.formEncargado.value;
+              return data;
             }
             return obj;
           })

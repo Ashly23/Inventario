@@ -26,6 +26,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
+import { NzCardModule } from 'ng-zorro-antd/card';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { NzDrawerModule } from 'ng-zorro-antd/drawer';
     NzPopconfirmModule,
     NzMessageModule,
     NzDatePickerModule,
-    NzDrawerModule
+    NzDrawerModule,
+    NzCardModule
   ],
   exports: [
     AreaComponent,

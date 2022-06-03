@@ -56,18 +56,59 @@
   <nz-modal [(nzVisible)]="visible" nzTitle="Nuevo Producto">
     <ng-container *nzModalContent>
       <form nz-form nzLayout="vertical" (ngSubmit)="guardar()" [formGroup]="formProducto">
-      <div nz-row [nzGutter]="8">
-          <div nz-col nzSpan="12">
-              <nz-form-item>
-                  <nz-form-label>Area</nz-form-label>
-                  <nz-form-control  nzErrorTip="Por favor escriba el dato correcto!">
-                      <nz-select formControlName="idArea">
-                          <nz-option *ngFor="let item of area" [nzValue]="item.id" [nzLabel]="item.nombre">
-                          </nz-option>
-                      </nz-select>
-                  </nz-form-control>
-              </nz-form-item>
+        <nz-card style="width:475px;" nzTitle="Información Base" [nzExtra]="extraTemplate">
+          <div nz-row [nzGutter]="8">
+           <div nz-col nzSpan="8">
+            <nz-form-item>
+              <nz-form-label>Nombre</nz-form-label>
+              <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
+                <input formControlName="nombre" nz-input/>
+              </nz-form-control>
+            </nz-form-item>
           </div>
+          <div nz-col nzSpan="8">
+            <nz-form-item>
+                <nz-form-label>Area</nz-form-label>
+                <nz-form-control  nzErrorTip="Por favor escriba el dato correcto!">
+                    <nz-select formControlName="idArea">
+                        <nz-option *ngFor="let item of area" [nzValue]="item.id" [nzLabel]="item.nombre">
+                        </nz-option>
+                    </nz-select>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+        <div nz-col nzSpan="8">
+          <nz-form-item>
+              <nz-form-label>Fabricante</nz-form-label>
+              <nz-form-control  nzErrorTip="Por favor escriba el dato correcto!">
+                  <nz-select formControlName="idFabricante">
+                      <nz-option *ngFor="let item of fabricante" [nzValue]="item.id" [nzLabel]="item.nombre">
+                      </nz-option>
+                  </nz-select>
+              </nz-form-control>
+          </nz-form-item>
+      </div>
+          </div>
+          <div nz-row [nzGutter]="8">
+            <div nz-col nzSpan="12">
+              <nz-form-item>
+                <nz-form-label>Modelo</nz-form-label>
+                <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
+                  <input formControlName="modelo" nz-input/>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+            <div nz-col nzSpan="12">
+              <nz-form-item>
+                <nz-form-label>Etiqueta de Servicio</nz-form-label>
+                <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
+                  <input formControlName="etiquetaServ" nz-input/>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+
+          <div nz-row [nzGutter]="8">
           <div nz-col nzSpan="12">
             <nz-form-item>
                 <nz-form-label>Categorias</nz-form-label>
@@ -79,94 +120,66 @@
                 </nz-form-control>
                </nz-form-item>
               </div>
-                 </div>
+                <div nz-col nzSpan="12">
+                  <nz-form-item>
+                    <nz-form-label>Valor</nz-form-label>
+                    <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
+                      <input type="number" formControlName="valor" nz-input/>
+                    </nz-form-control>
+                  </nz-form-item>
+                </div>
+            </div>  
+          </nz-card>
+          <ng-template #extraTemplate>
+          </ng-template>
+          &nbsp;
+          <nz-card style="width:475px;" nzTitle="Estado del Prodcuto" [nzExtra]="extraTemplate">
           <div nz-row [nzGutter]="8">
-           <div nz-col nzSpan="12">
-          <nz-form-item>
-              <nz-form-label>Estado Producto</nz-form-label>
-              <nz-form-control  nzErrorTip="Por favor escriba el dato correcto!">
-                  <nz-select formControlName="idEstadoProducto">
-                      <nz-option *ngFor="let item of estado" [nzValue]="item.id" [nzLabel]="item.nombre">
-                      </nz-option>
-                  </nz-select>
-              </nz-form-control>
-           </nz-form-item>
-         </div>
           <div nz-col nzSpan="12">
             <nz-form-item>
-                <nz-form-label>Partes</nz-form-label>
+                <nz-form-label>Estado Producto</nz-form-label>
                 <nz-form-control  nzErrorTip="Por favor escriba el dato correcto!">
-                    <nz-select formControlName="idPartes">
-                        <nz-option *ngFor="let item of partes" [nzValue]="item.id" [nzLabel]="item.nombre">
+                    <nz-select formControlName="idEstadoProducto">
+                        <nz-option *ngFor="let item of estado" [nzValue]="item.id" [nzLabel]="item.nombre">
                         </nz-option>
                     </nz-select>
                 </nz-form-control>
              </nz-form-item>
+            </div>
+             <div nz-col nzSpan="12">
+              <nz-form-item>
+                <nz-form-label>Vida Util</nz-form-label>
+                <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
+                  <input type="number" formControlName="vidaUtil" nz-input/>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+
+          <div nz-row [nzGutter]="8">
+            <div nz-col nzSpan="12">
+              <nz-form-item>
+                <nz-form-label>Valor Depreciado</nz-form-label>
+                <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
+                  <input type="number" formControlName="valorDepreciado" nz-input/>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+            <div nz-col nzSpan="12">
+              <nz-form-item>
+                <nz-form-label>Año Depreciado</nz-form-label>
+                <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
+                  <input type="number" formControlName="anioDepreciados" nz-input/>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
            </div>
-         </div>
-        <div nz-row [nzGutter]="8">
-          <div nz-col nzSpan="15">
-            <nz-form-item>
-              <nz-form-label>Nombre</nz-form-label>
-              <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
-                <input formControlName="nombre" nz-input/>
-              </nz-form-control>
-            </nz-form-item>
-          </div>
-          <div nz-col nzSpan="8">
-            <nz-form-item>
-              <nz-form-label>Valor</nz-form-label>
-              <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
-                <input type="number" formControlName="valor" nz-input/>
-              </nz-form-control>
-            </nz-form-item>
-          </div>
-        </div>
-       
-        <div nz-row [nzGutter]="8">
-          <div nz-col nzSpan="8">
-            <nz-form-item>
-              <nz-form-label>Vida Util</nz-form-label>
-              <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
-                <input type="number" formControlName="vidaUtil" nz-input/>
-              </nz-form-control>
-            </nz-form-item>
-          </div>
-          <div nz-col nzSpan="8">
-            <nz-form-item>
-              <nz-form-label>Valor Depreciado</nz-form-label>
-              <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
-                <input type="number" formControlName="valorDepreciado" nz-input/>
-              </nz-form-control>
-            </nz-form-item>
-          </div>
-          <div nz-col nzSpan="8">
-            <nz-form-item>
-              <nz-form-label>Año Depreciado</nz-form-label>
-              <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
-                <input type="number" formControlName="anioDepreciados" nz-input/>
-              </nz-form-control>
-            </nz-form-item>
-          </div>
-        </div>
-        <div nz-row [nzGutter]="8">
-          <div nz-col nzSpan="12">
-            <nz-form-item>
-              <nz-form-label>Modelo</nz-form-label>
-              <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
-                <input formControlName="modelo" nz-input/>
-              </nz-form-control>
-            </nz-form-item>
-          </div>
-          <div nz-col nzSpan="12">
-            <nz-form-item>
-              <nz-form-label>Etiqueta de Servicio</nz-form-label>
-              <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
-                <input formControlName="etiquetaServ" nz-input/>
-              </nz-form-control>
-            </nz-form-item>
-          </div>
-        </div>
+          </nz-card>
+          <ng-template #extraTemplate>
+          </ng-template>
+        
+
+      
       </form>
     </ng-container>
     <div *nzModalFooter>

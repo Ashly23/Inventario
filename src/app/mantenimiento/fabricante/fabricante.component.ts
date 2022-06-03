@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { Fabricante, Producto } from 'src/app/api/models';
+import { Fabricante, FabricanteWithRelations, Producto } from 'src/app/api/models';
 import { FabricanteControllerService, ProductoControllerService } from 'src/app/api/services';
 
 interface DataItem {
@@ -24,26 +24,19 @@ export class FabricanteComponent implements OnInit {
   validateForm !: FormGroup;
   visible: boolean = false;
   fabricante:Fabricante[]=[];
-  producto: Producto[] = [];
+  //producto: Producto[] = [];
 
   constructor(
     private messageService: NzMessageService,
     private fabricanteService:FabricanteControllerService,
-    private productoService: ProductoControllerService,
+   // private productoService: ProductoControllerService,
     private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
     this.CleanForm();
-    this.fabricanteService.find(
-      {
-        "filter": `{"include": [{"relation": "Productos"}]}`
-      }
-    ).subscribe(data=> {
-      this.fabricante=data 
-      console.log(data)
-    })
-    this.productoService.find().subscribe(data => this.producto = data)
+    this.fabricanteService.find().subscribe(data => this.fabricante = data)
+   // this.productoService.find().subscribe(data => this.producto = data)
   }
 
   eliminar(id: number): void {
@@ -57,9 +50,12 @@ export class FabricanteComponent implements OnInit {
     this.messageService.info('Su registro sigue activo!')
   }
 
-  mostrar(data?: Fabricante): void {
+  mostrar(data?: any): void {
     if (data?.id) {
-      this.formFabricante.setValue({ ...data, 'estado': String(data.estado) })
+      this.formFabricante.setValue(
+        { 'id':data.id, 'nombre':data.nombre, 'correo':data.correo, 'telefono':data.telefono,
+        'idProducto':data.idProducto, 'sitioWeb':data.sitioWeb, 'estado': data.estado 
+      })
     }
     this.visible = true
   }
@@ -98,8 +94,10 @@ export class FabricanteComponent implements OnInit {
   guardar(): void {
     this.formFabricante.setValue({ ...this.formFabricante.value, 'estado': Boolean(this.formFabricante.value.estado) })
     if (this.formFabricante.value.id) {
-      this.fabricanteService.updateById({ 'id': this.formFabricante.value.id, 'body': this.formFabricante.value }).subscribe(
-        () => {
+      this.fabricanteService.updateById({ 'id': this.formFabricante.value.id
+      , 'body': this.formFabricante.value }).subscribe(
+        (data) => {
+          console.log(data)
           //actualizar
           this.fabricante = this.fabricante.map(obj => {
             if (obj.id === this.formFabricante.value.id){
@@ -127,7 +125,6 @@ export class FabricanteComponent implements OnInit {
   formFabricante: FormGroup = this.fb.group({
     id:[],
     nombre:[],
-    idProducto:[],
     correo:[],
     telefono:[],
     sitioWeb:[],
@@ -143,11 +140,6 @@ export class FabricanteComponent implements OnInit {
     },
     {
       title: 'Nombre',
-      compare: null,
-      priority: false
-    },
-    {
-      title: 'Producto',
       compare: null,
       priority: false
     },

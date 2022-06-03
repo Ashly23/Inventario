@@ -11,8 +11,6 @@ export interface NewProductoInEstadoProducto {
   idCategorias?: number;
   idEstadoProducto?: number;
   idFabricante?: number;
-  idGarantia?: number;
-  idPartes?: number;
   modelo?: string;
   nombre: string;
   valor: number;

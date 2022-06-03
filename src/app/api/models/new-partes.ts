@@ -6,10 +6,9 @@
  */
 export interface NewPartes {
   capacidad?: string;
-  descripcion?: string;
   estado?: boolean;
+  idFabricante?: number;
   nombre: string;
   tecnologia?: string;
   tipoParte?: string;
-  valor: string;
 }

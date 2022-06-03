@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 export interface Encargado {
-  fechaFinal: string;
-  fechaInicial: string;
+  fechaFinal: Date;
+  fechaInicial: Date;
   id: number;
   idEmpleado?: number;
   idProducto?: number;

@@ -2,11 +2,10 @@
 /* eslint-disable */
 export interface Garantia {
   cuota?: string;
-  descripcion?: string;
   estado: boolean;
-  fecha: string;
+  fecha: Date;
   id: number;
+  idProducto?: number;
   observacion?: string;
   porcentaje?: string;
-  idProducto?: number;
 }

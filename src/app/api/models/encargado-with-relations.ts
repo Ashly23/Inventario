@@ -9,8 +9,8 @@ import { ProductoWithRelations } from './producto-with-relations';
 export interface EncargadoWithRelations {
   Empleados?: EmpleadoWithRelations;
   Productos?: ProductoWithRelations;
-  fechaFinal: string;
-  fechaInicial: string;
+  fechaFinal: Date;
+  fechaInicial: Date;
   id: number;
   idEmpleado?: number;
   idProducto?: number;

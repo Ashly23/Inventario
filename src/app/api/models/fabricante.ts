@@ -7,5 +7,4 @@ export interface Fabricante {
   nombre: string;
   sitioWeb?: string;
   telefono: string;
-  idProducto?: number;
 }

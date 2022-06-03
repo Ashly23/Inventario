@@ -42,6 +42,7 @@
           </div>
         </td>
         <td>{{ data.nombre }}</td>
+        <td>{{ data.Fabricantes?.nombre }}</td>
         <td>{{ data.tipoParte }}</td>
         <td>{{ data.capacidad }}</td>
         <td>{{ data.tecnologia }}</td>
@@ -74,6 +75,17 @@
               </nz-form-control>
             </nz-form-item>
           </div>
+            <div nz-col nzSpan="12">
+              <nz-form-item>
+                  <nz-form-label>Fabricante</nz-form-label>
+                  <nz-form-control  nzErrorTip="Por favor escriba el dato correcto!">
+                      <nz-select formControlName="idFabricante">
+                          <nz-option *ngFor="let item of fabricante"  [nzValue]="item.id" [nzLabel]="item.nombre">
+                          </nz-option>
+                      </nz-select>
+                  </nz-form-control>
+                 </nz-form-item>
+              </div>
             </div>
             <div nz-row [nzGutter]="8">
           <div nz-col nzSpan="12">

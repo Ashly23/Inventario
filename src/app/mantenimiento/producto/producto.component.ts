@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { Area, Categorias, EstadoProducto, Fabricante, Garantia, Partes, Producto } from 'src/app/api/models';
+import { Area, Categorias, EstadoProducto, Fabricante, Producto } from 'src/app/api/models';
 import { AreaControllerService, CategoriasControllerService, EstadoProductoControllerService, 
-      FabricanteControllerService, GarantiaControllerService, PartesControllerService, ProductoControllerService } from 'src/app/api/services';
+      FabricanteControllerService, ProductoControllerService } from 'src/app/api/services';
 
 interface DataItem {
   id: number;
@@ -17,7 +17,7 @@ interface DataItem {
   idCategorias: number;
   idEstado: number;
   idArea: number;
-  idPartes: number;
+  idFabricante: number;
 }
 
 @Component({
@@ -34,7 +34,7 @@ export class ProductoComponent implements OnInit {
   area:Area[]=[];
   categorias:Categorias[]=[];
   estado:EstadoProducto[]=[];
-  partes:Partes[]=[];
+  fabricante:Fabricante[]=[];
 
   constructor(
     private messageService: NzMessageService,
@@ -42,7 +42,7 @@ export class ProductoComponent implements OnInit {
     private areaService:AreaControllerService,
     private categoriasService:CategoriasControllerService,
     private estadoService:EstadoProductoControllerService,
-    private partesService:PartesControllerService,
+    private fabricanteService:FabricanteControllerService,
     private fb: FormBuilder
   ) {}
 
@@ -52,7 +52,7 @@ export class ProductoComponent implements OnInit {
     this.areaService.find().subscribe(data=>this.area=data)
     this.categoriasService.find().subscribe(data=>this.categorias=data)
     this.estadoService.find().subscribe(data=>this.estado=data)
-    this.partesService.find().subscribe(data=>this.partes=data)
+    this.fabricanteService.find().subscribe(data=>this.fabricante=data)
   }
 
   eliminar(id: number): void {
@@ -94,6 +94,7 @@ export class ProductoComponent implements OnInit {
 
   CleanForm(){
     this.validateForm  = this.fb.group({
+      id: [null, [Validators.required]],
       nombre: [null, [Validators.required]],
       valor: [null, [Validators.required]],
       vidaUtil: [0, [Validators.required]],
@@ -104,11 +105,13 @@ export class ProductoComponent implements OnInit {
       idArea: [null, [Validators.required]],
       idCategoria: [null, [Validators.required]],
       idEstadoProducto: [null, [Validators.required]],
-      idPartes: [null, [Validators.required]]
+      idFabricante: [null, [Validators.required]],
     });
   } 
 
   guardar(): void {
+    //console.log(...this.formProducto.value)
+    
     this.formProducto.setValue({ ...this.formProducto.value })
     if (this.formProducto.value.id) {
       this.productoService.updateById({ 'id': this.formProducto.value.id, 'body': this.formProducto.value }).subscribe(
@@ -128,12 +131,12 @@ export class ProductoComponent implements OnInit {
     } else {
       //insertar
       delete this.formProducto.value.id
-      console.log({ body: this.formProducto.value })
-      this.productoService.create({ body: this.formProducto.value }).subscribe((datoAgregado) => {
-        this.producto = [...this.producto, datoAgregado]
-        this.messageService.success('Registro creado con exito!')
-        this.formProducto.reset()
-      })
+     
+       this.productoService.create({ body: this.formProducto.value }).subscribe((datoAgregado) => {
+       this.producto = [...this.producto, datoAgregado]
+       this.messageService.success('Registro creado con exito!')
+       this.formProducto.reset()
+       })
     }
     this.visible = false
    }
@@ -143,14 +146,14 @@ export class ProductoComponent implements OnInit {
     idArea:[],
     idCategorias:[],
     idEstadoProducto:[],
-    idPartes:[],
+    idFabricante:[],
     nombre: [],
     valor: [],
     vidaUtil: [],
     valorDepreciado: [],
     anioDepreciados: [],
     modelo: [],
-    etiquetaServ: [],
+    etiquetaServ:[],
   })
 
   listOfColumn = [

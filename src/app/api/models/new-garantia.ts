@@ -6,9 +6,9 @@
  */
 export interface NewGarantia {
   cuota?: string;
-  descripcion?: string;
   estado: boolean;
   fecha: string;
+  idProducto?: number;
   observacion?: string;
   porcentaje?: string;
 }

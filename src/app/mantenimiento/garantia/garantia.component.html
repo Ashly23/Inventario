@@ -30,7 +30,7 @@
           </div>
         </td>
         <td>{{ data.id }}</td>
-        <td>{{ data.Productos?.nombre }}</td>
+        <td>{{ data.Productos?.nombre }}</td> 
         <td>{{ data.fecha | date }}</td>
         <td>{{ data.porcentaje }}</td>
         <td>{{ data.observacion }}</td>
@@ -42,6 +42,7 @@
     </tbody>
   </nz-table>
 
+  
 
 <!--   Agregar Nueva Garantia   -->
   <nz-modal [(nzVisible)]="visible" nzTitle="Nueva Garantia">
