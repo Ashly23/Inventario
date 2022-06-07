@@ -15,4 +15,6 @@ export interface FabricanteWithRelations {
   productos?: Array<ProductoWithRelations>;
   sitioWeb?: string;
   telefono: string;
+  idProducto?: number;
+  idPartes?: number;
 }

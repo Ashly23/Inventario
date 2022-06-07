@@ -7,7 +7,6 @@ import { FabricanteControllerService, ProductoControllerService } from 'src/app/
 interface DataItem {
   id: number;
   nombre: string;
-  idProducto: number;
   correo: string;
   telefono: string;
   sitioWeb: string;
@@ -54,7 +53,7 @@ export class FabricanteComponent implements OnInit {
     if (data?.id) {
       this.formFabricante.setValue(
         { 'id':data.id, 'nombre':data.nombre, 'correo':data.correo, 'telefono':data.telefono,
-        'idProducto':data.idProducto, 'sitioWeb':data.sitioWeb, 'estado': data.estado 
+          'sitioWeb':data.sitioWeb, 'estado': data.estado 
       })
     }
     this.visible = true
@@ -66,24 +65,23 @@ export class FabricanteComponent implements OnInit {
   }
   
   showModal(): void {
-    this.isVisible = true;
+    this.visible = true;
   }
 
   handleOk(): void {
     console.log('Button ok clicked!');
-    this.isVisible = false;
+    this.visible = false;
   }
 
   handleCancel(): void {
     console.log('Button cancel clicked!');
-    this.isVisible = false;
+    this.visible = false;
   }
 
   CleanForm(){
     this.validateForm  = this.fb.group({
       id: [null, [Validators.required]],
       nombre: [null, [Validators.required]],
-      idProducto: [null, [Validators.required]],
       correo: [null, [Validators.required]],
       telefono: [null, [Validators.required]],
       sitioWeb: [null, [Validators.required]],

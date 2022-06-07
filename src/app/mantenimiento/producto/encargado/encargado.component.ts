@@ -45,7 +45,7 @@ export class EncargadoComponent implements OnInit {
       }
     ).subscribe(data => {
       this.encargado = data
-      //console.log("DATOS",data)
+     // console.log("DATOS",data)
     })
     this.empleadoService.find().subscribe(data => this.empleado = data)
     this.productoService.find().subscribe(data => this.producto = data)
@@ -105,17 +105,17 @@ export class EncargadoComponent implements OnInit {
   }
 
   showModal(): void {
-    this.isVisible = true;
+    this.visible = true;
   }
 
   handleOk(): void {
     console.log('Button ok clicked!');
-    this.isVisible = false;
+    this.visible = false;
   }
 
   handleCancel(): void {
     console.log('Button cancel clicked!');
-    this.isVisible = false;
+    this.visible = false;
   }
 
   CleanForm() {
@@ -131,7 +131,7 @@ export class EncargadoComponent implements OnInit {
   //console.log(this.formEncargado.value);
 
   guardar(): void {
-   this.formEncargado.setValue({ ...this.formEncargado.value })
+    this.formEncargado.setValue({ ...this.formEncargado.value })
     if (this.formEncargado.value.id) {
       this.encargadoService.updateById({ 'id': this.formEncargado.value.id, 'body': this.formEncargado.value }).subscribe(
         (data) => {
@@ -148,6 +148,7 @@ export class EncargadoComponent implements OnInit {
       )
     } else {
       //insertar
+      //console.log(this.formEncargado.value);
       delete this.formEncargado.value.id
       this.encargadoService.create({ body: this.formEncargado.value }).subscribe((datoAgregado) => {
         this.encargado = [...this.encargado, datoAgregado]
@@ -185,13 +186,13 @@ export class EncargadoComponent implements OnInit {
     },
     {
       title: 'Empleado',
-      compare: null,
-      priority: false
+      compare: (a: DataItem, b: DataItem) => a.idEmpleado - b.idEmpleado,
+      priority: 0
     },
     {
       title: 'Producto',
-      compare: null,
-      priority: false
+      compare: (a: DataItem, b: DataItem) => a.idProducto - b.idProducto,
+      priority: 0
     },
   ];
 }

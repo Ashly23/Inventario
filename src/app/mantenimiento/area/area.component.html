@@ -42,7 +42,7 @@
 
 
 <!--       Agregar Nueva Area       -->
-<nz-modal [(nzVisible)]="visible" nzTitle="Nueva Area">
+<nz-modal [(nzVisible)]="visible" nzTitle="Nueva Area" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
   <ng-container *nzModalContent>
     <form nz-form nzLayout="vertical" (ngSubmit)="guardar()" [formGroup]="formArea">
       <div nz-row [nzGutter]="8">

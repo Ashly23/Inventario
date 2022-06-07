@@ -58,17 +58,17 @@ export class AreaComponent implements OnInit {
   }
 
   showModal(): void {
-    this.isVisible = true;
+    this.visible = true;
   }
 
   handleOk(): void {
     console.log('Button ok clicked!');
-    this.isVisible = false;
+    this.visible = false;
   }
 
   handleCancel(): void {
     console.log('Button cancel clicked!');
-    this.isVisible = false;
+    this.visible = false;
   }
 
   CleanForm(){

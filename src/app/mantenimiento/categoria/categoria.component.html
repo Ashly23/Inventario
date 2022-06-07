@@ -42,7 +42,7 @@
 
 
 <!--       Agregar Nueva Categoria      -->
-  <nz-modal [(nzVisible)]="visible" nzTitle="Nueva Categoria">
+  <nz-modal [(nzVisible)]="visible" nzTitle="Nueva Categoria" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
     <ng-container *nzModalContent>
       <form nz-form nzLayout="vertical" (ngSubmit)="guardar()" [formGroup]="formCategorias">
         <div nz-row [nzGutter]="8">

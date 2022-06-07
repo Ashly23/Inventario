@@ -43,7 +43,7 @@ export class GarantiaComponent implements OnInit {
       }
     ).subscribe(data => {
       this.garantia = data
-     // console.log("DATOS",data)
+      console.log("DATOS",data)
     })
     this.productoService.find().subscribe(data => this.producto = data)
   }
@@ -61,6 +61,15 @@ export class GarantiaComponent implements OnInit {
 
   mostrar(data?: Garantia): void {
     if (data?.id) {
+      this.formGarantia.setValue({ ...data, 'fecha':(new Date(data.fecha)).toISOString(),
+      'estado': String(data.estado) })
+    }
+    this.visible = true
+  }
+
+  /*
+  mostrar(data?: Garantia): void {
+    if (data?.id) {
       this.formGarantia.setValue({
         id: data.id,
         idProducto: data.idProducto,
@@ -68,11 +77,12 @@ export class GarantiaComponent implements OnInit {
         porcentaje: data.porcentaje,
         observacion: data.observacion,
         cuota: data.cuota,
-        estado: data.estado
+        estado: String(data.estado)
       })
     }
     this.visible = true
   }
+  */
 
   ocultar(): void {
     this.visible = false
@@ -80,21 +90,22 @@ export class GarantiaComponent implements OnInit {
   }
 
   showModal(): void {
-    this.isVisible = true;
+    this.visible = true;
   }
 
   handleOk(): void {
     console.log('Button ok clicked!');
-    this.isVisible = false;
+    this.visible = false;
   }
 
   handleCancel(): void {
     console.log('Button cancel clicked!');
-    this.isVisible = false;
+    this.visible = false;
   }
 
   CleanForm() {
     this.validateForm = this.fb.group({
+      id: [null, [Validators.required]],
       idProducto: [null, [Validators.required]],
       fecha: [null, [Validators.required]],
       porcentaje: [null, [Validators.required]],
@@ -103,6 +114,7 @@ export class GarantiaComponent implements OnInit {
       estado: [null, [Validators.required]],
     });
   }
+
 
   guardar(): void {
     this.formGarantia.setValue({ ...this.formGarantia.value, 'estado': Boolean(this.formGarantia.value.estado) })
@@ -116,7 +128,6 @@ export class GarantiaComponent implements OnInit {
             }
             return obj;
           })
-         
           this.messageService.success('Registro actualizado con exito!')
           this.formGarantia.reset()
         }
@@ -153,8 +164,8 @@ export class GarantiaComponent implements OnInit {
     },
     {
       title: 'Producto',
-      compare: null,
-      priority: false
+      compare: (a: DataItem, b: DataItem) => a.idProducto - b.idProducto,
+      priority: 0
     },
     {
       title: 'Fecha',

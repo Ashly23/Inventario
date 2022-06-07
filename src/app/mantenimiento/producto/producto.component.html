@@ -53,7 +53,7 @@
 
 
     <!--   Nuevo Producto  -->
-  <nz-modal [(nzVisible)]="visible" nzTitle="Nuevo Producto">
+  <nz-modal [(nzVisible)]="visible" nzTitle="Nuevo Producto" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
     <ng-container *nzModalContent>
       <form nz-form nzLayout="vertical" (ngSubmit)="guardar()" [formGroup]="formProducto">
         <nz-card style="width:475px;" nzTitle="Información Base" [nzExtra]="extraTemplate">

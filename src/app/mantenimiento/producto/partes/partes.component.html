@@ -63,7 +63,7 @@
 
 
   <!--  Nueva Parte -->
-  <nz-modal [(nzVisible)]="visible" nzTitle="Nueva parte del producto">
+  <nz-modal [(nzVisible)]="visible" nzTitle="Nueva parte del producto" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
     <ng-container *nzModalContent>
       <form nz-form nzLayout="vertical" (ngSubmit)="guardar()" [formGroup]="formPartes">
         <div nz-row [nzGutter]="8">
