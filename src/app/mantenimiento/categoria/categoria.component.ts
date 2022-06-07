@@ -73,6 +73,7 @@ export class CategoriaComponent implements OnInit {
 
   CleanForm(){
     this.validateForm  = this.fb.group({
+      id: [null, [Validators.required]],
       nombre: [null, [Validators.required]],
       descripcion: [null, [Validators.required]],
       estado: [null, [Validators.required]]
@@ -99,7 +100,7 @@ export class CategoriaComponent implements OnInit {
     } else {
       //insertar
       delete this.formCategorias.value.id
-      console.log({ body: this.formCategorias.value })
+      //console.log({ body: this.formCategorias.value })
       this.categoriasService.create({ body: this.formCategorias.value }).subscribe((datoAgregado) => {
         this.categorias = [...this.categorias, datoAgregado]
         this.messageService.success('Registro creado con exito!')

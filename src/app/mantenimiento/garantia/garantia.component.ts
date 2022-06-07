@@ -43,7 +43,7 @@ export class GarantiaComponent implements OnInit {
       }
     ).subscribe(data => {
       this.garantia = data
-      console.log("DATOS",data)
+      //console.log("DATOS",data)
     })
     this.productoService.find().subscribe(data => this.producto = data)
   }
@@ -61,15 +61,6 @@ export class GarantiaComponent implements OnInit {
 
   mostrar(data?: Garantia): void {
     if (data?.id) {
-      this.formGarantia.setValue({ ...data, 'fecha':(new Date(data.fecha)).toISOString(),
-      'estado': String(data.estado) })
-    }
-    this.visible = true
-  }
-
-  /*
-  mostrar(data?: Garantia): void {
-    if (data?.id) {
       this.formGarantia.setValue({
         id: data.id,
         idProducto: data.idProducto,
@@ -82,7 +73,6 @@ export class GarantiaComponent implements OnInit {
     }
     this.visible = true
   }
-  */
 
   ocultar(): void {
     this.visible = false

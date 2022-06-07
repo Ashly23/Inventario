@@ -47,7 +47,8 @@ export class AreaComponent implements OnInit {
 
   mostrar(data?: Area): void {
     if (data?.id) {
-      this.formArea.setValue({ ...data, 'estado': String(data.estado) })
+      this.formArea.setValue({ ...data, 'estado': String(data.estado) 
+     })
     }
     this.visible = true
   }

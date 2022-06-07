@@ -27,7 +27,6 @@ export class PartesComponent implements OnInit{
   visibleDrawer = false;
   partes:PartesWithRelations[]=[];
   fabricante:Fabricante[]=[];
-  //producto:Producto[]=[];
 
   constructor(
     private messageService: NzMessageService,
@@ -46,7 +45,6 @@ export class PartesComponent implements OnInit{
       this.partes = data
     })
     this.fabricanteService.find().subscribe(data=>this.fabricante=data)
-    //this.productoService.find().subscribe(data=>this.producto=data)
   }
 
   eliminar(id: number): void {
@@ -93,7 +91,7 @@ export class PartesComponent implements OnInit{
         tipoParte: data.tipoParte,
         capacidad: data.capacidad,
         tecnologia: data.tecnologia,
-        estado: data.estado
+        estado: String(data.estado)
       })
     }
     this.visible = true
@@ -152,6 +150,7 @@ export class PartesComponent implements OnInit{
       delete this.formPartes.value.id
       this.partesService.create({ body: this.formPartes.value }).subscribe((datoAgregado) => {
         this.partes = [...this.partes, datoAgregado]
+        console.log(this.partes)
         this.messageService.success('Registro creado con exito!')
         this.formPartes.reset()
       })

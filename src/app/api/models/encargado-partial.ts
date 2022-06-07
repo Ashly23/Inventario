@@ -5,8 +5,8 @@
  * (tsType: Partial<Encargado>, schemaOptions: { partial: true })
  */
 export interface EncargadoPartial {
-  fechaFinal?: Date;
-  fechaInicial?: Date;
+  fechaFinal?: string;
+  fechaInicial?: string;
   id: number;
   idEmpleado?: number;
   idProducto?: number;

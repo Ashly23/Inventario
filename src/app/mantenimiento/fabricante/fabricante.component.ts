@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { Fabricante, FabricanteWithRelations, Producto } from 'src/app/api/models';
-import { FabricanteControllerService, ProductoControllerService } from 'src/app/api/services';
+import { Fabricante } from 'src/app/api/models';
+import { FabricanteControllerService } from 'src/app/api/services';
 
 interface DataItem {
   id: number;
@@ -23,19 +23,16 @@ export class FabricanteComponent implements OnInit {
   validateForm !: FormGroup;
   visible: boolean = false;
   fabricante:Fabricante[]=[];
-  //producto: Producto[] = [];
 
   constructor(
     private messageService: NzMessageService,
     private fabricanteService:FabricanteControllerService,
-   // private productoService: ProductoControllerService,
     private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
     this.CleanForm();
     this.fabricanteService.find().subscribe(data => this.fabricante = data)
-   // this.productoService.find().subscribe(data => this.producto = data)
   }
 
   eliminar(id: number): void {
@@ -49,12 +46,9 @@ export class FabricanteComponent implements OnInit {
     this.messageService.info('Su registro sigue activo!')
   }
 
-  mostrar(data?: any): void {
+  mostrar(data?: Fabricante): void {
     if (data?.id) {
-      this.formFabricante.setValue(
-        { 'id':data.id, 'nombre':data.nombre, 'correo':data.correo, 'telefono':data.telefono,
-          'sitioWeb':data.sitioWeb, 'estado': data.estado 
-      })
+      this.formFabricante.setValue({ ...data, 'estado': String(data.estado) })
     }
     this.visible = true
   }
@@ -92,10 +86,8 @@ export class FabricanteComponent implements OnInit {
   guardar(): void {
     this.formFabricante.setValue({ ...this.formFabricante.value, 'estado': Boolean(this.formFabricante.value.estado) })
     if (this.formFabricante.value.id) {
-      this.fabricanteService.updateById({ 'id': this.formFabricante.value.id
-      , 'body': this.formFabricante.value }).subscribe(
-        (data) => {
-          console.log(data)
+      this.fabricanteService.updateById({ 'id': this.formFabricante.value.id, 'body': this.formFabricante.value }).subscribe(
+        () => {
           //actualizar
           this.fabricante = this.fabricante.map(obj => {
             if (obj.id === this.formFabricante.value.id){
