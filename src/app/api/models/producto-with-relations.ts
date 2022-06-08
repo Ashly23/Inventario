@@ -26,6 +26,7 @@ export interface ProductoWithRelations {
   idFabricante?: number;
   modelo?: string;
   nombre: string;
+  fechaCompra: Date;
   valor: number;
   valorDepreciado: number;
   vidaUtil: number;

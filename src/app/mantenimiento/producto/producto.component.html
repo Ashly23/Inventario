@@ -32,11 +32,11 @@
         </td>
         <td>{{ data.id }}</td>
         <td>{{ data.nombre }}</td>
+        <td>{{ data.fechaCompra | date }}</td>
         <td>{{ data.valor }}</td>
         <td>{{ data.vidaUtil }}</td>
         <td>{{ data.valorDepreciado }}</td>
         <td>{{ data.anioDepreciados }}</td>
-        <td>{{ data.modelo }}</td>
         <td>{{ data.etiquetaServ }}</td>
         <td nzRight nzAlign="center">
           <div nz-col nzSpan="10">
@@ -44,7 +44,7 @@
         </div>
         &nbsp;
         <div nz-col nzSpan="10" nzOffset="1">
-          <app-partes></app-partes>
+          <app-partes  [productoPosicion]="data"></app-partes>
         </div>
         </td>
       </tr>
@@ -53,7 +53,7 @@
 
 
     <!--   Nuevo Producto  -->
-  <nz-modal [(nzVisible)]="visible" nzTitle="Nuevo Producto" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+  <nz-modal [(nzVisible)]="visible" nzTitle="Producto" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
     <ng-container *nzModalContent>
       <form nz-form nzLayout="vertical" (ngSubmit)="guardar()" [formGroup]="formProducto">
         <nz-card style="width:475px;" nzTitle="Información Base" [nzExtra]="extraTemplate">
@@ -90,7 +90,15 @@
       </div>
           </div>
           <div nz-row [nzGutter]="8">
-            <div nz-col nzSpan="12">
+            <div nz-col nzSpan="8">
+                <nz-form-item>
+                    <nz-form-label>Fecha de Compra</nz-form-label>
+                    <nz-form-control  nzErrorTip="Por favor escriba el dato correcto!">
+                        <nz-date-picker formControlName="fechaCompra" nzPlaceHolder="Seleccione Fecha"></nz-date-picker>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div nz-col nzSpan="8">
               <nz-form-item>
                 <nz-form-label>Modelo</nz-form-label>
                 <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
@@ -98,7 +106,7 @@
                 </nz-form-control>
               </nz-form-item>
             </div>
-            <div nz-col nzSpan="12">
+            <div nz-col nzSpan="8">
               <nz-form-item>
                 <nz-form-label>Etiqueta de Servicio</nz-form-label>
                 <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
@@ -107,7 +115,6 @@
               </nz-form-item>
             </div>
           </div>
-
           <div nz-row [nzGutter]="8">
           <div nz-col nzSpan="12">
             <nz-form-item>
@@ -150,12 +157,11 @@
               <nz-form-item>
                 <nz-form-label>Vida Util</nz-form-label>
                 <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
-                  <input type="number" formControlName="vidaUtil" nz-input/>
+                  <input nzLabel="Year" formControlName="vidaUtil" type="number" nz-input/>
                 </nz-form-control>
               </nz-form-item>
             </div>
           </div>
-
           <div nz-row [nzGutter]="8">
             <div nz-col nzSpan="12">
               <nz-form-item>

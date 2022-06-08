@@ -3,7 +3,8 @@
 export interface Garantia {
   cuota?: string;
   estado: boolean;
-  fecha: string;
+  fechaInicial: Date;
+  fechaFinal: Date;
   id: number;
   idProducto?: number;
   observacion?: string;

@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Empleado } from 'src/app/api/models';
-import { EmpleadoControllerService } from 'src/app/api/services';
+import { Area, Empleado, EmpleadoWithRelations } from 'src/app/api/models';
+import { AreaControllerService, EmpleadoControllerService } from 'src/app/api/services';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
 interface DataItem {
   id: number;
+  idArea: number;
   nombre: string;
   correo: string;
   telefono: string;
@@ -21,17 +22,26 @@ export class EmpleadoComponent implements OnInit{
   isVisible = false;
   validateForm !: FormGroup;
   visible: boolean = false;
-  empleado:Empleado[]=[];
+  empleado:EmpleadoWithRelations[]=[];
+  area:Area[]=[];
 
   constructor(
     private messageService: NzMessageService,
     private empleadoService:EmpleadoControllerService,
+    private areaService:AreaControllerService,
     private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
     this.CleanForm();
-    this.empleadoService.find().subscribe(data=>this.empleado=data)
+    this.empleadoService.find(
+      {
+        "filter": `{"include": [{"relation": "Areas"}]}`
+      }
+    ).subscribe(data=> {
+      this.empleado=data 
+    })
+    this.areaService.find().subscribe(data=>this.area=data)
   }
 
   eliminar(id: number): void {
@@ -74,6 +84,7 @@ export class EmpleadoComponent implements OnInit{
   CleanForm(){
     this.validateForm  = this.fb.group({
       id: [null, [Validators.required]],
+      idArea: [null, [Validators.required]],
       nombre: [null, [Validators.required]],
       correo: [null, [Validators.required]],
       telefono: [null, [Validators.required]],
@@ -113,6 +124,7 @@ export class EmpleadoComponent implements OnInit{
 
   formEmpleado: FormGroup = this.fb.group({
     id: [],
+    idArea: [],
     nombre: [],
     correo: [],
     telefono: [],
@@ -128,6 +140,11 @@ export class EmpleadoComponent implements OnInit{
     },
     {
       title: 'Nombre',
+      compare: null,
+      priority: false
+    },
+    {
+      title: 'Area',
       compare: null,
       priority: false
     },

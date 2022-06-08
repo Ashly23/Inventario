@@ -8,10 +8,10 @@ import { DatePipe } from '@angular/common';
 interface DataItem {
   id: number,
   idProducto: number,
-  fecha: Date,
+  fechaInicial: Date,
+  fechaFinal: Date,
   porcentaje: string,
   observacion: string,
-  cuota: number,
   estado: boolean
 }
 
@@ -64,10 +64,10 @@ export class GarantiaComponent implements OnInit {
       this.formGarantia.setValue({
         id: data.id,
         idProducto: data.idProducto,
-        fecha:(new Date(data.fecha)).toISOString(),
+        fechaInicial:(new Date(data.fechaInicial)).toISOString(),
+        fechaFinal:(new Date(data.fechaFinal)).toISOString(),
         porcentaje: data.porcentaje,
         observacion: data.observacion,
-        cuota: data.cuota,
         estado: String(data.estado)
       })
     }
@@ -97,10 +97,10 @@ export class GarantiaComponent implements OnInit {
     this.validateForm = this.fb.group({
       id: [null, [Validators.required]],
       idProducto: [null, [Validators.required]],
-      fecha: [null, [Validators.required]],
+      fechaInicial: [null, [Validators.required]],
+      fechaFinal: [null, [Validators.required]],
       porcentaje: [null, [Validators.required]],
       observacion: [null, [Validators.required]],
-      cuota: [null, [Validators.required]],
       estado: [null, [Validators.required]],
     });
   }
@@ -138,10 +138,10 @@ export class GarantiaComponent implements OnInit {
   formGarantia: FormGroup = this.fb.group({
     id: [],
     idProducto: [],
-    fecha: [],
+    fechaInicial: [],
+    fechaFinal: [],
     porcentaje: [],
     observacion: [],
-    cuota: [],
     estado: []
   })
 
@@ -158,7 +158,12 @@ export class GarantiaComponent implements OnInit {
       priority: 0
     },
     {
-      title: 'Fecha',
+      title: 'Fecha Inicial',
+      compare: null,
+      priority: false
+    },
+    {
+      title: 'Fecha Final',
       compare: null,
       priority: false
     },
@@ -171,11 +176,6 @@ export class GarantiaComponent implements OnInit {
       title: 'Observacion',
       compare: null,
       priority: false
-    },
-    {
-      title: 'Cuota',
-      compare: (a: DataItem, b: DataItem) => a.cuota - b.cuota,
-      priority: 2
     },
     {
       title: 'Estado',

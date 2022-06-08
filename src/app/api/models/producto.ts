@@ -10,6 +10,7 @@ export interface Producto {
   idFabricante?: number;
   modelo?: string;
   nombre: string;
+  fechaCompra: Date;
   valor: number;
   valorDepreciado: number;
   vidaUtil: number;

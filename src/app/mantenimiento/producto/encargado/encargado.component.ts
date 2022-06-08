@@ -8,7 +8,7 @@ import { EncargadoControllerService, EmpleadoControllerService, ProductoControll
 interface DataItem {
   id: number,
   fechaInicial: Date,
-  fechaFinal: string,
+  fechaFinal: Date,
   idEmpleado: number,
   idProducto: number
 }
@@ -131,6 +131,7 @@ export class EncargadoComponent implements OnInit {
   //console.log(this.formEncargado.value);
 
   guardar(): void {
+    console.log(this.formEncargado.value)
     this.formEncargado.setValue({ ...this.formEncargado.value })
     if (this.formEncargado.value.id) {
       this.encargadoService.updateById({ 'id': this.formEncargado.value.id, 'body': this.formEncargado.value }).subscribe(
@@ -188,11 +189,6 @@ export class EncargadoComponent implements OnInit {
       title: 'Empleado',
       compare: (a: DataItem, b: DataItem) => a.idEmpleado - b.idEmpleado,
       priority: 0
-    },
-    {
-      title: 'Producto',
-      compare: (a: DataItem, b: DataItem) => a.idProducto - b.idProducto,
-      priority: 0
-    },
+    }
   ];
 }

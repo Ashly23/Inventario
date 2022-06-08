@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { Fabricante, Partes, PartesWithRelations } from 'src/app/api/models';
+import { Fabricante, Partes, PartesWithRelations, Producto } from 'src/app/api/models';
 import { FabricanteControllerService, PartesControllerService } from 'src/app/api/services';
 
 interface DataItem {
@@ -19,7 +19,7 @@ interface DataItem {
   templateUrl: './partes.component.html',
   styleUrls: ['./partes.component.css']
 })
-export class PartesComponent implements OnInit{
+export class PartesComponent implements OnInit /*OnChanges*/{
   isVisible = false;
   size: 'large' | 'default' = 'default';
   validateForm !: FormGroup;
@@ -27,6 +27,7 @@ export class PartesComponent implements OnInit{
   visibleDrawer = false;
   partes:PartesWithRelations[]=[];
   fabricante:Fabricante[]=[];
+  @Input() productoPosicion!: Producto;
 
   constructor(
     private messageService: NzMessageService,
@@ -46,6 +47,18 @@ export class PartesComponent implements OnInit{
     })
     this.fabricanteService.find().subscribe(data=>this.fabricante=data)
   }
+
+  /*
+  ngOnChanges(changes: SimpleChanges): void {
+    if(this.productoPosicion){
+      for(let i = 0; i < this.partes.length ; i++){
+        if(this.productoPosicion.id === this.partes[i]){
+          //no le estas asignando la parte a un producto en ningun momento, no hay forma de filtrarlo
+        }
+      }
+    }
+  }
+  */
 
   eliminar(id: number): void {
     this.partesService.deleteById({ id }).subscribe(() => {

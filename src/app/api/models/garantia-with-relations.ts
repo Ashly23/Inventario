@@ -9,7 +9,8 @@ export interface GarantiaWithRelations {
   Productos?: ProductoWithRelations;
   cuota?: string;
   estado: boolean;
-  fecha: string;
+  fechaInicial: Date;
+  fechaFinal: Date;
   id: number;
   idProducto?: number;
   observacion?: string;

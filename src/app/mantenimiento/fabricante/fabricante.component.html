@@ -44,7 +44,7 @@
 
 
     <!--       Agregar Nuevo Fabricante       -->
-  <nz-modal [(nzVisible)]="visible" nzTitle="Nuevo Fabricante" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+  <nz-modal [(nzVisible)]="visible" nzTitle="Fabricante" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
     <ng-container *nzModalContent>
       <form nz-form nzLayout="vertical" (ngSubmit)="guardar()" [formGroup]="formFabricante">
         <div nz-row [nzGutter]="8">

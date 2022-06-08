@@ -31,10 +31,10 @@
         </td>
         <td>{{ data.id }}</td>
         <td>{{ data.Productos?.nombre }}</td> 
-        <td>{{ data.fecha | date }}</td>
+        <td>{{ data.fechaInicial | date }}</td>
+        <td>{{ data.fechaFinal | date }}</td>
         <td>{{ data.porcentaje }}</td>
         <td>{{ data.observacion }}</td>
-        <td>{{ data.cuota }}</td>
         <td>
           <div *ngIf="data.estado"><i nz-icon nzType="check-circle" nzTheme="outline"></i></div>
         </td>
@@ -45,7 +45,7 @@
   
 
 <!--   Agregar Nueva Garantia   -->
-  <nz-modal [(nzVisible)]="visible" nzTitle="Nueva Garantia" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+  <nz-modal [(nzVisible)]="visible" nzTitle="Garantia" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
     <ng-container *nzModalContent>
       <form nz-form nzLayout="vertical" (ngSubmit)="guardar()" [formGroup]="formGarantia">
         <div nz-row [nzGutter]="8">
@@ -60,32 +60,32 @@
                 </nz-form-control>
                </nz-form-item>
               </div>
-          <div nz-col nzSpan="12">
-              <nz-form-item>
-                  <nz-form-label>Fecha</nz-form-label>
-                  <nz-form-control  nzErrorTip="Por favor escriba el dato correcto!">
-                      <nz-date-picker formControlName="fecha" nzPlaceHolder="Seleccione Fecha"></nz-date-picker>
+              <div nz-col nzSpan="12">
+                <nz-form-item>
+                  <nz-form-label>Porcentaje</nz-form-label>
+                  <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
+                    <input formControlName="porcentaje" nz-input/>
                   </nz-form-control>
-              </nz-form-item>
-          </div>
+                </nz-form-item>
+              </div>
           </div>
         <div nz-row [nzGutter]="8">
-           <div nz-col nzSpan="12">
-            <nz-form-item>
-              <nz-form-label>Porcentaje</nz-form-label>
-              <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
-                <input formControlName="porcentaje" nz-input/>
-              </nz-form-control>
-            </nz-form-item>
-          </div>
           <div nz-col nzSpan="12">
             <nz-form-item>
-              <nz-form-label>Cuota</nz-form-label>
-              <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
-                <input formControlName="cuota" nz-input/>
-              </nz-form-control>
+                <nz-form-label>Fecha Inicial</nz-form-label>
+                <nz-form-control  nzErrorTip="Por favor escriba el dato correcto!">
+                    <nz-date-picker formControlName="fechaInicial" nzPlaceHolder="Seleccione Fecha"></nz-date-picker>
+                </nz-form-control>
             </nz-form-item>
-          </div>
+        </div>
+        <div nz-col nzSpan="12">
+          <nz-form-item>
+              <nz-form-label>Fecha Final</nz-form-label>
+              <nz-form-control  nzErrorTip="Por favor escriba el dato correcto!">
+                  <nz-date-picker formControlName="fechaFinal" nzPlaceHolder="Seleccione Fecha"></nz-date-picker>
+              </nz-form-control>
+          </nz-form-item>
+      </div>
         </div>
         <div nz-row [nzGutter]="8">
           <div nz-col nzSpan="24">

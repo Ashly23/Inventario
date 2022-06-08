@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -8,6 +9,7 @@ import { AreaControllerService, CategoriasControllerService, EstadoProductoContr
 interface DataItem {
   id: number;
   nombre: string;
+  fechaCompra: Date;
   valor: number;
   vidaUtil: number;
   valorDepreciado: number;
@@ -35,6 +37,7 @@ export class ProductoComponent implements OnInit {
   categorias:Categorias[]=[];
   estado:EstadoProducto[]=[];
   fabricante:Fabricante[]=[];
+  pipe = new DatePipe('en-US');
 
   constructor(
     private messageService: NzMessageService,
@@ -68,7 +71,20 @@ export class ProductoComponent implements OnInit {
 
   mostrar(data?:Producto): void {
     if (data?.id) {
-      this.formProducto.setValue({ ... data})
+      this.formProducto.setValue({ 
+        id: data.id,
+        idArea: data.idArea,
+        idCategorias: data.idCategorias,
+        idEstadoProducto: data.idEstadoProducto,
+        idFabricante: data.idFabricante,
+        nombre: data.nombre,
+        valor: data.valor,
+        vidaUtil: data.vidaUtil,
+        valorDepreciado: data.valorDepreciado,
+        anioDepreciados: data.anioDepreciados,
+        modelo: data.modelo,
+        etiquetaServ: data.etiquetaServ,
+        fechaCompra:(new Date(data.fechaCompra)).toISOString()})
     }
     this.visible = true
   }
@@ -96,8 +112,9 @@ export class ProductoComponent implements OnInit {
     this.validateForm  = this.fb.group({
       id: [null, [Validators.required]],
       nombre: [null, [Validators.required]],
+      fechaCompra: [null, [Validators.required]],
       valor: [null, [Validators.required]],
-      vidaUtil: [0, [Validators.required]],
+      vidaUtil: [null, [Validators.required]],
       valorDepreciado: [null, [Validators.required]],
       anioDepreciados: [null, [Validators.required]],
       modelo: [null, [Validators.required]],
@@ -148,6 +165,7 @@ export class ProductoComponent implements OnInit {
     idEstadoProducto:[],
     idFabricante:[],
     nombre: [],
+    fechaCompra: [],
     valor: [],
     vidaUtil: [],
     valorDepreciado: [],
@@ -164,6 +182,11 @@ export class ProductoComponent implements OnInit {
     },
     {
       title: 'Nombre',
+      compare: null,
+      priority: false
+    },
+    {
+      title: 'Fecha de Compra',
       compare: null,
       priority: false
     },
@@ -186,11 +209,6 @@ export class ProductoComponent implements OnInit {
       title: 'Años Depreciado',
       compare: (a: DataItem, b: DataItem) => a.anioDepreciados - b.anioDepreciados,
       priority: 2
-    },
-    {
-      title: 'Modelo',
-      compare: null,
-      priority: false
     },
     {
       title: 'Etiqueta de Servicio',

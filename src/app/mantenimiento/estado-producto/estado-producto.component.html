@@ -42,7 +42,7 @@
 
 
 
-  <nz-modal [(nzVisible)]="visible" nzTitle="Nuevo Estado del producto" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+  <nz-modal [(nzVisible)]="visible" nzTitle="Estado del producto" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
     <ng-container *nzModalContent>
       <form nz-form nzLayout="vertical" (ngSubmit)="guardar()" [formGroup]="formEstado">
         <div nz-row [nzGutter]="8">
