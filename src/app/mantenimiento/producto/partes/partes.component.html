@@ -5,7 +5,6 @@
       [nzVisible]="visibleDrawer"
       nzPlacement="right"
       [nzTitle]="title"
-      [nzExtra]="extra"
       (nzOnClose)="close()"
     >
 <ng-container *nzDrawerContent>
@@ -54,11 +53,6 @@
   </nz-table>
 </ng-container>
 </nz-drawer>
-<ng-template #extra>
-  <button nz-button nzType="default" (click)="close()">Cancel</button>
-  &nbsp;
-  <button nz-button nzType="primary" (click)="close()">OK</button>
-</ng-template>
 
 
 

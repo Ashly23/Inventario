@@ -7,6 +7,7 @@
 export interface NewProductoInFabricante {
   anioDepreciados: number;
   etiquetaServ?: string;
+  fechaCompra: string;
   idArea?: number;
   idCategorias?: number;
   idEstadoProducto?: number;

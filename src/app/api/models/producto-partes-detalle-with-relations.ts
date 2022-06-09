@@ -3,16 +3,16 @@
 import { ProductoWithRelations } from './producto-with-relations';
 
 /**
- * (tsType: GarantiaWithRelations, schemaOptions: { includeRelations: true })
+ * (tsType: ProductoPartesDetalleWithRelations, schemaOptions: { includeRelations: true })
  */
-export interface GarantiaWithRelations {
+export interface ProductoPartesDetalleWithRelations {
   Productos?: ProductoWithRelations;
-  cuota?: string;
   estado: boolean;
   fechaFinal: string;
   fechaInicial: string;
-  id: number;
+  id?: number;
+  idParte: number;
   idProducto?: number;
-  observacion?: string;
-  porcentaje?: string;
+
+  [key: string]: any;
 }

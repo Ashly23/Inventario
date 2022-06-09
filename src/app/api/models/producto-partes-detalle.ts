@@ -1,12 +1,12 @@
 /* tslint:disable */
 /* eslint-disable */
-export interface Garantia {
-  cuota?: string;
+export interface ProductoPartesDetalle {
   estado: boolean;
   fechaFinal: string;
   fechaInicial: string;
-  id: number;
+  id?: number;
+  idParte: number;
   idProducto?: number;
-  observacion?: string;
-  porcentaje?: string;
+
+  [key: string]: any;
 }

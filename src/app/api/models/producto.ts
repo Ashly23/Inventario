@@ -3,6 +3,7 @@
 export interface Producto {
   anioDepreciados: number;
   etiquetaServ?: string;
+  fechaCompra: string;
   id: number;
   idArea?: number;
   idCategorias?: number;
@@ -10,7 +11,6 @@ export interface Producto {
   idFabricante?: number;
   modelo?: string;
   nombre: string;
-  fechaCompra: Date;
   valor: number;
   valorDepreciado: number;
   vidaUtil: number;

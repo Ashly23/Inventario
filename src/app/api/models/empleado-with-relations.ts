@@ -12,6 +12,7 @@ export interface EmpleadoWithRelations {
   encargados?: Array<EncargadoWithRelations>;
   estado: boolean;
   id: number;
+  idArea?: number;
   nombre: string;
   telefono: string;
 }

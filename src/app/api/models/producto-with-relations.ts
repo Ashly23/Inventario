@@ -6,6 +6,7 @@ import { EncargadoWithRelations } from './encargado-with-relations';
 import { EstadoProductoWithRelations } from './estado-producto-with-relations';
 import { FabricanteWithRelations } from './fabricante-with-relations';
 import { GarantiaWithRelations } from './garantia-with-relations';
+import { ProductoPartesDetalleWithRelations } from './producto-partes-detalle-with-relations';
 
 /**
  * (tsType: ProductoWithRelations, schemaOptions: { includeRelations: true })
@@ -18,6 +19,7 @@ export interface ProductoWithRelations {
   anioDepreciados: number;
   encargados?: Array<EncargadoWithRelations>;
   etiquetaServ?: string;
+  fechaCompra: string;
   garantias?: Array<GarantiaWithRelations>;
   id: number;
   idArea?: number;
@@ -26,7 +28,7 @@ export interface ProductoWithRelations {
   idFabricante?: number;
   modelo?: string;
   nombre: string;
-  fechaCompra: Date;
+  productoPartesDetalles?: Array<ProductoPartesDetalleWithRelations>;
   valor: number;
   valorDepreciado: number;
   vidaUtil: number;

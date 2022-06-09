@@ -7,6 +7,7 @@
 export interface NewEmpleado {
   correo: string;
   estado: boolean;
+  idArea?: number;
   nombre: string;
   telefono: string;
 }

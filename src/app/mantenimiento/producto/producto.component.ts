@@ -37,7 +37,9 @@ export class ProductoComponent implements OnInit {
   categorias:Categorias[]=[];
   estado:EstadoProducto[]=[];
   fabricante:Fabricante[]=[];
+  
   pipe = new DatePipe('en-US');
+  detallePartes: any[] = [];
 
   constructor(
     private messageService: NzMessageService,

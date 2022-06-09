@@ -7,6 +7,7 @@
 export interface ProductoPartial {
   anioDepreciados?: number;
   etiquetaServ?: string;
+  fechaCompra?: string;
   id: number;
   idArea?: number;
   idCategorias?: number;
@@ -14,7 +15,6 @@ export interface ProductoPartial {
   idFabricante?: number;
   modelo?: string;
   nombre?: string;
-  fechaCompra?: Date;
   valor?: number;
   valorDepreciado?: number;
   vidaUtil?: number;

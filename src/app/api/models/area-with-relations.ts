@@ -1,5 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
+import { EmpleadoWithRelations } from './empleado-with-relations';
 import { ProductoWithRelations } from './producto-with-relations';
 
 /**
@@ -7,6 +8,7 @@ import { ProductoWithRelations } from './producto-with-relations';
  */
 export interface AreaWithRelations {
   descripcion: string;
+  empleados?: Array<EmpleadoWithRelations>;
   estado: boolean;
   id: number;
   nombre: string;

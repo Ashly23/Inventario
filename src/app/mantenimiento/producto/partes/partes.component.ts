@@ -1,8 +1,8 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { Fabricante, Partes, PartesWithRelations, Producto } from 'src/app/api/models';
-import { FabricanteControllerService, PartesControllerService } from 'src/app/api/services';
+import { Fabricante, Partes, PartesWithRelations, Producto, ProductoPartesDetalle } from 'src/app/api/models';
+import { FabricanteControllerService, PartesControllerService, ProductoPartesDetalleControllerService } from 'src/app/api/services';
 
 interface DataItem {
   id: number;
@@ -27,38 +27,34 @@ export class PartesComponent implements OnInit /*OnChanges*/{
   visibleDrawer = false;
   partes:PartesWithRelations[]=[];
   fabricante:Fabricante[]=[];
+  detalles:ProductoPartesDetalle[]=[];
   @Input() productoPosicion!: Producto;
+  @Input() detallePartes: any[] = [];
 
   constructor(
     private messageService: NzMessageService,
     private partesService:PartesControllerService,
     private fabricanteService:FabricanteControllerService,
+    private detallesService:ProductoPartesDetalleControllerService,
     private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
     this.CleanForm();
-    this.partesService.find(
-      {
-        "filter": `{"include": [{"relation": "Fabricantes"}]}`
-      }
-    ).subscribe(data => {
-      this.partes = data
-    })
+    this.filtrar();
+    this.detallesService.find().subscribe(data=>this.detalles=data)
     this.fabricanteService.find().subscribe(data=>this.fabricante=data)
   }
 
-  /*
-  ngOnChanges(changes: SimpleChanges): void {
-    if(this.productoPosicion){
-      for(let i = 0; i < this.partes.length ; i++){
-        if(this.productoPosicion.id === this.partes[i]){
-          //no le estas asignando la parte a un producto en ningun momento, no hay forma de filtrarlo
-        }
+  
+  filtrar(){
+    for(let i = 0; i < this.detallePartes.length; i++){
+      if(this.detallePartes[i].idProducto === this.productoPosicion.id){
+        this.partes = [... this.partes, this.detallePartes[i]];
       }
     }
+    this.partes = [... this.partes];
   }
-  */
 
   eliminar(id: number): void {
     this.partesService.deleteById({ id }).subscribe(() => {
@@ -147,7 +143,7 @@ export class PartesComponent implements OnInit /*OnChanges*/{
       this.partesService.updateById({ 'id': this.formPartes.value.id, 'body': this.formPartes.value }).subscribe(
         (data) => {
           //actualizar
-          this.partes = this.partes.map(obj => {
+          this.partes = [... this.partes].map(obj => {
             if (obj.id === this.formPartes.value.id){
               return data;
             }

@@ -7,8 +7,8 @@
 export interface GarantiaPartial {
   cuota?: string;
   estado?: boolean;
-  fechaInicial: Date;
-  fechaFinal: Date;
+  fechaFinal?: string;
+  fechaInicial?: string;
   id: number;
   idProducto?: number;
   observacion?: string;

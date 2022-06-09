@@ -1,8 +1,10 @@
 export { CategoriasControllerService } from './services/categorias-controller.service';
 export { AreaControllerService } from './services/area-controller.service';
+export { AreaEmpleadoControllerService } from './services/area-empleado-controller.service';
 export { AreaProductoControllerService } from './services/area-producto-controller.service';
 export { CategoriasProductoControllerService } from './services/categorias-producto-controller.service';
 export { EmpleadoControllerService } from './services/empleado-controller.service';
+export { EmpleadoAreaControllerService } from './services/empleado-area-controller.service';
 export { EncargadoControllerService } from './services/encargado-controller.service';
 export { EncargadoEmpleadoControllerService } from './services/encargado-empleado-controller.service';
 export { EncargadoProductoControllerService } from './services/encargado-producto-controller.service';
@@ -16,8 +18,11 @@ export { GarantiaProductoControllerService } from './services/garantia-producto-
 export { PartesControllerService } from './services/partes-controller.service';
 export { PartesFabricanteControllerService } from './services/partes-fabricante-controller.service';
 export { PingControllerService } from './services/ping-controller.service';
+export { ProductoPartesDetalleControllerService } from './services/producto-partes-detalle-controller.service';
+export { ProductoPartesDetalleProductoControllerService } from './services/producto-partes-detalle-producto-controller.service';
 export { ProductoControllerService } from './services/producto-controller.service';
 export { ProductoAreaControllerService } from './services/producto-area-controller.service';
 export { ProductoCategoriasControllerService } from './services/producto-categorias-controller.service';
 export { ProductoEstadoProductoControllerService } from './services/producto-estado-producto-controller.service';
 export { ProductoFabricanteControllerService } from './services/producto-fabricante-controller.service';
+export { ProductoProductoPartesDetalleControllerService } from './services/producto-producto-partes-detalle-controller.service';

@@ -6,9 +6,11 @@ import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
 import { CategoriasControllerService } from './services/categorias-controller.service';
 import { AreaControllerService } from './services/area-controller.service';
+import { AreaEmpleadoControllerService } from './services/area-empleado-controller.service';
 import { AreaProductoControllerService } from './services/area-producto-controller.service';
 import { CategoriasProductoControllerService } from './services/categorias-producto-controller.service';
 import { EmpleadoControllerService } from './services/empleado-controller.service';
+import { EmpleadoAreaControllerService } from './services/empleado-area-controller.service';
 import { EncargadoControllerService } from './services/encargado-controller.service';
 import { EncargadoEmpleadoControllerService } from './services/encargado-empleado-controller.service';
 import { EncargadoProductoControllerService } from './services/encargado-producto-controller.service';
@@ -22,11 +24,14 @@ import { GarantiaProductoControllerService } from './services/garantia-producto-
 import { PartesControllerService } from './services/partes-controller.service';
 import { PartesFabricanteControllerService } from './services/partes-fabricante-controller.service';
 import { PingControllerService } from './services/ping-controller.service';
+import { ProductoPartesDetalleControllerService } from './services/producto-partes-detalle-controller.service';
+import { ProductoPartesDetalleProductoControllerService } from './services/producto-partes-detalle-producto-controller.service';
 import { ProductoControllerService } from './services/producto-controller.service';
 import { ProductoAreaControllerService } from './services/producto-area-controller.service';
 import { ProductoCategoriasControllerService } from './services/producto-categorias-controller.service';
 import { ProductoEstadoProductoControllerService } from './services/producto-estado-producto-controller.service';
 import { ProductoFabricanteControllerService } from './services/producto-fabricante-controller.service';
+import { ProductoProductoPartesDetalleControllerService } from './services/producto-producto-partes-detalle-controller.service';
 
 /**
  * Module that provides all services and configuration.
@@ -38,9 +43,11 @@ import { ProductoFabricanteControllerService } from './services/producto-fabrica
   providers: [
     CategoriasControllerService,
     AreaControllerService,
+    AreaEmpleadoControllerService,
     AreaProductoControllerService,
     CategoriasProductoControllerService,
     EmpleadoControllerService,
+    EmpleadoAreaControllerService,
     EncargadoControllerService,
     EncargadoEmpleadoControllerService,
     EncargadoProductoControllerService,
@@ -54,11 +61,14 @@ import { ProductoFabricanteControllerService } from './services/producto-fabrica
     PartesControllerService,
     PartesFabricanteControllerService,
     PingControllerService,
+    ProductoPartesDetalleControllerService,
+    ProductoPartesDetalleProductoControllerService,
     ProductoControllerService,
     ProductoAreaControllerService,
     ProductoCategoriasControllerService,
     ProductoEstadoProductoControllerService,
     ProductoFabricanteControllerService,
+    ProductoProductoPartesDetalleControllerService,
     ApiConfiguration
   ],
 })
