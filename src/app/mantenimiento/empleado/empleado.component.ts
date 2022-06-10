@@ -57,7 +57,13 @@ export class EmpleadoComponent implements OnInit{
 
   mostrar(data?: Empleado): void {
     if (data?.id) {
-      this.formEmpleado.setValue({ ...data, 'estado': String(data.estado) })
+      this.formEmpleado.setValue({ 
+        id: data.id,
+        idArea: data.idArea,
+        nombre: data.nombre,
+        correo: data.correo,
+        telefono: data.telefono,
+        estado: String(data.estado) })
     }
     this.visible = true
   }
@@ -93,14 +99,15 @@ export class EmpleadoComponent implements OnInit{
   } 
 
   guardar(): void {
+    console.log(this.formEmpleado.value)
     this.formEmpleado.setValue({ ...this.formEmpleado.value, 'estado': Boolean(this.formEmpleado.value.estado) })
     if (this.formEmpleado.value.id) {
       this.empleadoService.updateById({ 'id': this.formEmpleado.value.id, 'body': this.formEmpleado.value }).subscribe(
-        () => {
+        (data) => {
           //actualizar
           this.empleado = this.empleado.map(obj => {
             if (obj.id === this.formEmpleado.value.id){
-              return this.formEmpleado.value;
+              return data;
             }
             return obj;
           })
