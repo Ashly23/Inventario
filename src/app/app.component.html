@@ -49,9 +49,33 @@
               <a>Garantia</a>
             </li>
           </div>
-        </ul>
-      </li>
-    </ul>
+          <div nzMatchRouter [routerLink]="'mantenimiento/solicitud'">
+            <li nz-menu-item >
+              <a>Solicitar una parte</a>
+            </li>
+              </div>
+            </ul>
+          </li>
+          <li nz-submenu nzOpen nzTitle="Reportes" nzIcon="edit" >
+            <ul>
+              <div nzMatchRouter [routerLink]="'reportes/equipos-depart'">
+                <li nz-menu-item >
+                  <a>Equipos por Departamento</a>
+                </li>
+              </div>
+              <div nzMatchRouter [routerLink]="'reportes/equipos-obsoletos'">
+                <li nz-menu-item >
+                  <a>Equipos Obsoletos</a>
+                </li>
+              </div>
+              <div nzMatchRouter [routerLink]="'reportes/reporte-detallado'">
+                <li nz-menu-item >
+                  <a>Reporte Detallado</a>
+                </li>
+              </div>
+            </ul>
+          </li>
+      </ul>
   </nz-sider>
   <nz-layout>
     <nz-header>

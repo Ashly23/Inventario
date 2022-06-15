@@ -8,7 +8,7 @@ export interface ProductoPartesDetallePartial {
   estado?: boolean;
   fechaFinal?: string;
   fechaInicial?: string;
-  id?: number;
+  id: number;
   idParte?: number;
   idProducto?: number;
 

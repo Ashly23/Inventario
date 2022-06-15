@@ -1,9 +1,9 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Empleado, Encargado, EncargadoWithRelations, Producto } from 'src/app/api/models';
-import { EncargadoControllerService, EmpleadoControllerService, ProductoControllerService } from 'src/app/api/services';
+import { EncargadoControllerService, EmpleadoControllerService, ProductoControllerService, ProductoPartesDetalleControllerService } from 'src/app/api/services';
 
 interface DataItem {
   id: number,
@@ -28,6 +28,9 @@ export class EncargadoComponent implements OnInit {
   empleado: Empleado[] = [];
   producto: Producto[] = [];
   pipe = new DatePipe('en-US');
+  @Input() productoPosicion!: Producto;
+  @Input() detalleEncargado: any[] = [];
+  
 
   constructor(
     private messageService: NzMessageService,
@@ -39,6 +42,8 @@ export class EncargadoComponent implements OnInit {
 
   ngOnInit(): void {
     this.CleanForm();
+    this.filtrar();
+    /*
     this.encargadoService.find(
       {
         "filter": `{"include": [{"relation": "Productos"},{"relation": "Empleados"}]}`
@@ -46,9 +51,18 @@ export class EncargadoComponent implements OnInit {
     ).subscribe(data => {
       this.encargado = data
      // console.log("DATOS",data)
-    })
+    }) */
     this.empleadoService.find().subscribe(data => this.empleado = data)
     this.productoService.find().subscribe(data => this.producto = data)
+  }
+
+  filtrar(){
+    for(let i = 0; i < this.detalleEncargado.length; i++){
+      if(this.detalleEncargado[i].idProducto === this.productoPosicion.id){
+        this.encargado = [... this.encargado, this.detalleEncargado[i]];
+      }
+    }
+    this.encargado = [... this.encargado];
   }
 
   eliminar(id: number): void {

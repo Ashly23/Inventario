@@ -1,0 +1,83 @@
+<div nz-row>
+    <div nz-col nzSpan="24"><button (click)="mostrar()" nz-button nzType="primary">Agregar</button></div>
+  </div>
+  <hr>
+  
+  <nz-table #sortTable [nzData]="solicitud" nzTableLayout="fixed" [nzScroll]="{ x: '100%', y: '240px' }">
+    <thead>
+      <tr>
+        <th nzLeft nzWidth="100px">Acciones</th>
+        <th *ngFor="let column of listOfColumn" [nzSortFn]="column.compare" [nzSortPriority]="column.priority">
+          {{ column.title }}
+        </th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of sortTable.data">
+        <td nzLeft nzAlign="center">
+          <div nz-row>
+            <div nz-col nzSpan="10">
+              <td>
+                <a (click)="mostrar(data)">
+                <button nz-button nzTitle="Editar Solicitud" nzType="primary" nzSize="small">
+                <i nz-icon nzType="edit" nzTheme="outline"></i></button></a>
+              </td>
+            </div>
+            <div nz-col nzSpan="10" nzOffset="1">
+                  <a nz-popconfirm nzPopconfirmTitle="¿Está seguro de borrar el registro?" nzPopconfirmPlacement="bottom"
+                  (nzOnConfirm)="eliminar(data.id)" (nzOnCancel)="cancel()" nzShape="circle" nzCancelText="No" nzOkText="Si">
+                  <button nz-button nzType="primary" nzSize="small" nzDanger>
+                  <i nz-icon nzType="close" nzTheme="outline"></i></button></a>
+            </div>
+          </div>
+        </td>
+        <td>{{ data.id }}</td>
+        <td>{{ data.Empleados?.nombre }}</td>
+        <td>{{ data.partes }}</td>
+        <td>{{ data.descripcion }}</td>
+      </tr>
+    </tbody>
+  </nz-table>
+  
+
+<!--       Agregar Nueva Area       -->
+<nz-modal [(nzVisible)]="visible" nzTitle="Nueva Solicitud" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+    <ng-container *nzModalContent>
+      <form nz-form nzLayout="vertical" (ngSubmit)="guardar()" [formGroup]="formSolicitud">
+        <div nz-row [nzGutter]="8">
+            <div nz-col nzSpan="12">
+                <nz-form-item>
+                    <nz-form-label>Empleado</nz-form-label>
+                    <nz-form-control  nzErrorTip="Por favor escriba el dato correcto!">
+                        <nz-select formControlName="idEmpleado">
+                            <nz-option *ngFor="let item of empleado"  [nzValue]="item.id" [nzLabel]="item.nombre">
+                            </nz-option>
+                        </nz-select>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+                <div nz-col nzSpan="12">
+                  <nz-form-item>
+                    <nz-form-label>Parte Solitada</nz-form-label>
+                    <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
+                      <input formControlName="partes" nz-input/>
+                    </nz-form-control>
+                  </nz-form-item>
+              </div>
+          </div>
+        <div nz-row [nzGutter]="8">
+          <div nz-col nzSpan="24">
+            <nz-form-item>
+              <nz-form-label>Descripcion</nz-form-label>
+              <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
+                <input formControlName="descripcion" nz-input/>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+        </div>
+      </form>
+    </ng-container>
+    <div *nzModalFooter>
+      <button nz-button nzType="default" (click)="ocultar()">Cancelar</button>
+      <button nz-button nzType="primary" (click)="guardar()">Guardar</button>
+    </div>
+  </nz-modal>

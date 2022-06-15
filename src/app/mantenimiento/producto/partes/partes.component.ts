@@ -143,7 +143,7 @@ export class PartesComponent implements OnInit /*OnChanges*/{
       this.partesService.updateById({ 'id': this.formPartes.value.id, 'body': this.formPartes.value }).subscribe(
         (data) => {
           //actualizar
-          this.partes = [... this.partes].map(obj => {
+          this.partes = this.partes.map(obj => {
             if (obj.id === this.formPartes.value.id){
               return data;
             }

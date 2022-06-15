@@ -9,6 +9,7 @@ import { FabricanteComponent } from './fabricante/fabricante.component';
 import { GarantiaComponent } from './garantia/garantia.component';
 import { PartesComponent } from './producto/partes/partes.component';
 import { ProductoComponent } from './producto/producto.component';
+import { SolicitudComponent } from './solicitud/solicitud.component';
 
 const routes: Routes = [
   { path: 'area', component: AreaComponent},
@@ -17,11 +18,13 @@ const routes: Routes = [
   { path: 'estado-producto', component: EstadoProductoComponent},
   { path: 'fabricante', component: FabricanteComponent},
   { path: 'garantia', component: GarantiaComponent},
-  
+  { path: 'solicitud', component: SolicitudComponent},
+
   { path: 'producto', component: ProductoComponent,
     children:[
       { path:'encargado',component:EncargadoComponent },
       { path: 'partes', component: PartesComponent} ]}
+ 
 ];
 
 @NgModule({

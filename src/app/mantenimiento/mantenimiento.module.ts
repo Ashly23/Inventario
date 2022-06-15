@@ -11,6 +11,7 @@ import { GarantiaComponent } from './garantia/garantia.component';
 import { PartesComponent } from './producto/partes/partes.component';
 import { ProductoComponent } from './producto/producto.component';
 import { EncargadoComponent } from './producto/encargado/encargado.component';
+import { SolicitudComponent } from './solicitud/solicitud.component';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -38,7 +39,8 @@ import { NzCardModule } from 'ng-zorro-antd/card';
     GarantiaComponent,
     PartesComponent,
     ProductoComponent,
-    EncargadoComponent
+    EncargadoComponent,
+    SolicitudComponent
   ],
   imports: [
     CommonModule,
@@ -69,6 +71,7 @@ import { NzCardModule } from 'ng-zorro-antd/card';
     GarantiaComponent,
     PartesComponent,
     EncargadoComponent,
+    SolicitudComponent,
     ProductoComponent
   ]
 })
