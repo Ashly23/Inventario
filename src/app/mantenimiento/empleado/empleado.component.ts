@@ -63,7 +63,8 @@ export class EmpleadoComponent implements OnInit{
       nombre: data.nombre,
       correo: data.correo,
       telefono: data.telefono,
-      estado: String(data.estado) })
+      estado: String(data.estado) 
+      })
     }
     this.visible = true
   }
@@ -99,6 +100,7 @@ export class EmpleadoComponent implements OnInit{
   } 
 
   guardar(): void {
+    console.log(this.formEmpleado.value)
     this.formEmpleado.setValue({ ...this.formEmpleado.value, 'estado': Boolean(this.formEmpleado.value.estado) })
     if (this.formEmpleado.value.id) {
       this.empleadoService.updateById({ 'id': this.formEmpleado.value.id, 'body': this.formEmpleado.value }).subscribe(
