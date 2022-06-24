@@ -2,9 +2,9 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { Area, Categorias, EstadoProducto, Fabricante, Producto } from 'src/app/api/models';
-import { AreaControllerService, CategoriasControllerService, EstadoProductoControllerService, 
-      FabricanteControllerService, ProductoControllerService } from 'src/app/api/services';
+import { Area, Categorias, Encargado, EstadoProducto, Fabricante, Partes, Producto } from 'src/app/api/models';
+import { AreaControllerService, CategoriasControllerService, EncargadoControllerService, EstadoProductoControllerService, 
+      FabricanteControllerService, PartesControllerService, ProductoControllerService } from 'src/app/api/services';
 
 interface DataItem {
   id: number;
@@ -37,6 +37,8 @@ export class ProductoComponent implements OnInit {
   categorias:Categorias[]=[];
   estado:EstadoProducto[]=[];
   fabricante:Fabricante[]=[];
+  encargado:Encargado[]=[];
+  partes:Partes[]=[];
   pipe = new DatePipe('en-US');
   detallePartes: any[] = [];
   detalleEncargado: any[] = [];
@@ -48,6 +50,8 @@ export class ProductoComponent implements OnInit {
     private categoriasService:CategoriasControllerService,
     private estadoService:EstadoProductoControllerService,
     private fabricanteService:FabricanteControllerService,
+    private encargadoService:EncargadoControllerService,
+    private partesService:PartesControllerService,
     private fb: FormBuilder
   ) {}
 
@@ -58,6 +62,8 @@ export class ProductoComponent implements OnInit {
     this.categoriasService.find().subscribe(data=>this.categorias=data)
     this.estadoService.find().subscribe(data=>this.estado=data)
     this.fabricanteService.find().subscribe(data=>this.fabricante=data)
+    this.encargadoService.find().subscribe(data=>this.encargado=data)
+    this.partesService.find().subscribe(data=>this.partesService)
   }
 
   eliminar(id: number): void {

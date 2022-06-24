@@ -1,13 +1,18 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Empleado, Solicitud, SolicitudWithRelations } from 'src/app/api/models';
-import { EmpleadoControllerService, SolicitudControllerService } from 'src/app/api/services';
+import { Empleado, Partes, Producto, Solicitud, SolicitudWithRelations } from 'src/app/api/models';
+import { EmpleadoControllerService, PartesControllerService, ProductoControllerService, SolicitudControllerService } from 'src/app/api/services';
 
 interface DataItem {
-  id: number;
-  idEmpleado: number;
-  partes: string;
-  descripcion: string;
+  id: number,
+  idEmpleado: number,
+  idProducto: number,
+  idPartes: number,
+  fechaSolicitud: Date,
+  cotizacion: number,
+  estado: boolean
 }
 
 @Component({
@@ -18,13 +23,18 @@ interface DataItem {
 export class SolicitudComponent implements OnInit {
   validateForm !: FormGroup;
   visible: boolean = false;
-  solicitud:SolicitudWithRelations[]=[];
-  empleado:Empleado[]=[];
-  messageService: any;
+  solicitud: SolicitudWithRelations[]=[];
+  empleado: Empleado[]=[];
+  producto: Producto[]=[];
+  partes: Partes[]=[];
+  pipe = new DatePipe('en-US');
 
   constructor(
+    private messageService: NzMessageService,
     private solicitudService:SolicitudControllerService,
     private empleadoService:EmpleadoControllerService,
+    private partesService:PartesControllerService,
+    private productoService:ProductoControllerService,
     private fb: FormBuilder
   ) { }
 
@@ -32,10 +42,14 @@ export class SolicitudComponent implements OnInit {
     this.CleanForm();
     this.solicitudService.find(
       {
-        "filter": `{"include": [{"relation": "Empleados"}]}`
+        "filter": `{"include": [{"relation": "Empleados"}, {"relation": "Productos"}, {"relation": "Partes"}]}`
       }
-    ).subscribe(data=>this.solicitud=data)
+    ).subscribe(data=> {
+      this.solicitud=data
+    })
     this.empleadoService.find().subscribe(data=>this.empleado=data)
+    this.partesService.find().subscribe(data=>this.partes=data)
+    this.productoService.find().subscribe(data=>this.producto=data)
   }
 
   
@@ -53,10 +67,13 @@ export class SolicitudComponent implements OnInit {
   mostrar(data?: Solicitud): void {
     if (data?.id) {
       this.formSolicitud.setValue({ 
-       id: data.id,
-       idEmpleado: data.idEmpleado,
-       partes: data.partes,
-       descripcion: data.descripcion
+        id: data.id,
+        idEmpleado: data.idEmpleado,
+        idProducto: data.idProducto,
+        idPartes: data.idPartes,
+        fechaSolicitud:(new Date(data.fechaSolicitud)).toISOString(),
+        cotizacion: data.cotizacion,
+        estado: String(data.estado)
      })
     }
     this.visible = true
@@ -85,14 +102,16 @@ export class SolicitudComponent implements OnInit {
     this.validateForm  = this.fb.group({
       id: [null, [Validators.required]],
       idEmpleado: [null, [Validators.required]],
-      partes: [null, [Validators.required]],
-      descripcion: [null, [Validators.required]]
+      idProducto: [null, [Validators.required]],
+      idPartes: [null, [Validators.required]],
+      fechaSolicitud: [null, [Validators.required]],
+      cotizacion: [null, [Validators.required]],
+      estado: [null, [Validators.required]],     
     });
   } 
 
   guardar(): void {
-    console.log(this.formSolicitud.value)
-    this.formSolicitud.setValue({ ...this.formSolicitud.value })
+    this.formSolicitud.setValue({ ...this.formSolicitud.value, 'estado': Boolean(this.formSolicitud.value.estado) })
     if (this.formSolicitud.value.id) {
       this.solicitudService.updateById({ 'id': this.formSolicitud.value.id, 'body': this.formSolicitud.value }).subscribe(
         (data) => {
@@ -123,33 +142,44 @@ export class SolicitudComponent implements OnInit {
   formSolicitud: FormGroup = this.fb.group({
     id: [],
     idEmpleado: [],
-    partes: [],
-    descripcion: []
+    idProducto: [],
+    idPartes: [],
+    fechaSolicitud: [],
+    cotizacion: [],
+    estado: [],   
   })
 
    //Tabla
    listOfColumn = [
-    {
-      title: 'Id',
-      compare: (a: DataItem, b: DataItem) => a.id - b.id,
-      priority: 0
-    },
     {
       title: 'Empleado',
       compare: (a: DataItem, b: DataItem) => a.idEmpleado - b.idEmpleado,
       priority: 1
     },
     {
-      title: 'Parte Solicitada',
+      title: 'Producto',
+      compare: (a: DataItem, b: DataItem) => a.idProducto - b.idProducto,
+      priority: 2
+    },
+    {
+      title: 'Partes',
+      compare: (a: DataItem, b: DataItem) => a.idPartes - b.idPartes,
+      priority: 3
+    },
+    {
+      title: 'Fecha de Solicitud',
       compare: null,
       priority: false
     },
     {
-      title: 'Descripcion',
+      title: 'Cotizacion',
+      compare: (a: DataItem, b: DataItem) => a.cotizacion - b.cotizacion,
+      priority: 3
+    },
+    {
+      title: 'Estado',
       compare: null,
       priority: false
     },
   ];
-  
-
 }

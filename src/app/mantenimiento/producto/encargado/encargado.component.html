@@ -1,5 +1,4 @@
 <button nz-button nzType="primary" (click)="showLarge()">Empleado</button>
-
 <nz-drawer
       [nzSize]="size"
       [nzVisible]="visibleDrawer"
@@ -12,6 +11,7 @@
   <div nz-row>
     <div nz-col nzSpan="24"><button (click)="mostrar()" nz-button nzType="primary">Agregar</button></div>
   </div>
+  <hr>
   
 <nz-table #sortTable [nzData]="encargado" nzTableLayout="fixed" [nzScroll]="{ x: '100%', y: '240px' }">
     <thead>
@@ -40,7 +40,6 @@
             </div>
           </div>
         </td>
-        <td>{{ data.id }}</td>
         <td>{{ data.fechaInicial | date }}</td>
         <td>{{ data.fechaFinal | date }}</td>
         <td>{{ data.Empleados?.nombre }}</td>
@@ -86,18 +85,7 @@
                 </nz-form-control>
                </nz-form-item>
             </div>
-              <div nz-col nzSpan="12">
-                <nz-form-item>
-                    <nz-form-label>Producto</nz-form-label>
-                    <nz-form-control  nzErrorTip="Por favor escriba el dato correcto!">
-                        <nz-select formControlName="idProducto">
-                            <nz-option *ngFor="let item of producto"  [nzValue]="item.id" [nzLabel]="item.nombre">
-                            </nz-option>
-                        </nz-select>
-                    </nz-form-control>
-                   </nz-form-item>
-                  </div>
-               </div>
+          </div>
         </form>
       </ng-container>
     <div *nzModalFooter>

@@ -18,7 +18,6 @@ interface DataItem {
 })
 
 export class CategoriaComponent implements OnInit {
-  isVisible = false;
   validateForm !: FormGroup;
   visible: boolean = false;
   categorias:Categorias[]=[];

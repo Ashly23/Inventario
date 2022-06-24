@@ -40,7 +40,7 @@
         <td>{{ data.etiquetaServ }}</td>
         <td nzRight nzAlign="center">
           <div nz-col nzSpan="10">
-          <app-encargado></app-encargado>
+          <app-encargado [productoPosicion]="data" [detalleEncargado]="detalleEncargado"></app-encargado>
         </div>
         &nbsp;
         <div nz-col nzSpan="10" nzOffset="1">
@@ -50,7 +50,6 @@
       </tr>
     </tbody>
   </nz-table>
-
 
     <!--   Nuevo Producto  -->
   <nz-modal [(nzVisible)]="visible" nzTitle="Producto" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">

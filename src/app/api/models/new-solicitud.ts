@@ -5,7 +5,10 @@
  * (tsType: Omit<Solicitud, 'id'>, schemaOptions: { title: 'NewSolicitud', exclude: [ 'id' ] })
  */
 export interface NewSolicitud {
-  descripcion: string;
+  cotizacion: number;
+  estado: boolean;
+  fechaSolicitud: string;
   idEmpleado?: number;
-  partes: string;
+  idPartes?: number;
+  idProducto?: number;
 }

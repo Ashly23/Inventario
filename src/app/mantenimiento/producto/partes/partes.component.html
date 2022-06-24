@@ -1,5 +1,4 @@
 <button nz-button nzType="primary" (click)="showLarge()">Partes</button>
-
 <nz-drawer
       [nzSize]="size"
       [nzVisible]="visibleDrawer"
@@ -9,10 +8,10 @@
     >
 <ng-container *nzDrawerContent>
 
-<div nz-row>
-  <div nz-col nzSpan="24"><button (click)="mostrar()" nz-button nzType="primary">Agregar</button></div>
-</div>
-<hr>
+  <div nz-row>
+    <div nz-col nzSpan="24"><button (click)="mostrar()" nz-button nzType="primary">Agregar</button></div>
+  </div>
+  <hr>
 
 <nz-table #sortTable [nzData]="partes" nzTableLayout="fixed" [nzScroll]="{ x: '100%', y: '240px' }">
     <thead>
@@ -53,7 +52,6 @@
   </nz-table>
 </ng-container>
 </nz-drawer>
-
 
 
   <!--  Nueva Parte -->

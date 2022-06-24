@@ -5,7 +5,10 @@
  * (tsType: @loopback/repository-json-schema#Optional<Omit<Solicitud, 'id'>, 'idEmpleado'>, schemaOptions: { title: 'NewSolicitudInEmpleado', exclude: [ 'id' ], optional: [ 'idEmpleado' ] })
  */
 export interface NewSolicitudInEmpleado {
-  descripcion: string;
+  cotizacion: number;
+  estado: boolean;
+  fechaSolicitud: string;
   idEmpleado?: number;
-  partes: string;
+  idPartes?: number;
+  idProducto?: number;
 }

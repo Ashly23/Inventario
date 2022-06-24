@@ -5,8 +5,11 @@
  * (tsType: Partial<Solicitud>, schemaOptions: { partial: true })
  */
 export interface SolicitudPartial {
-  descripcion?: string;
+  cotizacion?: number;
+  estado?: boolean;
+  fechaSolicitud?: string;
   id: number;
   idEmpleado?: number;
-  partes?: string;
+  idPartes?: number;
+  idProducto?: number;
 }

@@ -9,6 +9,7 @@ export { EmpleadoSolicitudControllerService } from './services/empleado-solicitu
 export { EncargadoControllerService } from './services/encargado-controller.service';
 export { EncargadoEmpleadoControllerService } from './services/encargado-empleado-controller.service';
 export { EncargadoProductoControllerService } from './services/encargado-producto-controller.service';
+export { ReportesControllerService } from './services/reportes-controller.service';
 export { EstadoProductoControllerService } from './services/estado-producto-controller.service';
 export { EstadoProductoProductoControllerService } from './services/estado-producto-producto-controller.service';
 export { FabricanteControllerService } from './services/fabricante-controller.service';
@@ -19,6 +20,7 @@ export { GarantiaProductoControllerService } from './services/garantia-producto-
 export { PartesControllerService } from './services/partes-controller.service';
 export { PartesFabricanteControllerService } from './services/partes-fabricante-controller.service';
 export { PartesProductoPartesDetalleControllerService } from './services/partes-producto-partes-detalle-controller.service';
+export { PartesSolicitudControllerService } from './services/partes-solicitud-controller.service';
 export { PingControllerService } from './services/ping-controller.service';
 export { ProductoPartesDetalleControllerService } from './services/producto-partes-detalle-controller.service';
 export { ProductoPartesDetallePartesControllerService } from './services/producto-partes-detalle-partes-controller.service';
@@ -29,5 +31,8 @@ export { ProductoCategoriasControllerService } from './services/producto-categor
 export { ProductoEstadoProductoControllerService } from './services/producto-estado-producto-controller.service';
 export { ProductoFabricanteControllerService } from './services/producto-fabricante-controller.service';
 export { ProductoProductoPartesDetalleControllerService } from './services/producto-producto-partes-detalle-controller.service';
+export { ProductoSolicitudControllerService } from './services/producto-solicitud-controller.service';
 export { SolicitudControllerService } from './services/solicitud-controller.service';
 export { SolicitudEmpleadoControllerService } from './services/solicitud-empleado-controller.service';
+export { SolicitudPartesControllerService } from './services/solicitud-partes-controller.service';
+export { SolicitudProductoControllerService } from './services/solicitud-producto-controller.service';

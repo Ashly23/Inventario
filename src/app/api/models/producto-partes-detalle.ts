@@ -5,7 +5,7 @@ export interface ProductoPartesDetalle {
   fechaFinal: string;
   fechaInicial: string;
   id: number;
-  idParte?: number;
+  idPartes?: number;
   idProducto?: number;
 
   [key: string]: any;

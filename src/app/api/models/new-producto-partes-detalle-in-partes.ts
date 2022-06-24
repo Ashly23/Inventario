@@ -2,13 +2,13 @@
 /* eslint-disable */
 
 /**
- * (tsType: @loopback/repository-json-schema#Optional<Omit<ProductoPartesDetalle, 'id'>, 'idParte'>, schemaOptions: { title: 'NewProductoPartesDetalleInPartes', exclude: [ 'id' ], optional: [ 'idParte' ] })
+ * (tsType: @loopback/repository-json-schema#Optional<Omit<ProductoPartesDetalle, 'id'>, 'idPartes'>, schemaOptions: { title: 'NewProductoPartesDetalleInPartes', exclude: [ 'id' ], optional: [ 'idPartes' ] })
  */
 export interface NewProductoPartesDetalleInPartes {
   estado: boolean;
   fechaFinal: string;
   fechaInicial: string;
-  idParte?: number;
+  idPartes?: number;
   idProducto?: number;
 
   [key: string]: any;

@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Empleado, Encargado, EncargadoWithRelations, Producto } from 'src/app/api/models';
@@ -18,10 +18,11 @@ interface DataItem {
   templateUrl: './encargado.component.html',
   styleUrls: ['./encargado.component.css']
 })
-export class EncargadoComponent implements OnInit {
+export class EncargadoComponent implements OnInit, OnChanges {
   isVisible = false;
   size: 'large' | 'default' = 'default';
   validateForm !: FormGroup;
+  encargadoAux: any[] = []; 
   visible = false;
   visibleDrawer = false;
   encargado: EncargadoWithRelations[] = [];
@@ -31,7 +32,6 @@ export class EncargadoComponent implements OnInit {
   @Input() productoPosicion!: Producto;
   @Input() detalleEncargado: any[] = [];
   
-
   constructor(
     private messageService: NzMessageService,
     private encargadoService: EncargadoControllerService,
@@ -42,24 +42,37 @@ export class EncargadoComponent implements OnInit {
 
   ngOnInit(): void {
     this.CleanForm();
-    this.filtrar();
-    /*
+    this.empleadoService.find().subscribe(data=> this.empleado =data)
+    this.productoService.find().subscribe(data=> this.producto =data)
+    //obtener encargado
+
     this.encargadoService.find(
       {
-        "filter": `{"include": [{"relation": "Productos"},{"relation": "Empleados"}]}`
+        "filter": `{"include": [{"relation": "Empleados"}]}`
       }
-    ).subscribe(data => {
-      this.encargado = data
-     // console.log("DATOS",data)
-    }) */
-    this.empleadoService.find().subscribe(data => this.empleado = data)
-    this.productoService.find().subscribe(data => this.producto = data)
+    ).subscribe((data: any) => {
+      console.log('encargados');
+      
+      console.log(data[0]);
+      this.encargadoAux = data;
+      this.filtrar();
+    }) 
+ 
+  }
+  
+  ngOnChanges(changes: SimpleChanges): void {
+    // if(this.encargado){
+    //   this.filtrar();
+      
+    // }
   }
 
   filtrar(){
-    for(let i = 0; i < this.detalleEncargado.length; i++){
-      if(this.detalleEncargado[i].idProducto === this.productoPosicion.id){
-        this.encargado = [... this.encargado, this.detalleEncargado[i]];
+    this.encargado.length = 0;
+    for(let i = 0; i < this.encargadoAux.length; i++){
+      if(this.encargadoAux[i].idProducto === this.productoPosicion.id){
+        
+        this.encargado = [... this.encargado, this.encargadoAux[i]];
       }
     }
     this.encargado = [... this.encargado];
@@ -88,6 +101,7 @@ export class EncargadoComponent implements OnInit {
   }
 
   open(): void {
+    this.filtrar();
     this.visibleDrawer = true;
   }
 
@@ -142,10 +156,8 @@ export class EncargadoComponent implements OnInit {
     });
   }
 
-  //console.log(this.formEncargado.value);
-
   guardar(): void {
-    console.log(this.formEncargado.value)
+    //console.log(this.formEncargado.value)
     this.formEncargado.setValue({ ...this.formEncargado.value })
     if (this.formEncargado.value.id) {
       this.encargadoService.updateById({ 'id': this.formEncargado.value.id, 'body': this.formEncargado.value }).subscribe(
@@ -163,11 +175,12 @@ export class EncargadoComponent implements OnInit {
       )
     } else {
       //insertar
-      //console.log(this.formEncargado.value);
+      console.log(this.formEncargado.value);
       delete this.formEncargado.value.id
       this.encargadoService.create({ body: this.formEncargado.value }).subscribe((datoAgregado) => {
         this.encargado = [...this.encargado, datoAgregado]
         this.messageService.success('Registro creado con exito!')
+        this.filtrar;
         this.formEncargado.reset()
       })
     }
@@ -184,11 +197,6 @@ export class EncargadoComponent implements OnInit {
 
   //Tabla
   listOfColumn = [
-    {
-      title: 'Id',
-      compare: (a: DataItem, b: DataItem) => a.id - b.id,
-      priority: 2
-    },
     {
       title: 'Fecha Inicial',
       compare: null,

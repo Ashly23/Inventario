@@ -42,10 +42,17 @@ export class PartesComponent implements OnInit /*OnChanges*/{
   ngOnInit(): void {
     this.CleanForm();
     this.filtrar();
+    this.partesService.find(
+      {
+        "filter": `{"include": [{"relation: "Fabricantes"}]}`
+      }
+    ).subscribe(data=> {
+      console.log(data)
+      this.partes = data
+    })
     this.detallesService.find().subscribe(data=>this.detalles=data)
     this.fabricanteService.find().subscribe(data=>this.fabricante=data)
   }
-
   
   filtrar(){
     for(let i = 0; i < this.detallePartes.length; i++){

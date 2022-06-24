@@ -18,7 +18,6 @@ interface DataItem {
 })
 
 export class AreaComponent implements OnInit {
-  isVisible = false;
   validateForm !: FormGroup;
   visible: boolean = false;
   area:Area[]=[];
@@ -47,8 +46,7 @@ export class AreaComponent implements OnInit {
 
   mostrar(data?: Area): void {
     if (data?.id) {
-      this.formArea.setValue({ ...data, 'estado': String(data.estado) 
-     })
+      this.formArea.setValue({ ...data, 'estado': String(data.estado) })
     }
     this.visible = true
   }
@@ -74,6 +72,7 @@ export class AreaComponent implements OnInit {
 
   CleanForm(){
     this.validateForm  = this.fb.group({
+      id: [null, [Validators.required]],
       nombre: [null, [Validators.required]],
       descripcion: [null, [Validators.required]],
       estado: [null, [Validators.required]]

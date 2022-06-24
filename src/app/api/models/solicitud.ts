@@ -1,8 +1,11 @@
 /* tslint:disable */
 /* eslint-disable */
 export interface Solicitud {
-  descripcion: string;
+  cotizacion: number;
+  estado: boolean;
+  fechaSolicitud: string;
   id: number;
   idEmpleado?: number;
-  partes: string;
+  idPartes?: number;
+  idProducto?: number;
 }
