@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import { FabricanteWithRelations } from './fabricante-with-relations';
-import { ProductoPartesDetalleWithRelations } from './producto-partes-detalle-with-relations';
+import { ProductoWithRelations } from './producto-with-relations';
 import { SolicitudWithRelations } from './solicitud-with-relations';
 
 /**
@@ -9,12 +9,13 @@ import { SolicitudWithRelations } from './solicitud-with-relations';
  */
 export interface PartesWithRelations {
   Fabricantes?: FabricanteWithRelations;
+  Productos?: ProductoWithRelations;
   capacidad?: string;
   estado?: boolean;
   id: number;
   idFabricante?: number;
+  idProducto?: number;
   nombre: string;
-  productoPartesDetalles?: Array<ProductoPartesDetalleWithRelations>;
   solicitud?: Array<SolicitudWithRelations>;
   tecnologia?: string;
   tipoParte?: string;

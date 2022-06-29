@@ -30,10 +30,8 @@
           </div>
         </div>
       </td>
-      <td>{{ data.id }}</td>
       <td>{{ data.nombre }}</td>
-      <td>{{ data.descripcion }}</td>
-      <td>
+      <td nzWidth="75px">
         <div *ngIf="data.estado"><i nz-icon nzType="check-circle" nzTheme="outline"></i></div>
       </td>
     </tr>
@@ -51,16 +49,6 @@
             <nz-form-label>Nombre</nz-form-label>
             <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
               <input formControlName="nombre" nz-input/>
-            </nz-form-control>
-          </nz-form-item>
-        </div>
-      </div>
-      <div nz-row [nzGutter]="8">
-        <div nz-col nzSpan="24">
-          <nz-form-item>
-            <nz-form-label>Descripcion</nz-form-label>
-            <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
-              <input formControlName="descripcion" nz-input/>
             </nz-form-control>
           </nz-form-item>
         </div>

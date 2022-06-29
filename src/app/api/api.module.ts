@@ -25,18 +25,15 @@ import { GarantiaControllerService } from './services/garantia-controller.servic
 import { GarantiaProductoControllerService } from './services/garantia-producto-controller.service';
 import { PartesControllerService } from './services/partes-controller.service';
 import { PartesFabricanteControllerService } from './services/partes-fabricante-controller.service';
-import { PartesProductoPartesDetalleControllerService } from './services/partes-producto-partes-detalle-controller.service';
+import { PartesProductoControllerService } from './services/partes-producto-controller.service';
 import { PartesSolicitudControllerService } from './services/partes-solicitud-controller.service';
 import { PingControllerService } from './services/ping-controller.service';
-import { ProductoPartesDetalleControllerService } from './services/producto-partes-detalle-controller.service';
-import { ProductoPartesDetallePartesControllerService } from './services/producto-partes-detalle-partes-controller.service';
-import { ProductoPartesDetalleProductoControllerService } from './services/producto-partes-detalle-producto-controller.service';
 import { ProductoControllerService } from './services/producto-controller.service';
 import { ProductoAreaControllerService } from './services/producto-area-controller.service';
 import { ProductoCategoriasControllerService } from './services/producto-categorias-controller.service';
 import { ProductoEstadoProductoControllerService } from './services/producto-estado-producto-controller.service';
 import { ProductoFabricanteControllerService } from './services/producto-fabricante-controller.service';
-import { ProductoProductoPartesDetalleControllerService } from './services/producto-producto-partes-detalle-controller.service';
+import { ProductoPartesControllerService } from './services/producto-partes-controller.service';
 import { ProductoSolicitudControllerService } from './services/producto-solicitud-controller.service';
 import { SolicitudControllerService } from './services/solicitud-controller.service';
 import { SolicitudEmpleadoControllerService } from './services/solicitud-empleado-controller.service';
@@ -72,18 +69,15 @@ import { SolicitudProductoControllerService } from './services/solicitud-product
     GarantiaProductoControllerService,
     PartesControllerService,
     PartesFabricanteControllerService,
-    PartesProductoPartesDetalleControllerService,
+    PartesProductoControllerService,
     PartesSolicitudControllerService,
     PingControllerService,
-    ProductoPartesDetalleControllerService,
-    ProductoPartesDetallePartesControllerService,
-    ProductoPartesDetalleProductoControllerService,
     ProductoControllerService,
     ProductoAreaControllerService,
     ProductoCategoriasControllerService,
     ProductoEstadoProductoControllerService,
     ProductoFabricanteControllerService,
-    ProductoProductoPartesDetalleControllerService,
+    ProductoPartesControllerService,
     ProductoSolicitudControllerService,
     SolicitudControllerService,
     SolicitudEmpleadoControllerService,

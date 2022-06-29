@@ -148,11 +148,6 @@ export class GarantiaComponent implements OnInit {
   //Tabla
   listOfColumn = [
     {
-      title: 'Id',
-      compare: (a: DataItem, b: DataItem) => a.id - b.id,
-      priority: 0
-    },
-    {
       title: 'Producto',
       compare: (a: DataItem, b: DataItem) => a.idProducto - b.idProducto,
       priority: 0

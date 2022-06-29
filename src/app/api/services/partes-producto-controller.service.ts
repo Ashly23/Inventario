@@ -14,7 +14,7 @@ import { Producto } from '../models/producto';
 @Injectable({
   providedIn: 'root',
 })
-export class ProductoPartesDetalleProductoControllerService extends BaseService {
+export class PartesProductoControllerService extends BaseService {
   constructor(
     config: ApiConfiguration,
     http: HttpClient
@@ -23,9 +23,9 @@ export class ProductoPartesDetalleProductoControllerService extends BaseService 
   }
 
   /**
-   * Path part for operation productoPartesDetalleProductoControllerGetProducto
+   * Path part for operation partesProductoControllerGetProducto
    */
-  static readonly ProductoPartesDetalleProductoControllerGetProductoPath = '/producto-partes-detalles/{id}/producto';
+  static readonly PartesProductoControllerGetProductoPath = '/partes/{id}/producto';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -37,7 +37,7 @@ export class ProductoPartesDetalleProductoControllerService extends BaseService 
     id: number;
   }): Observable<StrictHttpResponse<Array<Producto>>> {
 
-    const rb = new RequestBuilder(this.rootUrl, ProductoPartesDetalleProductoControllerService.ProductoPartesDetalleProductoControllerGetProductoPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, PartesProductoControllerService.PartesProductoControllerGetProductoPath, 'get');
     if (params) {
       rb.path('id', params.id, {});
     }

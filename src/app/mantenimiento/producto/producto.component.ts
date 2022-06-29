@@ -136,7 +136,6 @@ export class ProductoComponent implements OnInit {
 
   guardar(): void {
     //console.log(...this.formProducto.value)
-    
     this.formProducto.setValue({ ...this.formProducto.value })
     if (this.formProducto.value.id) {
       this.productoService.updateById({ 'id': this.formProducto.value.id, 'body': this.formProducto.value }).subscribe(
@@ -183,11 +182,6 @@ export class ProductoComponent implements OnInit {
   })
 
   listOfColumn = [
-    {
-      title: 'Id',
-      compare: (a: DataItem, b: DataItem) => a.id - b.id,
-      priority: 0
-    },
     {
       title: 'Nombre',
       compare: null,

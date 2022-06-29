@@ -28,6 +28,7 @@ import { NzMessageModule } from 'ng-zorro-antd/message';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzBadgeModule } from 'ng-zorro-antd/badge';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { NzCardModule } from 'ng-zorro-antd/card';
     NzMessageModule,
     NzDatePickerModule,
     NzDrawerModule,
-    NzCardModule
+    NzCardModule,
+    NzBadgeModule
   ],
   exports: [
     AreaComponent,

@@ -19,6 +19,7 @@
         <th nzLeft nzWidth="100px">Acciones</th>
         <th *ngFor="let column of listOfColumn" [nzSortFn]="column.compare" [nzSortPriority]="column.priority">
           {{ column.title }}
+        </th>
     </thead>
     <tbody>
       <tr *ngFor="let data of sortTable.data">
@@ -55,7 +56,7 @@
 
 
   <!--  Nueva Parte -->
-  <nz-modal [(nzVisible)]="visible" nzTitle="Partes del producto" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+  <nz-modal [(nzVisible)]="visible" nzTitle="Partes" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
     <ng-container *nzModalContent>
       <form nz-form nzLayout="vertical" (ngSubmit)="guardar()" [formGroup]="formPartes">
         <div nz-row [nzGutter]="8">

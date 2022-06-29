@@ -6,7 +6,7 @@ import { EncargadoWithRelations } from './encargado-with-relations';
 import { EstadoProductoWithRelations } from './estado-producto-with-relations';
 import { FabricanteWithRelations } from './fabricante-with-relations';
 import { GarantiaWithRelations } from './garantia-with-relations';
-import { ProductoPartesDetalleWithRelations } from './producto-partes-detalle-with-relations';
+import { PartesWithRelations } from './partes-with-relations';
 import { SolicitudWithRelations } from './solicitud-with-relations';
 
 /**
@@ -29,7 +29,7 @@ export interface ProductoWithRelations {
   idFabricante?: number;
   modelo?: string;
   nombre: string;
-  productoPartesDetalles?: Array<ProductoPartesDetalleWithRelations>;
+  partes?: Array<PartesWithRelations>;
   solicitud?: Array<SolicitudWithRelations>;
   valor: number;
   valorDepreciado: number;

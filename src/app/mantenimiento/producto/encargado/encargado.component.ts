@@ -3,13 +3,13 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Empleado, Encargado, EncargadoWithRelations, Producto } from 'src/app/api/models';
-import { EncargadoControllerService, EmpleadoControllerService, ProductoControllerService, ProductoPartesDetalleControllerService } from 'src/app/api/services';
+import { EncargadoControllerService, EmpleadoControllerService, ProductoControllerService } from 'src/app/api/services';
 
 interface DataItem {
   id: number,
-  fechaInicial: Date,
+  fechaInicial: Date,             
   fechaFinal: Date,
-  idEmpleado: number,
+  idEmpleado: number,                                                                                                                                                                                                                                                                          
   idProducto: number
 }
 
@@ -23,7 +23,7 @@ export class EncargadoComponent implements OnInit, OnChanges {
   size: 'large' | 'default' = 'default';
   validateForm !: FormGroup;
   encargadoAux: any[] = []; 
-  visible = false;
+  visible: boolean = false;
   visibleDrawer = false;
   encargado: EncargadoWithRelations[] = [];
   empleado: Empleado[] = [];
@@ -42,22 +42,22 @@ export class EncargadoComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.CleanForm();
-    this.empleadoService.find().subscribe(data=> this.empleado =data)
-    this.productoService.find().subscribe(data=> this.producto =data)
+    this.filtrar();
+    this.empleadoService.find().subscribe(data=>this.empleado=data)
+    this.productoService.find().subscribe(data=>this.producto=data)
+    
     //obtener encargado
-
     this.encargadoService.find(
       {
-        "filter": `{"include": [{"relation": "Empleados"}]}`
+        "filter": `{"include": [{"relation": "Productos"}, {"relation": "Empleados"}]}`
       }
     ).subscribe((data: any) => {
-      console.log('encargados');
+     // console.log('encargados');
       
-      console.log(data[0]);
+     // console.log(data[0]);
       this.encargadoAux = data;
       this.filtrar();
     }) 
- 
   }
   
   ngOnChanges(changes: SimpleChanges): void {
@@ -101,7 +101,6 @@ export class EncargadoComponent implements OnInit, OnChanges {
   }
 
   open(): void {
-    this.filtrar();
     this.visibleDrawer = true;
   }
 
@@ -157,8 +156,9 @@ export class EncargadoComponent implements OnInit, OnChanges {
   }
 
   guardar(): void {
-    //console.log(this.formEncargado.value)
-    this.formEncargado.setValue({ ...this.formEncargado.value })
+    //console.log('datos del formulario', this.formEncargado.value)
+    //console.log('datos del input', this.productoPosicion)
+    this.formEncargado.setValue({ ...this.formEncargado.value, idProducto:this.productoPosicion.id })
     if (this.formEncargado.value.id) {
       this.encargadoService.updateById({ 'id': this.formEncargado.value.id, 'body': this.formEncargado.value }).subscribe(
         (data) => {
@@ -175,16 +175,16 @@ export class EncargadoComponent implements OnInit, OnChanges {
       )
     } else {
       //insertar
-      console.log(this.formEncargado.value);
       delete this.formEncargado.value.id
       this.encargadoService.create({ body: this.formEncargado.value }).subscribe((datoAgregado) => {
         this.encargado = [...this.encargado, datoAgregado]
         this.messageService.success('Registro creado con exito!')
-        this.filtrar;
+      //  this.filtrar;
         this.formEncargado.reset()
       })
     }
     this.visible = false
+    //console.log(this.formEncargado.value);
   }
 
   formEncargado: FormGroup = this.fb.group({

@@ -1,13 +1,14 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { Fabricante, Partes, PartesWithRelations, Producto, ProductoPartesDetalle } from 'src/app/api/models';
-import { FabricanteControllerService, PartesControllerService, ProductoPartesDetalleControllerService } from 'src/app/api/services';
+import { Fabricante, Partes, PartesWithRelations, Producto } from 'src/app/api/models';
+import { FabricanteControllerService, PartesControllerService, ProductoControllerService } from 'src/app/api/services';
 
 interface DataItem {
   id: number;
   nombre: string;
   idFabricante:number;
+  idProducto: number;
   tipoParte: string;
   capacidad: string;
   tecnologia: string;
@@ -19,15 +20,16 @@ interface DataItem {
   templateUrl: './partes.component.html',
   styleUrls: ['./partes.component.css']
 })
-export class PartesComponent implements OnInit /*OnChanges*/{
+export class PartesComponent implements OnInit, OnChanges {
   isVisible = false;
   size: 'large' | 'default' = 'default';
   validateForm !: FormGroup;
+  partesAux: any[] = [];
   visible: boolean = false;
   visibleDrawer = false;
   partes:PartesWithRelations[]=[];
   fabricante:Fabricante[]=[];
-  detalles:ProductoPartesDetalle[]=[];
+  producto:Producto[]=[];
   @Input() productoPosicion!: Producto;
   @Input() detallePartes: any[] = [];
 
@@ -35,29 +37,44 @@ export class PartesComponent implements OnInit /*OnChanges*/{
     private messageService: NzMessageService,
     private partesService:PartesControllerService,
     private fabricanteService:FabricanteControllerService,
-    private detallesService:ProductoPartesDetalleControllerService,
+    private productoService:ProductoControllerService,
     private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
     this.CleanForm();
     this.filtrar();
+    console.log(this.partes)
+    this.fabricanteService.find().subscribe(data=>this.fabricante=data)
+    this.productoService.find().subscribe(data=>this.producto=data)
+    
+    
     this.partesService.find(
       {
-        "filter": `{"include": [{"relation: "Fabricantes"}]}`
+        "filter": `{"include": [{"relation": "Productos"}, {"relation": "Fabricantes"}]}`
       }
-    ).subscribe(data=> {
-      console.log(data)
-      this.partes = data
+    ).subscribe((data: any) => {
+      console.log('partes');
+
+      console.log(data[0]);
+      this.partesAux = data;
+      this.filtrar();
     })
-    this.detallesService.find().subscribe(data=>this.detalles=data)
-    this.fabricanteService.find().subscribe(data=>this.fabricante=data)
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+   /* if(this.partes){
+      this.filtrar();
+    }
+    */
   }
   
   filtrar(){
-    for(let i = 0; i < this.detallePartes.length; i++){
-      if(this.detallePartes[i].idProducto === this.productoPosicion.id){
-        this.partes = [... this.partes, this.detallePartes[i]];
+    this.partes.length = 0;
+    for(let i = 0; i < this.partesAux.length; i++){
+      if(this.partesAux[i].idProducto === this.productoPosicion.id){
+        
+        this.partes = [... this.partes, this.partesAux[i]];
       }
     }
     this.partes = [... this.partes];
@@ -72,7 +89,7 @@ export class PartesComponent implements OnInit /*OnChanges*/{
 
     //Drawer
     get title(): string {
-      return `Partes del Producto`;
+      return `Partes`;
     }
   
     showDefault(): void {
@@ -104,6 +121,7 @@ export class PartesComponent implements OnInit /*OnChanges*/{
         id: data.id,
         nombre: data.nombre,
         idFabricante: data.idFabricante,
+        idProducto: data.idProducto,
         tipoParte: data.tipoParte,
         capacidad: data.capacidad,
         tecnologia: data.tecnologia,
@@ -137,6 +155,7 @@ export class PartesComponent implements OnInit /*OnChanges*/{
       id: [null, [Validators.required]],
       nombre: [null, [Validators.required]],
       idFabricante: [null, [Validators.required]],
+      idProducto: [null, [Validators.required]],
       tipoParte: [null, [Validators.required]],
       capacidad: [null, [Validators.required]],
       tecnologia: [null, [Validators.required]],
@@ -145,7 +164,9 @@ export class PartesComponent implements OnInit /*OnChanges*/{
   } 
 
   guardar(): void {
-    this.formPartes.setValue({ ...this.formPartes.value, 'estado': Boolean(this.formPartes.value.estado) })
+    console.log('datos del formulario', this.formPartes.value)
+    console.log('datos del input', this.productoPosicion)
+    this.formPartes.setValue({ ...this.formPartes.value,'estado': Boolean(this.formPartes.value.estado), idProducto:this.productoPosicion.id })
     if (this.formPartes.value.id) {
       this.partesService.updateById({ 'id': this.formPartes.value.id, 'body': this.formPartes.value }).subscribe(
         (data) => {
@@ -166,18 +187,19 @@ export class PartesComponent implements OnInit /*OnChanges*/{
       delete this.formPartes.value.id
       this.partesService.create({ body: this.formPartes.value }).subscribe((datoAgregado) => {
         this.partes = [...this.partes, datoAgregado]
-        console.log(this.partes)
         this.messageService.success('Registro creado con exito!')
         this.formPartes.reset()
       })
     }
     this.visible = false
+    console.log(this.formPartes.value)
    }
 
   formPartes: FormGroup = this.fb.group({
       id:[],
       nombre:[],
       idFabricante:[],
+      idProducto:[],
       tipoParte:[],
       capacidad:[],
       tecnologia:[],
@@ -193,8 +215,8 @@ export class PartesComponent implements OnInit /*OnChanges*/{
     },
     {
       title: 'Fabricante',
-      compare: null,
-      priority: false
+      compare: (a: DataItem, b: DataItem) => a.idFabricante - b.idFabricante,
+      priority: 0
     },
     {
       title: 'Tipo del producto',

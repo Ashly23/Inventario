@@ -118,11 +118,6 @@ export class EstadoProductoComponent implements OnInit {
   //Tabla
   listOfColumn = [
     {
-      title: 'Id',
-      compare: (a: DataItem, b: DataItem) => a.id - b.id,
-      priority: 1
-    },
-    {
       title: 'Nombre',
       compare: null,
       priority: false

@@ -7,7 +7,6 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 interface DataItem {
   id: number;
   nombre: string;
-  descripcion: string;
   estado: boolean;
 }
 
@@ -74,7 +73,6 @@ export class AreaComponent implements OnInit {
     this.validateForm  = this.fb.group({
       id: [null, [Validators.required]],
       nombre: [null, [Validators.required]],
-      descripcion: [null, [Validators.required]],
       estado: [null, [Validators.required]]
     });
   } 
@@ -111,24 +109,13 @@ export class AreaComponent implements OnInit {
   formArea: FormGroup = this.fb.group({
     id: [],
     nombre: [],
-    descripcion: [],
     estado: []
   })
   
   //Tabla
   listOfColumn = [
     {
-      title: 'Id',
-      compare: (a: DataItem, b: DataItem) => a.id - b.id,
-      priority: 0
-    },
-    {
       title: 'Nombre',
-      compare: null,
-      priority: false
-    },
-    {
-      title: 'Descripcion',
       compare: null,
       priority: false
     },
