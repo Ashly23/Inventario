@@ -11,6 +11,7 @@ import { AreaProductoControllerService } from './services/area-producto-controll
 import { CategoriasProductoControllerService } from './services/categorias-producto-controller.service';
 import { EmpleadoControllerService } from './services/empleado-controller.service';
 import { EmpleadoAreaControllerService } from './services/empleado-area-controller.service';
+import { EmpleadoProductoControllerService } from './services/empleado-producto-controller.service';
 import { EmpleadoSolicitudControllerService } from './services/empleado-solicitud-controller.service';
 import { EncargadoControllerService } from './services/encargado-controller.service';
 import { EncargadoEmpleadoControllerService } from './services/encargado-empleado-controller.service';
@@ -31,6 +32,8 @@ import { PingControllerService } from './services/ping-controller.service';
 import { ProductoControllerService } from './services/producto-controller.service';
 import { ProductoAreaControllerService } from './services/producto-area-controller.service';
 import { ProductoCategoriasControllerService } from './services/producto-categorias-controller.service';
+import { ProductoEmpleadoControllerService } from './services/producto-empleado-controller.service';
+import { ProductoEncargadoControllerService } from './services/producto-encargado-controller.service';
 import { ProductoEstadoProductoControllerService } from './services/producto-estado-producto-controller.service';
 import { ProductoFabricanteControllerService } from './services/producto-fabricante-controller.service';
 import { ProductoPartesControllerService } from './services/producto-partes-controller.service';
@@ -55,6 +58,7 @@ import { SolicitudProductoControllerService } from './services/solicitud-product
     CategoriasProductoControllerService,
     EmpleadoControllerService,
     EmpleadoAreaControllerService,
+    EmpleadoProductoControllerService,
     EmpleadoSolicitudControllerService,
     EncargadoControllerService,
     EncargadoEmpleadoControllerService,
@@ -75,6 +79,8 @@ import { SolicitudProductoControllerService } from './services/solicitud-product
     ProductoControllerService,
     ProductoAreaControllerService,
     ProductoCategoriasControllerService,
+    ProductoEmpleadoControllerService,
+    ProductoEncargadoControllerService,
     ProductoEstadoProductoControllerService,
     ProductoFabricanteControllerService,
     ProductoPartesControllerService,

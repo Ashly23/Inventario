@@ -2,15 +2,15 @@
 /* eslint-disable */
 export interface Producto {
   anioDepreciados: number;
-  etiquetaServ?: string;
   fechaCompra: string;
   id: number;
   idArea?: number;
   idCategorias?: number;
+  idEmpleado?: number;
   idEstadoProducto?: number;
   idFabricante?: number;
   modelo?: string;
-  nombre: string;
+  serie: string;
   valor: number;
   valorDepreciado: number;
   vidaUtil: number;

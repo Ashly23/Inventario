@@ -148,9 +148,9 @@ export class GarantiaComponent implements OnInit {
   //Tabla
   listOfColumn = [
     {
-      title: 'Producto',
-      compare: (a: DataItem, b: DataItem) => a.idProducto - b.idProducto,
-      priority: 0
+      title: '# de Serie',
+      compare: null,
+      priority: false
     },
     {
       title: 'Fecha Inicial',

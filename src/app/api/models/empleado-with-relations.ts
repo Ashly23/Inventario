@@ -2,6 +2,7 @@
 /* eslint-disable */
 import { AreaWithRelations } from './area-with-relations';
 import { EncargadoWithRelations } from './encargado-with-relations';
+import { ProductoWithRelations } from './producto-with-relations';
 import { SolicitudWithRelations } from './solicitud-with-relations';
 
 /**
@@ -15,6 +16,7 @@ export interface EmpleadoWithRelations {
   id: number;
   idArea?: number;
   nombre: string;
+  productos?: Array<ProductoWithRelations>;
   solicitud?: Array<SolicitudWithRelations>;
   telefono: string;
 }

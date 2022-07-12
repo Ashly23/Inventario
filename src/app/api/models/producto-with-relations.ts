@@ -2,6 +2,7 @@
 /* eslint-disable */
 import { AreaWithRelations } from './area-with-relations';
 import { CategoriasWithRelations } from './categorias-with-relations';
+import { EmpleadoWithRelations } from './empleado-with-relations';
 import { EncargadoWithRelations } from './encargado-with-relations';
 import { EstadoProductoWithRelations } from './estado-producto-with-relations';
 import { FabricanteWithRelations } from './fabricante-with-relations';
@@ -15,21 +16,22 @@ import { SolicitudWithRelations } from './solicitud-with-relations';
 export interface ProductoWithRelations {
   Areas?: AreaWithRelations;
   Categorias?: CategoriasWithRelations;
+  Empleados?: EmpleadoWithRelations;
   EstadoProductos?: EstadoProductoWithRelations;
   Fabricantes?: FabricanteWithRelations;
   anioDepreciados: number;
   encargados?: Array<EncargadoWithRelations>;
-  etiquetaServ?: string;
   fechaCompra: string;
   garantias?: Array<GarantiaWithRelations>;
   id: number;
   idArea?: number;
   idCategorias?: number;
+  idEmpleado?: number;
   idEstadoProducto?: number;
   idFabricante?: number;
   modelo?: string;
-  nombre: string;
   partes?: Array<PartesWithRelations>;
+  serie: string;
   solicitud?: Array<SolicitudWithRelations>;
   valor: number;
   valorDepreciado: number;

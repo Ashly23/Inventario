@@ -5,6 +5,7 @@ export { AreaProductoControllerService } from './services/area-producto-controll
 export { CategoriasProductoControllerService } from './services/categorias-producto-controller.service';
 export { EmpleadoControllerService } from './services/empleado-controller.service';
 export { EmpleadoAreaControllerService } from './services/empleado-area-controller.service';
+export { EmpleadoProductoControllerService } from './services/empleado-producto-controller.service';
 export { EmpleadoSolicitudControllerService } from './services/empleado-solicitud-controller.service';
 export { EncargadoControllerService } from './services/encargado-controller.service';
 export { EncargadoEmpleadoControllerService } from './services/encargado-empleado-controller.service';
@@ -25,6 +26,8 @@ export { PingControllerService } from './services/ping-controller.service';
 export { ProductoControllerService } from './services/producto-controller.service';
 export { ProductoAreaControllerService } from './services/producto-area-controller.service';
 export { ProductoCategoriasControllerService } from './services/producto-categorias-controller.service';
+export { ProductoEmpleadoControllerService } from './services/producto-empleado-controller.service';
+export { ProductoEncargadoControllerService } from './services/producto-encargado-controller.service';
 export { ProductoEstadoProductoControllerService } from './services/producto-estado-producto-controller.service';
 export { ProductoFabricanteControllerService } from './services/producto-fabricante-controller.service';
 export { ProductoPartesControllerService } from './services/producto-partes-controller.service';

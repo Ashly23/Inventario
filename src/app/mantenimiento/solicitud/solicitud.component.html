@@ -31,7 +31,7 @@
           </div>
         </td>
         <td>{{ data.Empleados?.nombre }}</td>
-        <td>{{ data.Productos?.nombre }}</td>
+        <td>{{ data.Productos?.serie }}</td>
         <td>{{ data.Partes?.nombre }}</td>
         <td>{{ data.fechaSolicitud | date }}</td>
         <td>{{ data.cotizacion }}</td>
@@ -54,7 +54,7 @@
                   <nz-form-label>Producto</nz-form-label>
                   <nz-form-control  nzErrorTip="Por favor escriba el dato correcto!">
                       <nz-select formControlName="idProducto">
-                          <nz-option *ngFor="let item of producto"  [nzValue]="item.id" [nzLabel]="item.nombre">
+                          <nz-option *ngFor="let item of producto"  [nzValue]="item.id" [nzLabel]="item.serie">
                           </nz-option>
                       </nz-select>
                   </nz-form-control>

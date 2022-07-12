@@ -2,24 +2,24 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { Area, Categorias, Encargado, EstadoProducto, Fabricante, Partes, Producto } from 'src/app/api/models';
-import { AreaControllerService, CategoriasControllerService, EncargadoControllerService, EstadoProductoControllerService, 
+import { Area, Categorias, Empleado, Encargado, EstadoProducto, Fabricante, Partes, Producto, ProductoWithRelations } from 'src/app/api/models';
+import { AreaControllerService, CategoriasControllerService, EmpleadoControllerService, EncargadoControllerService, EstadoProductoControllerService, 
       FabricanteControllerService, PartesControllerService, ProductoControllerService } from 'src/app/api/services';
 
 interface DataItem {
   id: number;
-  nombre: string;
   fechaCompra: Date;
   valor: number;
   vidaUtil: number;
   valorDepreciado: number;
   anioDepreciados: number;
+  serie: string;
   modelo: string;
-  etiquetaServ: string;
   idCategorias: number;
   idEstado: number;
   idArea: number;
   idFabricante: number;
+  idEmpleado: number;
 }
 
 @Component({
@@ -32,13 +32,14 @@ export class ProductoComponent implements OnInit {
   isVisible = false;
   validateForm !: FormGroup;
   visible: boolean = false;
-  producto:Producto[]=[];
+  producto:ProductoWithRelations[]=[];
   area:Area[]=[];
   categorias:Categorias[]=[];
   estado:EstadoProducto[]=[];
   fabricante:Fabricante[]=[];
   encargado:Encargado[]=[];
   partes:Partes[]=[];
+  empleado:Empleado[]=[];
   pipe = new DatePipe('en-US');
   detallePartes: any[] = [];
   detalleEncargado: any[] = [];
@@ -52,18 +53,26 @@ export class ProductoComponent implements OnInit {
     private fabricanteService:FabricanteControllerService,
     private encargadoService:EncargadoControllerService,
     private partesService:PartesControllerService,
+    private empleadoService:EmpleadoControllerService,
     private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
     this.CleanForm();
-    this.productoService.find().subscribe(data=>this.producto=data)
+    this.productoService.find(
+      {
+        "filter": `{"include": [{"relation": "Empleados"}]}`
+      }
+    ).subscribe(data=> {
+      this.producto=data
+    })
     this.areaService.find().subscribe(data=>this.area=data)
     this.categoriasService.find().subscribe(data=>this.categorias=data)
     this.estadoService.find().subscribe(data=>this.estado=data)
     this.fabricanteService.find().subscribe(data=>this.fabricante=data)
     this.encargadoService.find().subscribe(data=>this.encargado=data)
     this.partesService.find().subscribe(data=>this.partesService)
+    this.empleadoService.find().subscribe(data=>this.empleado=data)
   }
 
   eliminar(id: number): void {
@@ -85,13 +94,13 @@ export class ProductoComponent implements OnInit {
         idCategorias: data.idCategorias,
         idEstadoProducto: data.idEstadoProducto,
         idFabricante: data.idFabricante,
-        nombre: data.nombre,
+        idEmpleado: data.idEmpleado,
         valor: data.valor,
         vidaUtil: data.vidaUtil,
         valorDepreciado: data.valorDepreciado,
         anioDepreciados: data.anioDepreciados,
         modelo: data.modelo,
-        etiquetaServ: data.etiquetaServ,
+        serie: data.serie,
         fechaCompra:(new Date(data.fechaCompra)).toISOString()})
     }
     this.visible = true
@@ -119,18 +128,18 @@ export class ProductoComponent implements OnInit {
   CleanForm(){
     this.validateForm  = this.fb.group({
       id: [null, [Validators.required]],
-      nombre: [null, [Validators.required]],
       fechaCompra: [null, [Validators.required]],
       valor: [null, [Validators.required]],
       vidaUtil: [null, [Validators.required]],
       valorDepreciado: [null, [Validators.required]],
       anioDepreciados: [null, [Validators.required]],
       modelo: [null, [Validators.required]],
-      etiquetaServ: [null, [Validators.required]],
+      serie: [null, [Validators.required]],
       idArea: [null, [Validators.required]],
       idCategoria: [null, [Validators.required]],
       idEstadoProducto: [null, [Validators.required]],
       idFabricante: [null, [Validators.required]],
+      idEmpleado: [null, [Validators.required]],
     });
   } 
 
@@ -171,21 +180,21 @@ export class ProductoComponent implements OnInit {
     idCategorias:[],
     idEstadoProducto:[],
     idFabricante:[],
-    nombre: [],
+    idEmpleado:[],
     fechaCompra: [],
     valor: [],
     vidaUtil: [],
     valorDepreciado: [],
     anioDepreciados: [],
     modelo: [],
-    etiquetaServ:[],
+    serie:[],
   })
 
   listOfColumn = [
     {
-      title: 'Nombre',
-      compare: null,
-      priority: false
+      title: 'Empleado',
+      compare: (a: DataItem, b: DataItem) => a.idEmpleado - b.idEmpleado,
+      priority: 4
     },
     {
       title: 'Fecha de Compra',
@@ -213,7 +222,7 @@ export class ProductoComponent implements OnInit {
       priority: 2
     },
     {
-      title: 'Etiqueta de Servicio',
+      title: '# Serie',
       compare: null,
       priority: false
     },

@@ -30,13 +30,13 @@
             </div>
           </div>
         </td>
-        <td>{{ data.nombre }}</td>
+        <td>{{ data.Empleados?.nombre }}</td>
         <td>{{ data.fechaCompra | date }}</td>
         <td>{{ data.valor }}</td>
         <td>{{ data.vidaUtil }}</td>
         <td>{{ data.valorDepreciado }}</td>
         <td>{{ data.anioDepreciados }}</td>
-        <td>{{ data.etiquetaServ }}</td>
+        <td>{{ data.serie }}</td>
         <td nzRight nzAlign="center">
           <div nz-col nzSpan="10">
           <app-encargado [productoPosicion]="data" [detalleEncargado]="detalleEncargado"></app-encargado>
@@ -56,14 +56,17 @@
       <form nz-form nzLayout="vertical" (ngSubmit)="guardar()" [formGroup]="formProducto">
         <nz-card style="width:475px;" nzTitle="Información Base" [nzExtra]="extraTemplate">
           <div nz-row [nzGutter]="8">
-           <div nz-col nzSpan="8">
-            <nz-form-item>
-              <nz-form-label>Nombre</nz-form-label>
-              <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
-                <input formControlName="nombre" nz-input/>
-              </nz-form-control>
-            </nz-form-item>
-          </div>
+            <div nz-col nzSpan="8">
+              <nz-form-item>
+                  <nz-form-label>Empleado</nz-form-label>
+                  <nz-form-control  nzErrorTip="Por favor escriba el dato correcto!">
+                      <nz-select formControlName="idEmpleado">
+                          <nz-option *ngFor="let item of empleado" [nzValue]="item.id" [nzLabel]="item.nombre">
+                          </nz-option>
+                      </nz-select>
+                  </nz-form-control>
+                 </nz-form-item>
+                </div>
           <div nz-col nzSpan="8">
             <nz-form-item>
                 <nz-form-label>Area</nz-form-label>
@@ -106,9 +109,9 @@
             </div>
             <div nz-col nzSpan="8">
               <nz-form-item>
-                <nz-form-label>Etiqueta de Servicio</nz-form-label>
+                <nz-form-label># de Serie</nz-form-label>
                 <nz-form-control nzErrorTip="Por favor escriba el dato correcto!">
-                  <input formControlName="etiquetaServ" nz-input/>
+                  <input formControlName="serie" nz-input/>
                 </nz-form-control>
               </nz-form-item>
             </div>
